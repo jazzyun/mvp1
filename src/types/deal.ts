@@ -55,10 +55,28 @@ export interface Deal {
   hasGuidelines: boolean;
   guidelines: Guideline[];
   requiresPerformance: boolean;
+  conversation?: Conversation;
 }
 
 export interface DealCardAction {
   type: 'reply' | 'review_contract' | 'send_performance';
   label: string;
   enabled: boolean;
+}
+
+export interface ConversationMessage {
+  id: string;
+  sender: 'brand' | 'creator';
+  senderName: string;
+  content: string;
+  timestamp: Date;
+  hasAttachment?: boolean;
+  attachmentType?: 'contract' | 'image' | 'file';
+  attachmentName?: string;
+}
+
+export interface Conversation {
+  brandEmail: string;
+  channel: DealChannel;
+  messages: ConversationMessage[];
 }

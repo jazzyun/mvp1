@@ -5,6 +5,7 @@ import { Deal, DealChannel, DealPriority } from '@/types/deal';
 interface DealCardProps {
   deal: Deal;
   onReply: (dealId: string) => void;
+  onViewConversation: (dealId: string) => void;
   onCheckGuidelines: (dealId: string) => void;
   onReviewContract: (dealId: string) => void;
   onSendPerformance: (dealId: string) => void;
@@ -49,7 +50,7 @@ function getPriorityStyles(priority: DealPriority): { bg: string; text: string; 
   return styles[priority];
 }
 
-export default function DealCard({ deal, onReply, onCheckGuidelines, onReviewContract, onSendPerformance }: DealCardProps) {
+export default function DealCard({ deal, onReply, onViewConversation, onCheckGuidelines, onReviewContract, onSendPerformance }: DealCardProps) {
   const priorityStyles = getPriorityStyles(deal.priority);
 
   return (
@@ -67,12 +68,23 @@ export default function DealCard({ deal, onReply, onCheckGuidelines, onReviewCon
           <h3 className="text-lg font-bold text-gray-900">{deal.brandName}</h3>
           <span className="text-sm text-gray-500">{formatTimeAgo(deal.receivedAt)}</span>
         </div>
-        <p className="text-sm text-gray-500">
-          <span className="inline-flex items-center">
-            <span className="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>
-            {formatChannel(deal.channel)}
-          </span>
-        </p>
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-gray-500">
+            <span className="inline-flex items-center">
+              <span className="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>
+              {formatChannel(deal.channel)}
+            </span>
+          </p>
+          {deal.conversation && (
+            <button
+              onClick={() => onViewConversation(deal.id)}
+              className="text-xs text-blue-600 hover:text-blue-700 flex items-center gap-1"
+            >
+              <span>💬</span>
+              <span>{deal.conversation.messages.length} messages</span>
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Offer Details */}

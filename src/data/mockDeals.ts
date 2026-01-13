@@ -91,6 +91,43 @@ export const mockDeals: Deal[] = [
       },
     ],
     requiresPerformance: true,
+    conversation: {
+      brandEmail: 'partnerships@glossier.com',
+      channel: 'instagram_dm',
+      messages: [
+        {
+          id: 'm1',
+          sender: 'brand',
+          senderName: 'Glossier Team',
+          content: '안녕하세요! Glossier Korea입니다 ✨\n\n저희 신제품 런칭 캠페인에 함께해 주실 크리에이터를 찾고 있어요. 혹시 협업 가능하실까요?',
+          timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
+        },
+        {
+          id: 'm2',
+          sender: 'creator',
+          senderName: 'Me',
+          content: '안녕하세요! 연락 주셔서 감사합니다 :)\n어떤 캠페인인지 자세히 알 수 있을까요?',
+          timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000 + 2 * 60 * 60 * 1000),
+        },
+        {
+          id: 'm3',
+          sender: 'brand',
+          senderName: 'Glossier Team',
+          content: '네! 이번에 새로 출시되는 스킨케어 라인 홍보 캠페인이에요.\n\nInstagram Reel 1개 제작을 요청드리고 싶고, 제안 금액은 $2,000입니다.\n\n관심 있으시면 계약서 보내드릴게요!',
+          timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+        },
+        {
+          id: 'm4',
+          sender: 'brand',
+          senderName: 'Glossier Team',
+          content: '계약서 첨부드립니다. 검토 부탁드려요!',
+          timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000 + 30 * 60 * 1000),
+          hasAttachment: true,
+          attachmentType: 'contract',
+          attachmentName: 'Glossier_Contract_2024.pdf',
+        },
+      ],
+    },
   },
   {
     id: '2',
@@ -179,6 +216,36 @@ export const mockDeals: Deal[] = [
       },
     ],
     requiresPerformance: false,
+    conversation: {
+      brandEmail: 'creator.marketing@nike.com',
+      channel: 'email',
+      messages: [
+        {
+          id: 'n1',
+          sender: 'brand',
+          senderName: 'Nike Korea Marketing',
+          content: '안녕하세요,\n\nNike Korea 마케팅팀입니다.\n\n다가오는 신제품 런칭 캠페인에 참여해 주실 크리에이터를 찾고 있습니다. 귀하의 채널이 저희 브랜드와 잘 맞을 것 같아 연락드립니다.\n\n관심 있으시면 회신 부탁드립니다.\n\n감사합니다.',
+          timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+        },
+        {
+          id: 'n2',
+          sender: 'creator',
+          senderName: 'Me',
+          content: '안녕하세요,\n\n연락 감사합니다. 어떤 캠페인인지 상세 내용 공유 부탁드립니다.\n\n감사합니다.',
+          timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000 + 4 * 60 * 60 * 1000),
+        },
+        {
+          id: 'n3',
+          sender: 'brand',
+          senderName: 'Nike Korea Marketing',
+          content: '안녕하세요,\n\n회신 감사합니다!\n\n이번 캠페인은 새로운 러닝화 출시 관련입니다.\n\n요청 사항:\n- YouTube 리뷰 영상 1개 (8-12분)\n- Instagram Story 3개\n\n제안 금액: $5,000\n\n첨부된 계약서 검토 후 의견 주시면 감사하겠습니다.',
+          timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+          hasAttachment: true,
+          attachmentType: 'contract',
+          attachmentName: 'Nike_Creator_Agreement.pdf',
+        },
+      ],
+    },
   },
   {
     id: '3',
@@ -194,6 +261,19 @@ export const mockDeals: Deal[] = [
     hasGuidelines: false,
     guidelines: [],
     requiresPerformance: false,
+    conversation: {
+      brandEmail: 'localcafe_official',
+      channel: 'instagram_dm',
+      messages: [
+        {
+          id: 'c1',
+          sender: 'brand',
+          senderName: 'Local Cafe',
+          content: '안녕하세요! 저희 카페 홍보 협업 제안드려요 ☕\n제품 협찬 + 소정의 원고료 드립니다~',
+          timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
+        },
+      ],
+    },
   },
   {
     id: '4',
@@ -288,6 +368,46 @@ export const mockDeals: Deal[] = [
       },
     ],
     requiresPerformance: true,
+    conversation: {
+      brandEmail: 'creator.partnership@samsung.com',
+      channel: 'email',
+      messages: [
+        {
+          id: 's1',
+          sender: 'brand',
+          senderName: 'Samsung Mobile',
+          content: '안녕하세요,\n\nSamsung Electronics 모바일 마케팅팀입니다.\n\n곧 출시 예정인 Galaxy 신제품 리뷰 영상 제작을 요청드리고자 연락드립니다.\n\n귀하의 테크 리뷰 콘텐츠가 저희 제품과 잘 맞을 것 같습니다.\n\n관심 있으시면 상세 내용 공유드리겠습니다.\n\n감사합니다.',
+          timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000),
+        },
+        {
+          id: 's2',
+          sender: 'creator',
+          senderName: 'Me',
+          content: '안녕하세요,\n\n제안 감사합니다! 상세 내용과 조건 공유 부탁드립니다.',
+          timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000),
+        },
+        {
+          id: 's3',
+          sender: 'brand',
+          senderName: 'Samsung Mobile',
+          content: '빠른 회신 감사합니다!\n\n[캠페인 개요]\n- 제품: Galaxy S24 Ultra\n- 컨텐츠: YouTube 리뷰 영상 (10-15분)\n- 금액: $8,000\n- 일정: 제품 출시 D-3 업로드\n\n상세 계약서와 가이드라인 첨부드립니다.\n검토 후 질문 있으시면 말씀해 주세요.',
+          timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000),
+          hasAttachment: true,
+          attachmentType: 'contract',
+          attachmentName: 'Samsung_Creator_Contract.pdf',
+        },
+        {
+          id: 's4',
+          sender: 'brand',
+          senderName: 'Samsung Mobile',
+          content: '추가로 가이드라인 문서도 첨부드립니다.',
+          timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000 + 5 * 60 * 1000),
+          hasAttachment: true,
+          attachmentType: 'file',
+          attachmentName: 'Galaxy_S24_Review_Guidelines.pdf',
+        },
+      ],
+    },
   },
 ];
 

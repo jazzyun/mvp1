@@ -6,6 +6,7 @@ import GuidelinesModal from '@/components/GuidelinesModal';
 import ContractReviewModal from '@/components/ContractReviewModal';
 import PerformanceModal from '@/components/PerformanceModal';
 import ReplyModal from '@/components/ReplyModal';
+import ConversationModal from '@/components/ConversationModal';
 import { mockDeals, getTodayDealsCount } from '@/data/mockDeals';
 import { Deal } from '@/types/deal';
 
@@ -16,6 +17,7 @@ export default function BrandDealsInbox() {
   const [isContractOpen, setIsContractOpen] = useState(false);
   const [isPerformanceOpen, setIsPerformanceOpen] = useState(false);
   const [isReplyOpen, setIsReplyOpen] = useState(false);
+  const [isConversationOpen, setIsConversationOpen] = useState(false);
   const todayCount = getTodayDealsCount(deals);
 
   const handleReply = (dealId: string) => {
@@ -23,6 +25,14 @@ export default function BrandDealsInbox() {
     if (deal) {
       setSelectedDeal(deal);
       setIsReplyOpen(true);
+    }
+  };
+
+  const handleViewConversation = (dealId: string) => {
+    const deal = deals.find(d => d.id === dealId);
+    if (deal && deal.conversation) {
+      setSelectedDeal(deal);
+      setIsConversationOpen(true);
     }
   };
 
@@ -70,6 +80,11 @@ export default function BrandDealsInbox() {
     setSelectedDeal(null);
   };
 
+  const handleCloseConversation = () => {
+    setIsConversationOpen(false);
+    setSelectedDeal(null);
+  };
+
   // Sort deals: high priority first, then by received date (newest first)
   const sortedDeals = [...deals].sort((a, b) => {
     const priorityOrder = { high: 0, medium: 1, low: 2 };
@@ -111,6 +126,7 @@ export default function BrandDealsInbox() {
                 key={deal.id}
                 deal={deal}
                 onReply={handleReply}
+                onViewConversation={handleViewConversation}
                 onCheckGuidelines={handleCheckGuidelines}
                 onReviewContract={handleReviewContract}
                 onSendPerformance={handleSendPerformance}
@@ -146,6 +162,16 @@ export default function BrandDealsInbox() {
           deal={selectedDeal}
           isOpen={isReplyOpen}
           onClose={handleCloseReply}
+        />
+      )}
+
+      {/* Conversation Modal */}
+      {selectedDeal && selectedDeal.conversation && (
+        <ConversationModal
+          brandName={selectedDeal.brandName}
+          conversation={selectedDeal.conversation}
+          isOpen={isConversationOpen}
+          onClose={handleCloseConversation}
         />
       )}
 
