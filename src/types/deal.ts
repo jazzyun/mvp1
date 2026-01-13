@@ -1,0 +1,64 @@
+export type DealPriority = 'high' | 'medium' | 'low';
+export type DealChannel = 'instagram_dm' | 'email' | 'whatsapp' | 'other';
+export type DealStatus = 'new' | 'in_progress' | 'responded' | 'closed';
+
+export interface ContractRisk {
+  type: 'secondary_usage' | 'unlimited_period' | 'unlimited_revisions' | 'payment_terms' | 'other';
+  description: string;
+}
+
+export interface Guideline {
+  category: string;
+  requirements: string[];
+}
+
+export type RiskLevel = 'high' | 'medium' | 'low';
+
+export interface ContractTerm {
+  label: string;
+  value: string;
+  riskLevel?: RiskLevel;
+  warning?: string;
+}
+
+export interface ContractDetails {
+  summary: string;
+  deliverables: string[];
+  payment: {
+    amount: string;
+    method: string;
+    timing: string;
+    riskLevel?: RiskLevel;
+  };
+  timeline: {
+    contentDeadline: string;
+    reviewPeriod: string;
+    campaignPeriod: string;
+  };
+  usageRights: ContractTerm[];
+  restrictions: string[];
+  aiNotes: string[];
+}
+
+export interface Deal {
+  id: string;
+  brandName: string;
+  channel: DealChannel;
+  offeredAmount: number | null;
+  offeredDetails: string;
+  receivedAt: Date;
+  priority: DealPriority;
+  risks: ContractRisk[];
+  status: DealStatus;
+  hasContract: boolean;
+  contract?: ContractDetails;
+  hasGuidelines: boolean;
+  guidelines: Guideline[];
+  requiresPerformance: boolean;
+}
+
+export interface DealCardAction {
+  type: 'reply' | 'review_contract' | 'send_performance';
+  label: string;
+  enabled: boolean;
+}
