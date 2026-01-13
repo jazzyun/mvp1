@@ -128,6 +128,57 @@ export const mockDeals: Deal[] = [
         },
       ],
     },
+    brandProfile: {
+      logo: '💄',
+      industry: 'Beauty & Skincare',
+      description: 'Glossier는 "Skin First, Makeup Second" 철학을 바탕으로 한 뷰티 브랜드입니다. 밀레니얼과 Z세대를 타겟으로 미니멀하고 자연스러운 뷰티 제품을 선보이고 있습니다.',
+      founded: '2014년',
+      headquarters: '뉴욕, 미국',
+      socialFollowers: {
+        instagram: '2.8M',
+        youtube: '120K',
+        tiktok: '850K',
+      },
+      recentNews: [
+        {
+          title: 'Glossier, 한국 시장 본격 진출 발표',
+          source: 'Beauty Korea',
+          date: '2024.01.15',
+          sentiment: 'positive',
+        },
+        {
+          title: '글로벌 뷰티 브랜드 매출 순위 TOP 10 진입',
+          source: 'Forbes',
+          date: '2024.01.10',
+          sentiment: 'positive',
+        },
+        {
+          title: '신규 스킨케어 라인 출시 예정',
+          source: 'Allure',
+          date: '2024.01.05',
+          sentiment: 'neutral',
+        },
+      ],
+      creatorReviews: {
+        avgRating: 4.2,
+        totalReviews: 156,
+        paymentSpeed: 'average',
+        communicationRating: 4.5,
+        reuseProbability: '78%',
+      },
+      aiRecommendation: {
+        shouldCollaborate: true,
+        reasons: [
+          '글로벌 인지도 높은 뷰티 브랜드로 포트폴리오에 좋음',
+          '크리에이터 평점 4.2/5로 양호',
+          '한국 시장 진출로 향후 협업 기회 증가 예상',
+        ],
+        warnings: [
+          'Net 60 지급 조건은 협상 권장',
+          '2차 활용권 조항 주의 필요',
+        ],
+      },
+    },
   },
   {
     id: '2',
@@ -246,6 +297,58 @@ export const mockDeals: Deal[] = [
         },
       ],
     },
+    brandProfile: {
+      logo: '👟',
+      industry: 'Sportswear & Athletic',
+      description: 'Nike는 세계 최대의 스포츠용품 기업으로, "Just Do It" 슬로건으로 유명합니다. 혁신적인 운동화와 스포츠웨어를 통해 전 세계 운동선수들과 일반 소비자들에게 영감을 주고 있습니다.',
+      founded: '1964년',
+      headquarters: '오레곤, 미국',
+      socialFollowers: {
+        instagram: '306M',
+        youtube: '1.9M',
+        tiktok: '5.2M',
+      },
+      recentNews: [
+        {
+          title: 'Nike, 2024 파리 올림픽 공식 후원 확정',
+          source: 'Sports Business Journal',
+          date: '2024.01.18',
+          sentiment: 'positive',
+        },
+        {
+          title: '지속가능한 소재 사용 확대 발표',
+          source: 'Reuters',
+          date: '2024.01.12',
+          sentiment: 'positive',
+        },
+        {
+          title: '일부 지역 매장 구조조정 계획',
+          source: 'Bloomberg',
+          date: '2024.01.08',
+          sentiment: 'negative',
+        },
+      ],
+      creatorReviews: {
+        avgRating: 4.6,
+        totalReviews: 523,
+        paymentSpeed: 'fast',
+        communicationRating: 4.3,
+        reuseProbability: '85%',
+      },
+      aiRecommendation: {
+        shouldCollaborate: true,
+        reasons: [
+          '세계 최대 스포츠 브랜드로 포트폴리오 가치 매우 높음',
+          '크리에이터 평점 4.6/5로 우수',
+          '정산 속도 빠름 (Net 30)',
+          '재협업률 85%로 장기 파트너십 가능성 높음',
+        ],
+        warnings: [
+          '사용 기간 무제한 조항은 반드시 협상 필요',
+          '6개월 경쟁사 협업 금지 조항 주의',
+        ],
+      },
+    },
   },
   {
     id: '3',
@@ -273,6 +376,45 @@ export const mockDeals: Deal[] = [
           timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
         },
       ],
+    },
+    brandProfile: {
+      logo: '☕',
+      industry: 'Food & Beverage',
+      description: '성수동에 위치한 스페셜티 커피 전문점입니다. 직접 로스팅한 원두와 시그니처 디저트로 인기를 얻고 있으며, 감성적인 인테리어로 MZ세대에게 인기 있는 핫플레이스입니다.',
+      founded: '2022년',
+      headquarters: '서울, 한국',
+      socialFollowers: {
+        instagram: '15K',
+      },
+      recentNews: [
+        {
+          title: '성수동 핫플 카페 TOP 10 선정',
+          source: '서울경제',
+          date: '2024.01.10',
+          sentiment: 'positive',
+        },
+      ],
+      creatorReviews: {
+        avgRating: 3.8,
+        totalReviews: 12,
+        paymentSpeed: 'slow',
+        communicationRating: 3.5,
+        reuseProbability: '42%',
+      },
+      aiRecommendation: {
+        shouldCollaborate: false,
+        reasons: [
+          '성수동 핫플레이스로 로컬 인지도 있음',
+          '감성적인 컨텐츠 촬영 가능',
+        ],
+        warnings: [
+          '제안 금액이 낮음 ($300)',
+          '크리에이터 평점 3.8/5로 다소 낮음',
+          '정산 속도 느림 주의',
+          '재협업률 42%로 낮은 편',
+          '계약서가 없어 분쟁 시 보호 어려움',
+        ],
+      },
     },
   },
   {
@@ -407,6 +549,59 @@ export const mockDeals: Deal[] = [
           attachmentName: 'Galaxy_S24_Review_Guidelines.pdf',
         },
       ],
+    },
+    brandProfile: {
+      logo: '📱',
+      industry: 'Consumer Electronics',
+      description: 'Samsung Electronics는 세계 최대의 전자제품 제조업체 중 하나로, 스마트폰, TV, 가전제품 등 다양한 분야에서 혁신적인 제품을 선보이고 있습니다. Galaxy 시리즈는 전 세계적으로 사랑받는 스마트폰 브랜드입니다.',
+      founded: '1969년',
+      headquarters: '수원, 한국',
+      socialFollowers: {
+        instagram: '95M',
+        youtube: '8.2M',
+        tiktok: '3.1M',
+      },
+      recentNews: [
+        {
+          title: 'Galaxy S24 시리즈 AI 기능 대폭 강화',
+          source: 'The Verge',
+          date: '2024.01.17',
+          sentiment: 'positive',
+        },
+        {
+          title: 'CES 2024 혁신상 다수 수상',
+          source: 'TechCrunch',
+          date: '2024.01.10',
+          sentiment: 'positive',
+        },
+        {
+          title: '글로벌 스마트폰 시장 점유율 1위 유지',
+          source: 'IDC',
+          date: '2024.01.05',
+          sentiment: 'positive',
+        },
+      ],
+      creatorReviews: {
+        avgRating: 4.4,
+        totalReviews: 892,
+        paymentSpeed: 'average',
+        communicationRating: 4.0,
+        reuseProbability: '72%',
+      },
+      aiRecommendation: {
+        shouldCollaborate: true,
+        reasons: [
+          '글로벌 Top 전자제품 브랜드로 포트폴리오 가치 높음',
+          '크리에이터 평점 4.4/5로 양호',
+          '제안 금액 $8,000은 적정 수준',
+          '테크 리뷰어로서 브랜드 인지도 상승에 도움',
+        ],
+        warnings: [
+          '수정 횟수 무제한 조항은 반드시 협상 필요',
+          '광고 소재 활용권 포함 시 추가 비용 협상 권장',
+          'NDA 조항으로 출시 전 정보 공유 불가',
+        ],
+      },
     },
   },
 ];

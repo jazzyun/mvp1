@@ -56,6 +56,7 @@ export interface Deal {
   guidelines: Guideline[];
   requiresPerformance: boolean;
   conversation?: Conversation;
+  brandProfile?: BrandProfile;
 }
 
 export interface DealCardAction {
@@ -79,4 +80,37 @@ export interface Conversation {
   brandEmail: string;
   channel: DealChannel;
   messages: ConversationMessage[];
+}
+
+export interface BrandNews {
+  title: string;
+  source: string;
+  date: string;
+  sentiment: 'positive' | 'neutral' | 'negative';
+}
+
+export interface BrandProfile {
+  logo: string;
+  industry: string;
+  description: string;
+  founded: string;
+  headquarters: string;
+  socialFollowers: {
+    instagram?: string;
+    youtube?: string;
+    tiktok?: string;
+  };
+  recentNews: BrandNews[];
+  creatorReviews: {
+    avgRating: number;
+    totalReviews: number;
+    paymentSpeed: 'fast' | 'average' | 'slow';
+    communicationRating: number;
+    reuseProbability: string;
+  };
+  aiRecommendation: {
+    shouldCollaborate: boolean;
+    reasons: string[];
+    warnings: string[];
+  };
 }

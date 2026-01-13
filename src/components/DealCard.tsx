@@ -9,6 +9,7 @@ interface DealCardProps {
   onCheckGuidelines: (dealId: string) => void;
   onReviewContract: (dealId: string) => void;
   onSendPerformance: (dealId: string) => void;
+  onViewBrandProfile: (dealId: string) => void;
 }
 
 function formatTimeAgo(date: Date): string {
@@ -50,7 +51,7 @@ function getPriorityStyles(priority: DealPriority): { bg: string; text: string; 
   return styles[priority];
 }
 
-export default function DealCard({ deal, onReply, onViewConversation, onCheckGuidelines, onReviewContract, onSendPerformance }: DealCardProps) {
+export default function DealCard({ deal, onReply, onViewConversation, onCheckGuidelines, onReviewContract, onSendPerformance, onViewBrandProfile }: DealCardProps) {
   const priorityStyles = getPriorityStyles(deal.priority);
 
   return (
@@ -65,7 +66,13 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
       {/* Brand Info */}
       <div className="mb-4">
         <div className="flex items-center justify-between mb-1">
-          <h3 className="text-lg font-bold text-gray-900">{deal.brandName}</h3>
+          <button
+            onClick={() => onViewBrandProfile(deal.id)}
+            className="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors flex items-center gap-1"
+          >
+            {deal.brandName}
+            <span className="text-xs text-gray-400">ⓘ</span>
+          </button>
           <span className="text-sm text-gray-500">{formatTimeAgo(deal.receivedAt)}</span>
         </div>
         <div className="flex items-center justify-between">

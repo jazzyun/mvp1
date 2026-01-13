@@ -7,6 +7,7 @@ import ContractReviewModal from '@/components/ContractReviewModal';
 import PerformanceModal from '@/components/PerformanceModal';
 import ReplyModal from '@/components/ReplyModal';
 import ConversationModal from '@/components/ConversationModal';
+import BrandProfileModal from '@/components/BrandProfileModal';
 import { mockDeals, getTodayDealsCount } from '@/data/mockDeals';
 import { Deal } from '@/types/deal';
 
@@ -18,6 +19,7 @@ export default function BrandDealsInbox() {
   const [isPerformanceOpen, setIsPerformanceOpen] = useState(false);
   const [isReplyOpen, setIsReplyOpen] = useState(false);
   const [isConversationOpen, setIsConversationOpen] = useState(false);
+  const [isBrandProfileOpen, setIsBrandProfileOpen] = useState(false);
   const todayCount = getTodayDealsCount(deals);
 
   const handleReply = (dealId: string) => {
@@ -85,6 +87,19 @@ export default function BrandDealsInbox() {
     setSelectedDeal(null);
   };
 
+  const handleViewBrandProfile = (dealId: string) => {
+    const deal = deals.find(d => d.id === dealId);
+    if (deal && deal.brandProfile) {
+      setSelectedDeal(deal);
+      setIsBrandProfileOpen(true);
+    }
+  };
+
+  const handleCloseBrandProfile = () => {
+    setIsBrandProfileOpen(false);
+    setSelectedDeal(null);
+  };
+
   // Sort deals: high priority first, then by received date (newest first)
   const sortedDeals = [...deals].sort((a, b) => {
     const priorityOrder = { high: 0, medium: 1, low: 2 };
@@ -130,6 +145,7 @@ export default function BrandDealsInbox() {
                 onCheckGuidelines={handleCheckGuidelines}
                 onReviewContract={handleReviewContract}
                 onSendPerformance={handleSendPerformance}
+                onViewBrandProfile={handleViewBrandProfile}
               />
             ))}
           </div>
@@ -201,6 +217,16 @@ export default function BrandDealsInbox() {
           brandName={selectedDeal.brandName}
           isOpen={isPerformanceOpen}
           onClose={handleClosePerformance}
+        />
+      )}
+
+      {/* Brand Profile Modal */}
+      {selectedDeal && selectedDeal.brandProfile && (
+        <BrandProfileModal
+          brandName={selectedDeal.brandName}
+          profile={selectedDeal.brandProfile}
+          isOpen={isBrandProfileOpen}
+          onClose={handleCloseBrandProfile}
         />
       )}
     </div>
