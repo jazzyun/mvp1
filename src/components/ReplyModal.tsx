@@ -12,10 +12,10 @@ interface ReplyModalProps {
 }
 
 const intentOptions = [
-  { id: 'accept', label: '수락', icon: '✓', color: 'bg-green-100 text-green-700 border-green-200' },
-  { id: 'negotiate', label: '협상', icon: '💬', color: 'bg-blue-100 text-blue-700 border-blue-200' },
-  { id: 'decline', label: '거절', icon: '✗', color: 'bg-red-100 text-red-700 border-red-200' },
-  { id: 'question', label: '질문', icon: '?', color: 'bg-amber-100 text-amber-700 border-amber-200' },
+  { id: 'accept', label: 'Accept', icon: '✓', color: 'bg-green-100 text-green-700 border-green-200' },
+  { id: 'negotiate', label: 'Negotiate', icon: '💬', color: 'bg-blue-100 text-blue-700 border-blue-200' },
+  { id: 'decline', label: 'Decline', icon: '✗', color: 'bg-red-100 text-red-700 border-red-200' },
+  { id: 'question', label: 'Question', icon: '?', color: 'bg-amber-100 text-amber-700 border-amber-200' },
 ];
 
 function generateAIReply(deal: Deal, intent: ReplyIntent): string {
@@ -24,51 +24,51 @@ function generateAIReply(deal: Deal, intent: ReplyIntent): string {
 
   switch (intent) {
     case 'accept':
-      return `안녕하세요, ${brandName} 담당자님!
+      return `Hi ${brandName} team!
 
-제안 주셔서 감사합니다. 말씀하신 조건(${amount}, ${deal.offeredDetails})으로 협업 진행하고 싶습니다.
+Thank you for your proposal. I'd love to move forward with the collaboration on the terms you've outlined (${amount}, ${deal.offeredDetails}).
 
-다음 단계로 계약서 검토 후 서명 진행하면 될까요?
-일정 조율을 위해 편하신 시간 알려주시면 감사하겠습니다.
+For next steps, shall we proceed with contract review and signing?
+Please let me know your availability for scheduling.
 
-감사합니다.`;
+Thank you!`;
 
     case 'negotiate':
-      return `안녕하세요, ${brandName} 담당자님!
+      return `Hi ${brandName} team!
 
-협업 제안 감사드립니다. 컨텐츠 방향과 브랜드가 마음에 들어 긍정적으로 검토 중입니다.
+Thank you for the collaboration proposal. I'm very interested in the content direction and your brand.
 
-다만, 몇 가지 조건에 대해 협의가 필요할 것 같습니다:
+However, I'd like to discuss a few terms:
 
-${deal.risks.length > 0 ? deal.risks.map(r => `• ${r.description}`).join('\n') : '• 금액 조정\n• 2차 활용권 범위\n• 지급 일정'}
+${deal.risks.length > 0 ? deal.risks.map(r => `• ${r.description}`).join('\n') : '• Rate adjustment\n• Secondary usage rights scope\n• Payment schedule'}
 
-위 사항들에 대해 논의 가능하실까요?
+Would it be possible to discuss these items?
 
-감사합니다.`;
+Thank you!`;
 
     case 'decline':
-      return `안녕하세요, ${brandName} 담당자님!
+      return `Hi ${brandName} team!
 
-협업 제안 주셔서 감사합니다.
+Thank you for the collaboration proposal.
 
-아쉽게도 현재 일정/컨텐츠 방향성 등을 고려했을 때 이번 캠페인 참여가 어려울 것 같습니다.
+Unfortunately, after considering my schedule and content direction, I won't be able to participate in this campaign at this time.
 
-다음에 좋은 기회가 있으면 다시 연락 주시면 감사하겠습니다.
+I hope we can work together on a future opportunity.
 
-좋은 하루 되세요!`;
+Have a great day!`;
 
     case 'question':
-      return `안녕하세요, ${brandName} 담당자님!
+      return `Hi ${brandName} team!
 
-협업 제안 감사드립니다. 검토 중 몇 가지 확인하고 싶은 사항이 있습니다:
+Thank you for the collaboration proposal. I have a few questions while reviewing:
 
-1. 컨텐츠 업로드 마감일은 언제인가요?
-2. 제품 협찬은 별도로 진행되나요?
-3. 컨텐츠 사전 검수 절차는 어떻게 되나요?
+1. What is the content upload deadline?
+2. Is product sponsorship handled separately?
+3. What is the content pre-review process?
 
-답변 주시면 검토 후 말씀드리겠습니다.
+I'll get back to you after receiving your answers.
 
-감사합니다.`;
+Thank you!`;
 
     default:
       return '';
@@ -154,15 +154,15 @@ export default function ReplyModal({ deal, isOpen, onClose }: ReplyModalProps) {
               <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
                 <span className="text-4xl">✓</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">전송 완료!</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Sent!</h3>
               <p className="text-sm text-gray-500 mb-6">
-                {deal.brandName}에게 답장이 전송되었습니다.
+                Your reply has been sent to {deal.brandName}.
               </p>
               <button
                 onClick={handleClose}
                 className="px-8 py-3 bg-gray-900 text-white rounded-xl font-medium hover:bg-gray-800 transition-colors"
               >
-                완료
+                Done
               </button>
             </div>
           ) : (
@@ -171,18 +171,18 @@ export default function ReplyModal({ deal, isOpen, onClose }: ReplyModalProps) {
               <div className="bg-gray-50 rounded-xl p-4 mb-6">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-sm">📩</span>
-                  <p className="text-xs text-gray-500">받은 메시지</p>
+                  <p className="text-xs text-gray-500">Received message</p>
                 </div>
                 <p className="text-sm text-gray-700">
-                  안녕하세요! {deal.brandName}입니다.
-                  {deal.offeredDetails} 컨텐츠 협업을 제안드립니다.
-                  {deal.offeredAmount && `제안 금액은 $${deal.offeredAmount.toLocaleString()}입니다.`}
+                  Hi! This is {deal.brandName}.
+                  We&apos;d like to propose a {deal.offeredDetails} content collaboration.
+                  {deal.offeredAmount && ` The proposed amount is $${deal.offeredAmount.toLocaleString()}.`}
                 </p>
               </div>
 
               {/* Intent Selection */}
               <div className="mb-6">
-                <p className="text-sm font-medium text-gray-700 mb-3">답장 유형 선택</p>
+                <p className="text-sm font-medium text-gray-700 mb-3">Select reply type</p>
                 <div className="grid grid-cols-4 gap-2">
                   {intentOptions.map((option) => (
                     <button
@@ -207,14 +207,14 @@ export default function ReplyModal({ deal, isOpen, onClose }: ReplyModalProps) {
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       <span className="text-sm">🤖</span>
-                      <p className="text-sm font-medium text-gray-700">AI 작성 답장</p>
+                      <p className="text-sm font-medium text-gray-700">AI-generated reply</p>
                     </div>
                     {!isGenerating && (
                       <button
                         onClick={handleRegenerate}
                         className="text-xs text-blue-600 hover:text-blue-700"
                       >
-                        다시 생성
+                        Regenerate
                       </button>
                     )}
                   </div>
@@ -224,14 +224,14 @@ export default function ReplyModal({ deal, isOpen, onClose }: ReplyModalProps) {
                       <div className="w-10 h-10 mx-auto mb-3 rounded-full bg-blue-100 flex items-center justify-center animate-pulse">
                         <span className="text-lg">✨</span>
                       </div>
-                      <p className="text-sm text-gray-500">AI가 답장을 작성 중...</p>
+                      <p className="text-sm text-gray-500">AI is writing your reply...</p>
                     </div>
                   ) : (
                     <textarea
                       value={replyText}
                       onChange={(e) => setReplyText(e.target.value)}
                       className="w-full h-64 p-4 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-700 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="답장 내용을 입력하세요..."
+                      placeholder="Enter your reply..."
                     />
                   )}
                 </div>
@@ -243,11 +243,11 @@ export default function ReplyModal({ deal, isOpen, onClose }: ReplyModalProps) {
                   <div className="flex items-start gap-2">
                     <span className="text-amber-500">💡</span>
                     <div>
-                      <p className="text-sm font-medium text-amber-800 mb-1">협상 팁</p>
+                      <p className="text-sm font-medium text-amber-800 mb-1">Negotiation tips</p>
                       <ul className="text-xs text-amber-700 space-y-1">
-                        <li>• 구체적인 수치로 제안하세요 (예: +20%)</li>
-                        <li>• 대안을 함께 제시하면 성공률이 높아요</li>
-                        <li>• 긍정적인 톤을 유지하세요</li>
+                        <li>• Propose specific numbers (e.g., +20%)</li>
+                        <li>• Offering alternatives increases success rate</li>
+                        <li>• Maintain a positive tone</li>
                       </ul>
                     </div>
                   </div>
@@ -258,9 +258,9 @@ export default function ReplyModal({ deal, isOpen, onClose }: ReplyModalProps) {
               <div className="flex items-center gap-2 mb-6 text-sm text-gray-500">
                 <span>📤</span>
                 <span>
-                  {deal.channel === 'instagram_dm' ? 'Instagram DM' :
+                  Will be sent via {deal.channel === 'instagram_dm' ? 'Instagram DM' :
                    deal.channel === 'email' ? 'Email' :
-                   deal.channel === 'whatsapp' ? 'WhatsApp' : 'Message'}으로 전송됩니다
+                   deal.channel === 'whatsapp' ? 'WhatsApp' : 'Message'}
                 </span>
               </div>
 
@@ -273,10 +273,10 @@ export default function ReplyModal({ deal, isOpen, onClose }: ReplyModalProps) {
                 {isSending ? (
                   <span className="flex items-center justify-center gap-2">
                     <span className="animate-spin">⏳</span>
-                    전송 중...
+                    Sending...
                   </span>
                 ) : (
-                  '답장 보내기'
+                  'Send Reply'
                 )}
               </button>
             </>

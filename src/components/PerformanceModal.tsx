@@ -86,7 +86,7 @@ const mockPerformanceData: VideoPerformance[] = [
       likes: 12300,
       comments: 890,
       shares: 450,
-      watchTime: '8분 32초',
+      watchTime: '8m 32s',
       engagementRate: 5.8,
     },
     selected: false,
@@ -204,15 +204,15 @@ export default function PerformanceModal({ brandName, isOpen, onClose }: Perform
               <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
                 <span className="text-4xl">✓</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">전송 완료!</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Sent!</h3>
               <p className="text-sm text-gray-500 mb-6">
-                {brandName}에게 퍼포먼스 리포트가 전송되었습니다.
+                Performance report has been sent to {brandName}.
               </p>
               <button
                 onClick={handleClose}
                 className="px-8 py-3 bg-gray-900 text-white rounded-xl font-medium hover:bg-gray-800 transition-colors"
               >
-                완료
+                Done
               </button>
             </div>
           ) : (
@@ -220,7 +220,7 @@ export default function PerformanceModal({ brandName, isOpen, onClose }: Perform
               {/* Video Selection */}
               <div className="mb-6">
                 <p className="text-sm text-gray-500 mb-4">
-                  전송할 컨텐츠를 선택하세요
+                  Select content to send
                 </p>
                 <div className="space-y-3">
                   {videos.map((video) => (
@@ -268,7 +268,7 @@ export default function PerformanceModal({ brandName, isOpen, onClose }: Perform
               {/* Performance Summary */}
               {hasSelection && (
                 <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-5 text-white mb-6">
-                  <h3 className="text-sm font-medium text-gray-400 mb-4">퍼포먼스 요약</h3>
+                  <h3 className="text-sm font-medium text-gray-400 mb-4">Performance Summary</h3>
 
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div>
@@ -303,24 +303,24 @@ export default function PerformanceModal({ brandName, isOpen, onClose }: Perform
                 <div className="bg-gray-50 rounded-xl p-4 mb-6">
                   <div className="flex items-center gap-2 mb-3">
                     <span>📊</span>
-                    <p className="text-sm font-medium text-gray-900">리포트에 포함되는 내용</p>
+                    <p className="text-sm font-medium text-gray-900">Report includes</p>
                   </div>
                   <ul className="space-y-2 text-sm text-gray-600">
                     <li className="flex items-center gap-2">
                       <span className="text-green-500">✓</span>
-                      조회수, 좋아요, 댓글, 공유 통계
+                      Views, likes, comments, shares statistics
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="text-green-500">✓</span>
-                      오디언스 인구통계 (연령, 성별, 지역)
+                      Audience demographics (age, gender, region)
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="text-green-500">✓</span>
-                      시청 지속 시간 그래프
+                      Watch time retention graph
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="text-green-500">✓</span>
-                      도달률 및 노출 수
+                      Reach and impressions
                     </li>
                   </ul>
                 </div>
@@ -335,12 +335,12 @@ export default function PerformanceModal({ brandName, isOpen, onClose }: Perform
                 {isSending ? (
                   <span className="flex items-center justify-center gap-2">
                     <span className="animate-spin">⏳</span>
-                    전송 중...
+                    Sending...
                   </span>
                 ) : hasSelection ? (
-                  `${selectedVideos.length}개 컨텐츠 리포트 전송`
+                  `Send ${selectedVideos.length} Content Report`
                 ) : (
-                  '컨텐츠를 선택하세요'
+                  'Select content'
                 )}
               </button>
             </>

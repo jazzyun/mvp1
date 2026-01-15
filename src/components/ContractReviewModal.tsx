@@ -14,19 +14,19 @@ function getRiskBadge(level: RiskLevel) {
     case 'high':
       return (
         <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700">
-          주의
+          Caution
         </span>
       );
     case 'medium':
       return (
         <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-700">
-          확인
+          Review
         </span>
       );
     case 'low':
       return (
         <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700">
-          양호
+          Good
         </span>
       );
   }
@@ -74,7 +74,7 @@ export default function ContractReviewModal({ brandName, contract, isOpen, onClo
                 <span className="text-lg">🤖</span>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-900 mb-1">AI 요약</p>
+                <p className="text-sm font-medium text-gray-900 mb-1">AI Summary</p>
                 <p className="text-sm text-gray-700 leading-relaxed">{contract.summary}</p>
               </div>
             </div>
@@ -86,11 +86,11 @@ export default function ContractReviewModal({ brandName, contract, isOpen, onClo
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-red-500">🚨</span>
                 <p className="text-sm font-semibold text-red-700">
-                  {highRiskCount}개 항목 주의 필요
+                  {highRiskCount} item(s) need attention
                 </p>
               </div>
               <p className="text-sm text-red-600">
-                계약 조건 중 불리한 항목이 발견되었습니다. 아래 내용을 확인하세요.
+                Unfavorable terms were found in the contract. Please review below.
               </p>
             </div>
           )}
@@ -98,7 +98,7 @@ export default function ContractReviewModal({ brandName, contract, isOpen, onClo
           {/* Deliverables */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <span>📋</span> 제작 요청 사항
+              <span>📋</span> Deliverables
             </h3>
             <div className="bg-gray-50 rounded-xl p-4">
               <ul className="space-y-2">
@@ -117,7 +117,7 @@ export default function ContractReviewModal({ brandName, contract, isOpen, onClo
           {/* Payment */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <span>💰</span> 지급 조건
+              <span>💰</span> Payment Terms
             </h3>
             <div className={`rounded-xl p-4 border ${
               contract.payment.riskLevel === 'high'
@@ -131,8 +131,8 @@ export default function ContractReviewModal({ brandName, contract, isOpen, onClo
                 {contract.payment.riskLevel && getRiskBadge(contract.payment.riskLevel)}
               </div>
               <div className="space-y-1 text-sm text-gray-600">
-                <p>지급 방식: {contract.payment.method}</p>
-                <p>지급 시기: {contract.payment.timing}</p>
+                <p>Payment method: {contract.payment.method}</p>
+                <p>Payment timing: {contract.payment.timing}</p>
               </div>
             </div>
           </div>
@@ -140,19 +140,19 @@ export default function ContractReviewModal({ brandName, contract, isOpen, onClo
           {/* Timeline */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <span>📅</span> 일정
+              <span>📅</span> Timeline
             </h3>
             <div className="bg-gray-50 rounded-xl p-4 space-y-3">
               <div className="flex justify-between items-center">
-                <p className="text-sm text-gray-500">컨텐츠 마감</p>
+                <p className="text-sm text-gray-500">Content deadline</p>
                 <p className="text-sm font-medium text-gray-900">{contract.timeline.contentDeadline}</p>
               </div>
               <div className="flex justify-between items-center">
-                <p className="text-sm text-gray-500">검토 기간</p>
+                <p className="text-sm text-gray-500">Review period</p>
                 <p className="text-sm font-medium text-gray-900">{contract.timeline.reviewPeriod}</p>
               </div>
               <div className="flex justify-between items-center">
-                <p className="text-sm text-gray-500">캠페인 기간</p>
+                <p className="text-sm text-gray-500">Campaign period</p>
                 <p className="text-sm font-medium text-gray-900">{contract.timeline.campaignPeriod}</p>
               </div>
             </div>
@@ -161,7 +161,7 @@ export default function ContractReviewModal({ brandName, contract, isOpen, onClo
           {/* Usage Rights */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <span>📜</span> 권리 조항
+              <span>📜</span> Usage Rights
             </h3>
             <div className="space-y-2">
               {contract.usageRights.map((right, index) => (
@@ -193,7 +193,7 @@ export default function ContractReviewModal({ brandName, contract, isOpen, onClo
           {/* Restrictions */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <span>🚫</span> 제한 사항
+              <span>🚫</span> Restrictions
             </h3>
             <div className="bg-gray-50 rounded-xl p-4">
               <ul className="space-y-2">
@@ -210,7 +210,7 @@ export default function ContractReviewModal({ brandName, contract, isOpen, onClo
           {/* AI Notes */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <span>💡</span> AI 분석 노트
+              <span>💡</span> AI Analysis Notes
             </h3>
             <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 space-y-3">
               {contract.aiNotes.map((note, index) => (
@@ -227,13 +227,13 @@ export default function ContractReviewModal({ brandName, contract, isOpen, onClo
               onClick={onClose}
               className="flex-1 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-colors"
             >
-              닫기
+              Close
             </button>
             <button
               onClick={onClose}
               className="flex-1 py-3 bg-gray-900 text-white rounded-xl font-medium hover:bg-gray-800 transition-colors"
             >
-              협상 포인트 생성
+              Generate Negotiation Points
             </button>
           </div>
         </div>

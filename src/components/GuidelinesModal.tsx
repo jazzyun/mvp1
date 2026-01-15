@@ -37,7 +37,7 @@ const mockVideos: VideoItem[] = [
     platform: 'instagram',
     thumbnail: '🎬',
     title: 'New skincare routine ✨',
-    postedAt: '2시간 전',
+    postedAt: '2h ago',
     views: '12.4K',
   },
   {
@@ -45,7 +45,7 @@ const mockVideos: VideoItem[] = [
     platform: 'instagram',
     thumbnail: '📦',
     title: 'Unboxing haul',
-    postedAt: '1일 전',
+    postedAt: '1d ago',
     views: '8.2K',
   },
   {
@@ -53,7 +53,7 @@ const mockVideos: VideoItem[] = [
     platform: 'tiktok',
     thumbnail: '💄',
     title: 'Get ready with me',
-    postedAt: '2일 전',
+    postedAt: '2d ago',
     views: '45.1K',
   },
   {
@@ -61,7 +61,7 @@ const mockVideos: VideoItem[] = [
     platform: 'tiktok',
     thumbnail: '🏃',
     title: 'Morning workout vlog',
-    postedAt: '3일 전',
+    postedAt: '3d ago',
     views: '23.7K',
   },
 ];
@@ -77,13 +77,13 @@ function mockAnalyzeVideo(guidelines: Guideline[]): CategoryResult[] {
 
       if (rand > 0.3) {
         status = 'pass';
-        note = '자동 감지됨';
+        note = 'Auto-detected';
       } else if (rand > 0.15) {
         status = 'warning';
-        note = '수동 확인 필요';
+        note = 'Manual check needed';
       } else {
         status = 'fail';
-        note = '미충족';
+        note = 'Not met';
       }
 
       return { requirement: req, status, note };
@@ -194,7 +194,7 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
           {!selectedVideo && !isChecking && !results && (
             <div>
               <p className="text-sm text-gray-500 mb-4">
-                체크할 영상을 선택하세요
+                Select a video to check
               </p>
               <div className="space-y-3">
                 {mockVideos.map((video) => (
@@ -231,8 +231,8 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
               <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center animate-pulse">
                 <span className="text-xl">🔍</span>
               </div>
-              <p className="text-gray-900 font-medium mb-1">영상 분석 중...</p>
-              <p className="text-sm text-gray-500">가이드라인 항목을 확인하고 있습니다</p>
+              <p className="text-gray-900 font-medium mb-1">Analyzing video...</p>
+              <p className="text-sm text-gray-500">Checking guideline requirements</p>
             </div>
           )}
 
@@ -255,7 +255,7 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
                 <p className="text-3xl font-bold text-gray-900 mb-1">
                   {passCount}/{totalCount}
                 </p>
-                <p className="text-sm text-gray-500">항목 충족</p>
+                <p className="text-sm text-gray-500">Requirements met</p>
               </div>
 
               {/* Detailed Results */}
@@ -290,7 +290,7 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
                 onClick={handleClose}
                 className="w-full py-3 bg-gray-900 text-white rounded-xl font-medium hover:bg-gray-800 transition-colors"
               >
-                결과 공유하기
+                Share Results
               </button>
             </div>
           )}

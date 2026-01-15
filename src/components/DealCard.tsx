@@ -19,11 +19,11 @@ function formatTimeAgo(date: Date): string {
   const diffDays = Math.floor(diffHours / 24);
 
   if (diffDays > 0) {
-    return `${diffDays}일 전`;
+    return `${diffDays}d ago`;
   } else if (diffHours > 0) {
-    return `${diffHours}시간 전`;
+    return `${diffHours}h ago`;
   } else {
-    return '방금 전';
+    return 'Just now';
   }
 }
 
@@ -38,7 +38,7 @@ function formatChannel(channel: DealChannel): string {
 }
 
 function formatAmount(amount: number | null): string {
-  if (amount === null) return '협의 필요';
+  if (amount === null) return 'To be discussed';
   return `$${amount.toLocaleString()}`;
 }
 
@@ -98,11 +98,11 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
       <div className="bg-gray-50 rounded-xl p-4 mb-4">
         <div className="flex justify-between items-start">
           <div>
-            <p className="text-sm text-gray-500 mb-1">제안 금액</p>
+            <p className="text-sm text-gray-500 mb-1">Proposed Amount</p>
             <p className="text-xl font-bold text-gray-900">{formatAmount(deal.offeredAmount)}</p>
           </div>
           <div className="text-right">
-            <p className="text-sm text-gray-500 mb-1">컨텐츠</p>
+            <p className="text-sm text-gray-500 mb-1">Content</p>
             <p className="text-sm font-medium text-gray-700">{deal.offeredDetails}</p>
           </div>
         </div>

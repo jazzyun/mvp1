@@ -15,13 +15,13 @@ function formatDate(date: Date): string {
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
   if (diffDays === 0) {
-    return date.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+    return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
   } else if (diffDays === 1) {
-    return '어제';
+    return 'Yesterday';
   } else if (diffDays < 7) {
-    return `${diffDays}일 전`;
+    return `${diffDays}d ago`;
   } else {
-    return date.toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' });
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   }
 }
 
@@ -106,7 +106,7 @@ export default function ConversationModal({ brandName, conversation, isOpen, onC
   let currentDate = '';
 
   conversation.messages.forEach((msg) => {
-    const msgDate = msg.timestamp.toLocaleDateString('ko-KR', {
+    const msgDate = msg.timestamp.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -177,7 +177,7 @@ export default function ConversationModal({ brandName, conversation, isOpen, onC
         <div className="sticky bottom-0 bg-white border-t border-gray-100 p-4">
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <span>💡</span>
-            <span>전체 {conversation.messages.length}개의 메시지</span>
+            <span>{conversation.messages.length} total messages</span>
           </div>
         </div>
       </div>

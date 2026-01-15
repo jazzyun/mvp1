@@ -23,11 +23,11 @@ function getSentimentColor(sentiment: 'positive' | 'neutral' | 'negative') {
 function getPaymentSpeedLabel(speed: 'fast' | 'average' | 'slow') {
   switch (speed) {
     case 'fast':
-      return { label: '빠름', color: 'text-green-600' };
+      return { label: 'Fast', color: 'text-green-600' };
     case 'average':
-      return { label: '보통', color: 'text-yellow-600' };
+      return { label: 'Average', color: 'text-yellow-600' };
     case 'slow':
-      return { label: '느림', color: 'text-red-600' };
+      return { label: 'Slow', color: 'text-red-600' };
   }
 }
 
@@ -97,8 +97,8 @@ export default function BrandProfileModal({ brandName, profile, isOpen, onClose 
               </span>
               <p className="font-bold text-gray-900">
                 {profile.aiRecommendation.shouldCollaborate
-                  ? '협업 추천'
-                  : '신중한 검토 필요'}
+                  ? 'Collaboration Recommended'
+                  : 'Careful Review Needed'}
               </p>
             </div>
 
@@ -121,17 +121,17 @@ export default function BrandProfileModal({ brandName, profile, isOpen, onClose 
           {/* Brand Info */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <span>🏢</span> 브랜드 정보
+              <span>🏢</span> Brand Info
             </h3>
             <div className="bg-gray-50 rounded-xl p-4 space-y-3">
               <p className="text-sm text-gray-700">{profile.description}</p>
               <div className="grid grid-cols-2 gap-3 pt-2 border-t border-gray-200">
                 <div>
-                  <p className="text-xs text-gray-500">설립</p>
+                  <p className="text-xs text-gray-500">Founded</p>
                   <p className="text-sm font-medium text-gray-900">{profile.founded}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500">본사</p>
+                  <p className="text-xs text-gray-500">Headquarters</p>
                   <p className="text-sm font-medium text-gray-900">{profile.headquarters}</p>
                 </div>
               </div>
@@ -141,7 +141,7 @@ export default function BrandProfileModal({ brandName, profile, isOpen, onClose 
           {/* Social Presence */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <span>📱</span> 소셜 미디어
+              <span>📱</span> Social Media
             </h3>
             <div className="flex gap-2">
               {profile.socialFollowers.instagram && (
@@ -171,7 +171,7 @@ export default function BrandProfileModal({ brandName, profile, isOpen, onClose 
           {/* Creator Reviews */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <span>⭐</span> 크리에이터 평가
+              <span>⭐</span> Creator Reviews
             </h3>
             <div className="bg-gray-50 rounded-xl p-4">
               <div className="flex items-center justify-between mb-4">
@@ -183,26 +183,26 @@ export default function BrandProfileModal({ brandName, profile, isOpen, onClose 
                     <StarRating rating={Math.round(profile.creatorReviews.avgRating)} />
                   </div>
                   <p className="text-xs text-gray-500">
-                    {profile.creatorReviews.totalReviews}명의 크리에이터 평가
+                    {profile.creatorReviews.totalReviews} creator reviews
                   </p>
                 </div>
               </div>
 
               <div className="grid grid-cols-3 gap-3">
                 <div className="text-center p-2 bg-white rounded-lg">
-                  <p className="text-xs text-gray-500 mb-1">정산 속도</p>
+                  <p className="text-xs text-gray-500 mb-1">Payment Speed</p>
                   <p className={`text-sm font-medium ${paymentSpeed.color}`}>
                     {paymentSpeed.label}
                   </p>
                 </div>
                 <div className="text-center p-2 bg-white rounded-lg">
-                  <p className="text-xs text-gray-500 mb-1">커뮤니케이션</p>
+                  <p className="text-xs text-gray-500 mb-1">Communication</p>
                   <p className="text-sm font-medium text-gray-900">
                     {profile.creatorReviews.communicationRating.toFixed(1)}/5
                   </p>
                 </div>
                 <div className="text-center p-2 bg-white rounded-lg">
-                  <p className="text-xs text-gray-500 mb-1">재협업률</p>
+                  <p className="text-xs text-gray-500 mb-1">Re-collab Rate</p>
                   <p className="text-sm font-medium text-blue-600">
                     {profile.creatorReviews.reuseProbability}
                   </p>
@@ -214,7 +214,7 @@ export default function BrandProfileModal({ brandName, profile, isOpen, onClose 
           {/* Recent News */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-              <span>📰</span> 최근 뉴스
+              <span>📰</span> Recent News
             </h3>
             <div className="space-y-2">
               {profile.recentNews.map((news, index) => (
