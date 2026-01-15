@@ -3,6 +3,18 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
+// Points-redeemable rewards
+const redeemableRewards = [
+  { id: 'r1', title: 'Free Month Pro', description: 'Unlock all Pro features for 30 days', points: 5000, icon: '👑', color: 'from-violet-500 to-purple-600' },
+  { id: 'r2', title: 'Contract Review', description: 'AI-powered contract analysis', points: 2500, icon: '📝', color: 'from-blue-500 to-cyan-500' },
+  { id: 'r3', title: 'Rate Calculator', description: 'Advanced pricing tool access', points: 1500, icon: '💰', color: 'from-emerald-500 to-green-600' },
+  { id: 'r4', title: 'Haus Merch', description: '$25 off exclusive creator gear', points: 3000, icon: '👕', color: 'from-pink-500 to-rose-500' },
+  { id: 'r5', title: 'VIP Event Access', description: 'Early access to meetups & events', points: 8000, icon: '🎟️', color: 'from-amber-500 to-orange-500' },
+  { id: 'r6', title: '1:1 Rate Coaching', description: '30-min call with negotiation expert', points: 10000, icon: '📞', color: 'from-indigo-500 to-violet-600' },
+];
+
+const userPoints = 12450; // This would come from user context/state
+
 const benefits = [
   {
     id: '1',
@@ -93,12 +105,63 @@ export default function BenefitsSection() {
       {/* Header */}
       <div className="flex items-end justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Benefits</h2>
-          <p className="text-sm text-gray-500 mt-0.5">Exclusive perks for members</p>
+          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Perks</h2>
+          <p className="text-sm text-gray-500 mt-0.5">Exclusive benefits for members</p>
         </div>
         <Link href="/community/benefits" className="text-sm text-violet-600 font-medium hover:text-violet-700">
           See all
         </Link>
+      </div>
+
+      {/* Redeem with Points - Horizontal Scroll */}
+      <div>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-semibold text-gray-900">Redeem with Points</h3>
+            <span className="px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">
+              {userPoints.toLocaleString()} pts
+            </span>
+          </div>
+          <Link href="/profile" className="text-xs text-violet-600 font-medium">
+            Earn more →
+          </Link>
+        </div>
+        <div className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 snap-x snap-mandatory scrollbar-hide">
+          {redeemableRewards.map((reward) => {
+            const canAfford = userPoints >= reward.points;
+            return (
+              <div
+                key={reward.id}
+                className={`flex-shrink-0 w-[calc(50%-6px)] snap-start bg-white rounded-2xl border border-gray-100 overflow-hidden ${
+                  !canAfford ? 'opacity-60' : ''
+                }`}
+              >
+                <div className={`h-16 bg-gradient-to-br ${reward.color} flex items-center justify-center`}>
+                  <span className="text-2xl">{reward.icon}</span>
+                </div>
+                <div className="p-3">
+                  <h4 className="font-semibold text-gray-900 text-sm mb-0.5">{reward.title}</h4>
+                  <p className="text-xs text-gray-500 line-clamp-1 mb-2">{reward.description}</p>
+                  <div className="flex items-center justify-between">
+                    <span className={`text-xs font-semibold ${canAfford ? 'text-amber-500' : 'text-gray-400'}`}>
+                      {reward.points.toLocaleString()} pts
+                    </span>
+                    <button
+                      className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors ${
+                        canAfford
+                          ? 'bg-violet-600 text-white hover:bg-violet-700'
+                          : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      }`}
+                      disabled={!canAfford}
+                    >
+                      {canAfford ? 'Redeem' : 'Locked'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Stats Card */}

@@ -189,15 +189,6 @@ const pointsData = {
     { level: 20, name: 'Haus Legend', minPoints: 100000, color: 'from-rose-400 to-pink-500' },
   ],
 
-  // Redeemable rewards
-  redeemableRewards: [
-    { id: '1', title: 'Free Month Pro', description: 'Unlock all Pro features for 30 days', points: 5000, icon: '👑', color: 'from-violet-500 to-purple-600', available: true },
-    { id: '2', title: 'Contract Review', description: 'AI-powered contract analysis', points: 2500, icon: '📝', color: 'from-blue-500 to-cyan-500', available: true },
-    { id: '3', title: 'Rate Calculator', description: 'Advanced pricing tool access', points: 1500, icon: '💰', color: 'from-emerald-500 to-green-600', available: true },
-    { id: '4', title: 'Haus Merch', description: '$25 off exclusive creator gear', points: 3000, icon: '👕', color: 'from-pink-500 to-rose-500', available: true },
-    { id: '5', title: 'VIP Event Access', description: 'Early access to meetups & events', points: 8000, icon: '🎟️', color: 'from-amber-500 to-orange-500', available: false },
-    { id: '6', title: '1:1 Rate Coaching', description: '30-min call with negotiation expert', points: 10000, icon: '📞', color: 'from-indigo-500 to-violet-600', available: false },
-  ],
 };
 
 // Mock analytics data
@@ -474,50 +465,6 @@ export default function ProfilePage() {
 
         {activeTab === 'points' && (
           <>
-            {/* Redeemable Rewards - Horizontal Scroll */}
-            <div className="-mx-4">
-              <div className="px-4 mb-3 flex items-center justify-between">
-                <h3 className="font-semibold text-gray-900">Redeem Points</h3>
-                <button className="text-xs text-violet-600 font-medium">See all</button>
-              </div>
-              <div className="flex gap-3 overflow-x-auto pb-2 px-4 snap-x snap-mandatory scrollbar-hide">
-                {pointsData.redeemableRewards.map((reward) => {
-                  const canAfford = pointsData.totalPoints >= reward.points;
-                  return (
-                    <div
-                      key={reward.id}
-                      className={`flex-shrink-0 w-[calc(50%-6px)] snap-start bg-white rounded-2xl border border-gray-100 overflow-hidden ${
-                        !canAfford ? 'opacity-60' : ''
-                      }`}
-                    >
-                      <div className={`h-20 bg-gradient-to-br ${reward.color} flex items-center justify-center`}>
-                        <span className="text-3xl">{reward.icon}</span>
-                      </div>
-                      <div className="p-3">
-                        <h4 className="font-semibold text-gray-900 text-sm mb-0.5">{reward.title}</h4>
-                        <p className="text-xs text-gray-500 line-clamp-2 mb-2">{reward.description}</p>
-                        <div className="flex items-center justify-between">
-                          <span className={`text-xs font-semibold ${canAfford ? 'text-amber-500' : 'text-gray-400'}`}>
-                            {reward.points.toLocaleString()} pts
-                          </span>
-                          <button
-                            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                              canAfford
-                                ? 'bg-violet-600 text-white hover:bg-violet-700'
-                                : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                            }`}
-                            disabled={!canAfford}
-                          >
-                            {canAfford ? 'Redeem' : 'Locked'}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
             {/* Points Overview Card */}
             <div className="bg-gradient-to-br from-amber-400 via-orange-500 to-rose-500 rounded-2xl p-5 text-white">
               <div className="flex items-start justify-between mb-4">
