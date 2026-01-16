@@ -1,0 +1,25 @@
+{
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "success": "Éxito"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "settings": "Configuración",
+    "profile": "Perfil",
+    "community": "Comunidad",
+    "analytics": "Análisis",
+    "signOut": "Cerrar sesión"
+  },
+  "settings": {
+    "title": "Configuración",
+    "language": {
+      "title": "Idioma",
+      "description": "Selecciona tu idioma preferido",
+      "saved": "Preferencia de idioma guardada"
+    }
+  }
+}

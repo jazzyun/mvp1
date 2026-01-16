@@ -1,4 +1,7 @@
 import type { Metadata, Viewport } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
+import { PasswordGate } from "@/components/PasswordGate";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,15 +23,20 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className="antialiased">
-        {children}
+        <NextIntlClientProvider messages={messages}>
+          <PasswordGate>{children}</PasswordGate>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
