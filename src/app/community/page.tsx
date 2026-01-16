@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 // Import community sections
 import InsightsSection from './sections/InsightsSection';
@@ -13,14 +14,16 @@ import MenuSection from './sections/MenuSection';
 type TabType = 'signals' | 'anonymous' | 'community' | 'benefits' | 'menu';
 
 export default function CommunityHub() {
+  const t = useTranslations('community');
+  const tNav = useTranslations('navigation');
   const [activeTab, setActiveTab] = useState<TabType>('signals');
 
   const tabs = [
-    { id: 'signals' as TabType, label: 'Haus Signals', icon: '✦' },
-    { id: 'anonymous' as TabType, label: 'Anon', icon: '◐' },
-    { id: 'community' as TabType, label: 'Feed', icon: '◈' },
-    { id: 'benefits' as TabType, label: 'Perks', icon: '✧' },
-    { id: 'menu' as TabType, label: 'More', icon: '≡' },
+    { id: 'signals' as TabType, label: t('tabs.signals'), icon: '✦' },
+    { id: 'anonymous' as TabType, label: t('tabs.anonymous'), icon: '◐' },
+    { id: 'community' as TabType, label: t('tabs.feed'), icon: '◈' },
+    { id: 'benefits' as TabType, label: t('tabs.perks'), icon: '✧' },
+    { id: 'menu' as TabType, label: t('tabs.more'), icon: '≡' },
   ];
 
   const renderContent = () => {
@@ -51,8 +54,8 @@ export default function CommunityHub() {
                 <span className="text-white font-bold text-sm">H</span>
               </div>
               <div>
-                <h1 className="text-lg font-semibold text-gray-900 tracking-tight">The Haus</h1>
-                <p className="text-xs text-gray-500 -mt-0.5">Creator Community</p>
+                <h1 className="text-lg font-semibold text-gray-900 tracking-tight">{t('title')}</h1>
+                <p className="text-xs text-gray-500 -mt-0.5">{t('subtitle')}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -103,19 +106,19 @@ export default function CommunityHub() {
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span className="text-xs mt-1">Assistant</span>
+                <span className="text-xs mt-1">{tNav('assistant')}</span>
               </Link>
               <Link href="/community" className="flex flex-col items-center py-2 px-6 rounded-xl bg-violet-50 text-violet-600">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
-                <span className="text-xs mt-1 font-semibold">Community</span>
+                <span className="text-xs mt-1 font-semibold">{tNav('community')}</span>
               </Link>
               <Link href="/profile" className="flex flex-col items-center py-2 px-6 rounded-xl text-gray-400 hover:bg-gray-100 transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                <span className="text-xs mt-1">Profile</span>
+                <span className="text-xs mt-1">{tNav('profile')}</span>
               </Link>
             </div>
           </div>

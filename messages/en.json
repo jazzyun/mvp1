@@ -4,7 +4,9 @@
     "cancel": "Cancel",
     "loading": "Loading...",
     "error": "An error occurred",
-    "success": "Success"
+    "success": "Success",
+    "search": "Search",
+    "more": "More"
   },
   "navigation": {
     "assistant": "Assistant",
@@ -18,6 +20,43 @@
     "title": "Brand Deals",
     "today": "Today",
     "noDeals": "No deals to review"
+  },
+  "deals": {
+    "priority": {
+      "high": "HIGH PRIORITY",
+      "medium": "MEDIUM",
+      "low": "LOW"
+    },
+    "time": {
+      "justNow": "Just now",
+      "hoursAgo": "{hours}h ago",
+      "daysAgo": "{days}d ago"
+    },
+    "channel": {
+      "instagram_dm": "Instagram DM",
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "other": "Other"
+    },
+    "messages": "{count} messages",
+    "proposedAmount": "Proposed Amount",
+    "content": "Content",
+    "toBeDiscussed": "To be discussed",
+    "reply": "Reply",
+    "checkGuidelines": "Check Guidelines",
+    "reviewContract": "Review Contract",
+    "sendPerformance": "Send Performance"
+  },
+  "community": {
+    "title": "The Haus",
+    "subtitle": "Creator Community",
+    "tabs": {
+      "signals": "Haus Signals",
+      "anonymous": "Anon",
+      "feed": "Feed",
+      "perks": "Perks",
+      "more": "More"
+    }
   },
   "settings": {
     "title": "Settings",

@@ -4,7 +4,9 @@
     "cancel": "취소",
     "loading": "로딩 중...",
     "error": "오류가 발생했습니다",
-    "success": "성공"
+    "success": "성공",
+    "search": "검색",
+    "more": "더보기"
   },
   "navigation": {
     "assistant": "어시스턴트",
@@ -18,6 +20,43 @@
     "title": "브랜드 딜",
     "today": "오늘",
     "noDeals": "검토할 딜이 없습니다"
+  },
+  "deals": {
+    "priority": {
+      "high": "높은 우선순위",
+      "medium": "중간",
+      "low": "낮음"
+    },
+    "time": {
+      "justNow": "방금 전",
+      "hoursAgo": "{hours}시간 전",
+      "daysAgo": "{days}일 전"
+    },
+    "channel": {
+      "instagram_dm": "인스타그램 DM",
+      "email": "이메일",
+      "whatsapp": "왓츠앱",
+      "other": "기타"
+    },
+    "messages": "{count}개 메시지",
+    "proposedAmount": "제안 금액",
+    "content": "콘텐츠",
+    "toBeDiscussed": "협의 예정",
+    "reply": "답장하기",
+    "checkGuidelines": "가이드라인 확인",
+    "reviewContract": "계약서 검토",
+    "sendPerformance": "성과 전송"
+  },
+  "community": {
+    "title": "더 하우스",
+    "subtitle": "크리에이터 커뮤니티",
+    "tabs": {
+      "signals": "하우스 시그널",
+      "anonymous": "익명",
+      "feed": "피드",
+      "perks": "혜택",
+      "more": "더보기"
+    }
   },
   "settings": {
     "title": "설정",

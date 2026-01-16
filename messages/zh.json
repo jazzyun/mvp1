@@ -4,7 +4,9 @@
     "cancel": "取消",
     "loading": "加载中...",
     "error": "发生错误",
-    "success": "成功"
+    "success": "成功",
+    "search": "搜索",
+    "more": "更多"
   },
   "navigation": {
     "assistant": "助手",
@@ -18,6 +20,43 @@
     "title": "品牌合作",
     "today": "今天",
     "noDeals": "没有待审核的合作"
+  },
+  "deals": {
+    "priority": {
+      "high": "高优先级",
+      "medium": "中等",
+      "low": "低"
+    },
+    "time": {
+      "justNow": "刚刚",
+      "hoursAgo": "{hours}小时前",
+      "daysAgo": "{days}天前"
+    },
+    "channel": {
+      "instagram_dm": "Instagram私信",
+      "email": "邮件",
+      "whatsapp": "WhatsApp",
+      "other": "其他"
+    },
+    "messages": "{count}条消息",
+    "proposedAmount": "提议金额",
+    "content": "内容",
+    "toBeDiscussed": "待讨论",
+    "reply": "回复",
+    "checkGuidelines": "查看指南",
+    "reviewContract": "审核合同",
+    "sendPerformance": "发送业绩"
+  },
+  "community": {
+    "title": "创作者之家",
+    "subtitle": "创作者社区",
+    "tabs": {
+      "signals": "Haus信号",
+      "anonymous": "匿名",
+      "feed": "动态",
+      "perks": "福利",
+      "more": "更多"
+    }
   },
   "settings": {
     "title": "设置",

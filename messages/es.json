@@ -4,7 +4,9 @@
     "cancel": "Cancelar",
     "loading": "Cargando...",
     "error": "Ocurrió un error",
-    "success": "Éxito"
+    "success": "Éxito",
+    "search": "Buscar",
+    "more": "Más"
   },
   "navigation": {
     "assistant": "Asistente",
@@ -18,6 +20,43 @@
     "title": "Ofertas de Marcas",
     "today": "Hoy",
     "noDeals": "No hay ofertas para revisar"
+  },
+  "deals": {
+    "priority": {
+      "high": "ALTA PRIORIDAD",
+      "medium": "MEDIA",
+      "low": "BAJA"
+    },
+    "time": {
+      "justNow": "Justo ahora",
+      "hoursAgo": "hace {hours}h",
+      "daysAgo": "hace {days}d"
+    },
+    "channel": {
+      "instagram_dm": "DM de Instagram",
+      "email": "Correo",
+      "whatsapp": "WhatsApp",
+      "other": "Otro"
+    },
+    "messages": "{count} mensajes",
+    "proposedAmount": "Monto Propuesto",
+    "content": "Contenido",
+    "toBeDiscussed": "Por discutir",
+    "reply": "Responder",
+    "checkGuidelines": "Ver Directrices",
+    "reviewContract": "Revisar Contrato",
+    "sendPerformance": "Enviar Rendimiento"
+  },
+  "community": {
+    "title": "The Haus",
+    "subtitle": "Comunidad de Creadores",
+    "tabs": {
+      "signals": "Señales Haus",
+      "anonymous": "Anón",
+      "feed": "Feed",
+      "perks": "Beneficios",
+      "more": "Más"
+    }
   },
   "settings": {
     "title": "Configuración",
