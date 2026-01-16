@@ -42,6 +42,12 @@
       "whatsapp": "WhatsApp",
       "other": "その他"
     },
+    "brands": {
+      "glossier": "グロッシアー",
+      "nike": "ナイキ",
+      "local_cafe": "ローカルカフェブランド",
+      "samsung": "サムスン電子"
+    },
     "risks": {
       "secondary_usage": "二次使用権が含まれています",
       "secondary_usage_ad": "広告素材として使用可能",
@@ -50,14 +56,11 @@
       "unlimited_revisions": "無制限の修正リクエスト可能",
       "other": "その他のリスク条件"
     },
-    "offeredDetails": {
-      "reel": "リール {count}本",
-      "reels": "リール {count}本",
-      "youtubeVideo": "YouTube動画 {count}本",
-      "youtubeVideos": "YouTube動画 {count}本",
-      "instagramStories": "Instagramストーリー {count}件",
-      "productSponsorship": "製品提供 + 少額報酬",
-      "galaxyReview": "Galaxyレビュー動画"
+    "contentTypes": {
+      "one_reel": "リール1本",
+      "youtube_and_stories": "YouTube動画1本 + Instagramストーリー3件",
+      "product_sponsorship": "製品提供 + 少額報酬",
+      "galaxy_review": "Galaxy製品レビュー動画"
     },
     "messages": "{count}件のメッセージ",
     "proposedAmount": "提案金額",

@@ -42,6 +42,12 @@
       "whatsapp": "WhatsApp",
       "other": "Otro"
     },
+    "brands": {
+      "glossier": "Glossier",
+      "nike": "Nike",
+      "local_cafe": "Marca de Café Local",
+      "samsung": "Samsung Electronics"
+    },
     "risks": {
       "secondary_usage": "Derechos de uso secundario incluidos",
       "secondary_usage_ad": "Puede usarse como material publicitario",
@@ -50,14 +56,11 @@
       "unlimited_revisions": "Solicitudes de revisión ilimitadas",
       "other": "Otra condición de riesgo"
     },
-    "offeredDetails": {
-      "reel": "{count} Reel",
-      "reels": "{count} Reels",
-      "youtubeVideo": "{count} video de YouTube",
-      "youtubeVideos": "{count} videos de YouTube",
-      "instagramStories": "{count} Instagram Stories",
-      "productSponsorship": "Patrocinio de producto + pequeña tarifa",
-      "galaxyReview": "Video de reseña de Galaxy"
+    "contentTypes": {
+      "one_reel": "1 Reel",
+      "youtube_and_stories": "1 video de YouTube + 3 Instagram Stories",
+      "product_sponsorship": "Patrocinio de producto + pequeña tarifa",
+      "galaxy_review": "Video de reseña de Galaxy"
     },
     "messages": "{count} mensajes",
     "proposedAmount": "Monto Propuesto",

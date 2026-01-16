@@ -42,6 +42,12 @@
       "whatsapp": "WhatsApp",
       "other": "其他"
     },
+    "brands": {
+      "glossier": "Glossier",
+      "nike": "耐克",
+      "local_cafe": "本地咖啡品牌",
+      "samsung": "三星电子"
+    },
     "risks": {
       "secondary_usage": "包含二次使用权",
       "secondary_usage_ad": "可用作广告素材",
@@ -50,14 +56,11 @@
       "unlimited_revisions": "无限修改请求",
       "other": "其他风险条款"
     },
-    "offeredDetails": {
-      "reel": "{count}个Reel",
-      "reels": "{count}个Reels",
-      "youtubeVideo": "{count}个YouTube视频",
-      "youtubeVideos": "{count}个YouTube视频",
-      "instagramStories": "{count}个Instagram故事",
-      "productSponsorship": "产品赞助 + 少量费用",
-      "galaxyReview": "Galaxy产品评测视频"
+    "contentTypes": {
+      "one_reel": "1个Reel",
+      "youtube_and_stories": "1个YouTube视频 + 3个Instagram故事",
+      "product_sponsorship": "产品赞助 + 少量费用",
+      "galaxy_review": "Galaxy产品评测视频"
     },
     "messages": "{count}条消息",
     "proposedAmount": "提议金额",

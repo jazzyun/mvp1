@@ -43,9 +43,11 @@ export interface ContractDetails {
 export interface Deal {
   id: string;
   brandName: string;
+  brandKey?: string;
   channel: DealChannel;
   offeredAmount: number | null;
   offeredDetails: string;
+  contentTypeKey?: string;
   receivedAt: Date;
   priority: DealPriority;
   risks: ContractRisk[];

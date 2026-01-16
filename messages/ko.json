@@ -42,6 +42,12 @@
       "whatsapp": "왓츠앱",
       "other": "기타"
     },
+    "brands": {
+      "glossier": "글로시에",
+      "nike": "나이키",
+      "local_cafe": "로컬 카페 브랜드",
+      "samsung": "삼성전자"
+    },
     "risks": {
       "secondary_usage": "2차 사용권 포함",
       "secondary_usage_ad": "광고 소재로 사용 가능",
@@ -50,14 +56,11 @@
       "unlimited_revisions": "무제한 수정 요청 가능",
       "other": "기타 위험 조건"
     },
-    "offeredDetails": {
-      "reel": "릴 {count}개",
-      "reels": "릴 {count}개",
-      "youtubeVideo": "유튜브 영상 {count}개",
-      "youtubeVideos": "유튜브 영상 {count}개",
-      "instagramStories": "인스타그램 스토리 {count}개",
-      "productSponsorship": "제품 협찬 + 소정의 비용",
-      "galaxyReview": "갤럭시 제품 리뷰 영상"
+    "contentTypes": {
+      "one_reel": "릴 1개",
+      "youtube_and_stories": "유튜브 영상 1개 + 인스타그램 스토리 3개",
+      "product_sponsorship": "제품 협찬 + 소정의 비용",
+      "galaxy_review": "갤럭시 제품 리뷰 영상"
     },
     "messages": "{count}개 메시지",
     "proposedAmount": "제안 금액",

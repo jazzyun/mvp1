@@ -4,9 +4,11 @@ export const mockDeals: Deal[] = [
   {
     id: '1',
     brandName: 'Glossier',
+    brandKey: 'glossier',
     channel: 'instagram_dm',
     offeredAmount: 2000,
     offeredDetails: '1 Reel',
+    contentTypeKey: 'one_reel',
     receivedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
     priority: 'high',
     risks: [
@@ -183,9 +185,11 @@ export const mockDeals: Deal[] = [
   {
     id: '2',
     brandName: 'Nike',
+    brandKey: 'nike',
     channel: 'email',
     offeredAmount: 5000,
     offeredDetails: '1 YouTube video + 3 Instagram Stories',
+    contentTypeKey: 'youtube_and_stories',
     receivedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
     priority: 'high',
     risks: [
@@ -353,9 +357,11 @@ export const mockDeals: Deal[] = [
   {
     id: '3',
     brandName: 'Local Cafe Brand',
+    brandKey: 'local_cafe',
     channel: 'instagram_dm',
     offeredAmount: 300,
     offeredDetails: 'Product sponsorship + small fee',
+    contentTypeKey: 'product_sponsorship',
     receivedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
     priority: 'medium',
     risks: [],
@@ -420,9 +426,11 @@ export const mockDeals: Deal[] = [
   {
     id: '4',
     brandName: 'Samsung Electronics',
+    brandKey: 'samsung',
     channel: 'email',
     offeredAmount: 8000,
     offeredDetails: 'Galaxy product review video',
+    contentTypeKey: 'galaxy_review',
     receivedAt: new Date(Date.now() - 3 * 60 * 60 * 1000),
     priority: 'high',
     risks: [
