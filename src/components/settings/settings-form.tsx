@@ -24,9 +24,8 @@ export function SettingsForm() {
         });
 
         if (response.ok) {
-          setMessage(t("language.saved"));
-          // Refresh the page to apply the new locale
-          window.location.reload();
+          // Redirect to home with new locale applied
+          window.location.href = "/";
         } else {
           setMessage(tCommon("error"));
         }
