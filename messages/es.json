@@ -156,7 +156,31 @@
     "helpful": "Útil",
     "postAnonymously": "Publicar Anónimamente",
     "identityHidden": "Tu identidad está completamente oculta",
-    "placeholder": "¿Qué tienes en mente? Comparte algo que no puedes publicar públicamente..."
+    "placeholder": "¿Qué tienes en mente? Comparte algo que no puedes publicar públicamente...",
+    "categories": {
+      "contract": "Contrato",
+      "personal": "Personal",
+      "wellness": "Bienestar",
+      "agency": "Agencia",
+      "payment": "Pago"
+    },
+    "posts": {
+      "1": {
+        "content": "¿Alguien ha trabajado con FashionBrand X? Me ofrecieron $8K por una campaña pero quieren que firme un NDA que me impide mencionar que trabajé con ellos. ¿Es esto normal?"
+      },
+      "2": {
+        "content": "Estoy embarazada y preocupada por decirle a las marcas. Una campaña en la que estoy quiere contenido de \"estilo de vida\" y no sé si me dejarán. ¿Alguien ha pasado por esto?"
+      },
+      "3": {
+        "content": "Me siento agotada. Publiqué consistentemente durante 3 años, finalmente llegué a 500K, pero ahora temo crear. Acepto ofertas de marcas solo para pagar las cuentas pero mi corazón no está en ello. ¿Cómo lo manejan ustedes?"
+      },
+      "4": {
+        "content": "Una agencia me contactó diciendo que pueden multiplicar mis ofertas de marcas por 10. Piden 30% de comisión + 6 meses de exclusividad. Representan algunos nombres grandes pero me parece caro. ¿Opiniones?"
+      },
+      "5": {
+        "content": "La marca lleva 60 días de retraso en el pago ($12K). Siguen diciendo \"procesando\" pero empiezo a preocuparme. ¿Lo hago público? ¿Contrato un abogado? ¿Qué les ha funcionado a otros?"
+      }
+    }
   },
   "settings": {
     "title": "Configuración",

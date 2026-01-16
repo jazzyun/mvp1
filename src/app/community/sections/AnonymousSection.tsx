@@ -6,8 +6,7 @@ import { useTranslations } from 'next-intl';
 const anonymousPosts = [
   {
     id: '1',
-    content: 'Has anyone worked with FashionBrand X? They offered $8K for a campaign but want me to sign an NDA that prevents me from ever mentioning I worked with them. Is this normal?',
-    category: 'Contract',
+    categoryKey: 'contract',
     categoryColor: 'from-blue-400 to-blue-600',
     likes: 156,
     comments: 67,
@@ -16,8 +15,7 @@ const anonymousPosts = [
   },
   {
     id: '2',
-    content: 'I\'m pregnant and worried about telling brands. One campaign I\'m in the middle of wants "lifestyle" content and idk if they\'ll drop me. Anyone been through this?',
-    category: 'Personal',
+    categoryKey: 'personal',
     categoryColor: 'from-pink-400 to-rose-600',
     likes: 234,
     comments: 89,
@@ -26,8 +24,7 @@ const anonymousPosts = [
   },
   {
     id: '3',
-    content: 'Feeling burnt out. Posted consistently for 3 years, finally hit 500K, but now I dread creating. Taking brand deals just to pay bills but my heart isn\'t in it. How do you guys deal?',
-    category: 'Wellness',
+    categoryKey: 'wellness',
     categoryColor: 'from-violet-400 to-purple-600',
     likes: 567,
     comments: 156,
@@ -36,8 +33,7 @@ const anonymousPosts = [
   },
   {
     id: '4',
-    content: 'Agency reached out claiming they can 10x my brand deals. Asking for 30% commission + 6 month exclusivity. They represent some big names but this feels steep. Thoughts?',
-    category: 'Agency',
+    categoryKey: 'agency',
     categoryColor: 'from-amber-400 to-orange-600',
     likes: 189,
     comments: 92,
@@ -46,8 +42,7 @@ const anonymousPosts = [
   },
   {
     id: '5',
-    content: 'Brand is 60 days late on payment ($12K). They keep saying "processing" but I\'m starting to worry. Do I go public? Hire a lawyer? What\'s worked for others?',
-    category: 'Payment',
+    categoryKey: 'payment',
     categoryColor: 'from-red-400 to-red-600',
     likes: 423,
     comments: 134,
@@ -124,13 +119,13 @@ export default function AnonymousSection() {
                   </div>
                 </div>
                 <span className={`px-2.5 py-1 bg-gradient-to-r ${post.categoryColor} text-white text-[10px] font-bold rounded-full uppercase tracking-wider`}>
-                  {post.category}
+                  {t(`categories.${post.categoryKey}`)}
                 </span>
               </div>
 
               {/* Content */}
               <div className="p-4">
-                <p className="text-gray-200 text-[15px] leading-relaxed">{post.content}</p>
+                <p className="text-gray-200 text-[15px] leading-relaxed">{t(`posts.${post.id}.content`)}</p>
               </div>
 
               {/* Actions */}
