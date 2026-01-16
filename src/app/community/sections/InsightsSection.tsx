@@ -32,7 +32,7 @@ const signalsData = [
     id: '4',
     category: 'news',
     categoryColor: 'from-violet-500 to-purple-500',
-    image: 'https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1611605698335-8b1569810432?w=800&q=80',
     readTime: '2 min',
     isHot: false,
   },
