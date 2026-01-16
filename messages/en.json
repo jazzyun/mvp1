@@ -7,12 +7,17 @@
     "success": "Success"
   },
   "navigation": {
-    "home": "Home",
-    "settings": "Settings",
-    "profile": "Profile",
+    "assistant": "Assistant",
     "community": "Community",
+    "profile": "Profile",
+    "settings": "Settings",
     "analytics": "Analytics",
     "signOut": "Sign Out"
+  },
+  "home": {
+    "title": "Brand Deals",
+    "today": "Today",
+    "noDeals": "No deals to review"
   },
   "settings": {
     "title": "Settings",

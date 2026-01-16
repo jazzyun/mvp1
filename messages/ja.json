@@ -7,12 +7,17 @@
     "success": "成功"
   },
   "navigation": {
-    "home": "ホーム",
-    "settings": "設定",
-    "profile": "プロフィール",
+    "assistant": "アシスタント",
     "community": "コミュニティ",
+    "profile": "プロフィール",
+    "settings": "設定",
     "analytics": "分析",
     "signOut": "ログアウト"
+  },
+  "home": {
+    "title": "ブランド案件",
+    "today": "今日",
+    "noDeals": "レビューする案件はありません"
   },
   "settings": {
     "title": "設定",

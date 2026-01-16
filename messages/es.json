@@ -7,12 +7,17 @@
     "success": "Éxito"
   },
   "navigation": {
-    "home": "Inicio",
-    "settings": "Configuración",
-    "profile": "Perfil",
+    "assistant": "Asistente",
     "community": "Comunidad",
+    "profile": "Perfil",
+    "settings": "Configuración",
     "analytics": "Análisis",
     "signOut": "Cerrar sesión"
+  },
+  "home": {
+    "title": "Ofertas de Marcas",
+    "today": "Hoy",
+    "noDeals": "No hay ofertas para revisar"
   },
   "settings": {
     "title": "Configuración",

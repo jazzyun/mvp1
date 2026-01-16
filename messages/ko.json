@@ -7,12 +7,17 @@
     "success": "성공"
   },
   "navigation": {
-    "home": "홈",
-    "settings": "설정",
-    "profile": "프로필",
+    "assistant": "어시스턴트",
     "community": "커뮤니티",
+    "profile": "프로필",
+    "settings": "설정",
     "analytics": "분석",
     "signOut": "로그아웃"
+  },
+  "home": {
+    "title": "브랜드 딜",
+    "today": "오늘",
+    "noDeals": "검토할 딜이 없습니다"
   },
   "settings": {
     "title": "설정",
