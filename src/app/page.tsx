@@ -122,9 +122,9 @@ export default function BrandDealsInbox() {
                 Today <span className="font-semibold text-blue-600">{todayCount}</span>
               </p>
             </div>
-            <button className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
+            <Link href="/settings" className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center">
               <span className="text-lg">⚙️</span>
-            </button>
+            </Link>
           </div>
         </div>
       </header>
