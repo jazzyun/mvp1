@@ -94,6 +94,43 @@
       "guide": "Guía",
       "news": "Noticias",
       "story": "Historia"
+    },
+    "cards": {
+      "1": {
+        "headline": "Las marcas de belleza gastan 40% más este trimestre",
+        "subheadline": "El Q1 2025 será el mejor trimestre para creadores de belleza en 3 años.",
+        "keyPoints": ["El tamaño promedio de los acuerdos subió de $2,800 a $3,900", "Se prefieren asociaciones a largo plazo sobre las únicas", "Skincare lidera, maquillaje sigue"],
+        "takeaway": "Si estás en belleza, ahora es el momento de proponer. Las marcas tienen presupuesto.",
+        "author": "Haus Research"
+      },
+      "2": {
+        "headline": "La trampa de la \"Perpetuidad\" ha vuelto",
+        "subheadline": "Las marcas están ocultando derechos de uso ilimitados en el nuevo lenguaje contractual.",
+        "keyPoints": ["Cuidado con \"durante la duración de la campaña\"", "\"En todos los medios\" = pueden usarlo en cualquier lugar para siempre", "Siempre pide fechas de finalización específicas por escrito"],
+        "takeaway": "Nunca firmes sin una fecha de vencimiento de uso. 12-24 meses es estándar.",
+        "author": "Equipo Legal"
+      },
+      "3": {
+        "headline": "Cómo los mejores creadores obtienen 3x sus ofertas iniciales",
+        "subheadline": "El marco de negociación que funciona ahora mismo.",
+        "keyPoints": ["Contraoferta 50% más alta que tu objetivo", "Agrega valor antes de agregar costo", "Usa lenguaje basado en datos", "Ten tu precio mínimo listo"],
+        "takeaway": "Las marcas esperan que negocies. La primera oferta nunca es la mejor.",
+        "author": "Sarah Chen"
+      },
+      "4": {
+        "headline": "Las comisiones de TikTok Shop bajan al 2%",
+        "subheadline": "Los cambios de marzo afectarán a la mayoría de los creadores.",
+        "keyPoints": ["Base actual del 5% → 2% para la mayoría", "Belleza y moda se mantienen en 5%", "Bonos de compras en vivo reducidos"],
+        "takeaway": "Diversifica ahora. Los acuerdos directos con marcas deben ser tu ingreso principal.",
+        "author": "Haus Research"
+      },
+      "5": {
+        "headline": "De $500 a $15K: El viaje de un creador",
+        "subheadline": "Mike dejó de decir sí a todo.",
+        "keyPoints": ["Rechazó el 80% de los acuerdos durante 6 meses", "Construyó calidad sobre cantidad", "Ahora promedia $8K por asociación"],
+        "takeaway": "Ser selectivo construye tu valor percibido.",
+        "author": "Mike Johnson"
+      }
     }
   },
   "benefits": {

@@ -94,6 +94,43 @@
       "guide": "Guide",
       "news": "News",
       "story": "Story"
+    },
+    "cards": {
+      "1": {
+        "headline": "Beauty Brands Are Spending 40% More This Quarter",
+        "subheadline": "Q1 2025 is shaping up to be the best quarter for beauty creators in 3 years.",
+        "keyPoints": ["Average deal size up from $2,800 to $3,900", "Long-term partnerships preferred over one-offs", "Skincare leading, makeup following"],
+        "takeaway": "If you're in beauty, now is the time to pitch. Brands have budget to spend.",
+        "author": "Haus Research"
+      },
+      "2": {
+        "headline": "The \"Perpetuity\" Trap Is Back",
+        "subheadline": "Brands are hiding unlimited usage rights in new contract language.",
+        "keyPoints": ["Watch for \"for the duration of the campaign\"", "\"Across all media\" = they can use it anywhere forever", "Always ask for specific end dates in writing"],
+        "takeaway": "Never sign without a usage expiration date. 12-24 months is standard.",
+        "author": "Legal Team"
+      },
+      "3": {
+        "headline": "How Top Creators Get 3x Their Initial Offers",
+        "subheadline": "The negotiation framework that's working right now.",
+        "keyPoints": ["Counter 50% higher than your target", "Add value before adding cost", "Use data-driven language", "Have your walk-away number ready"],
+        "takeaway": "Brands expect you to negotiate. The first offer is never the best offer.",
+        "author": "Sarah Chen"
+      },
+      "4": {
+        "headline": "TikTok Shop Commissions Dropping to 2%",
+        "subheadline": "March changes will hit most creators hard.",
+        "keyPoints": ["Current 5% baseline → 2% for most", "Beauty & fashion staying at 5%", "Live shopping bonuses reduced"],
+        "takeaway": "Diversify now. Direct brand deals should be your primary income.",
+        "author": "Haus Research"
+      },
+      "5": {
+        "headline": "From $500 to $15K: One Creator's Journey",
+        "subheadline": "Mike stopped saying yes to everything.",
+        "keyPoints": ["Turned down 80% of deals for 6 months", "Built quality over quantity", "Now averages $8K per partnership"],
+        "takeaway": "Being selective builds your perceived value.",
+        "author": "Mike Johnson"
+      }
     }
   },
   "benefits": {
