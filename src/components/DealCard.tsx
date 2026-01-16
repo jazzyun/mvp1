@@ -111,7 +111,7 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
           {deal.risks.map((risk, index) => (
             <div key={index} className="flex items-start text-sm">
               <span className="text-amber-500 mr-2 flex-shrink-0">⚠️</span>
-              <span className="text-gray-700">{risk.description}</span>
+              <span className="text-gray-700">{t(`risks.${risk.type}`)}</span>
             </div>
           ))}
         </div>

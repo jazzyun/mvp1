@@ -42,6 +42,23 @@
       "whatsapp": "WhatsApp",
       "other": "Otro"
     },
+    "risks": {
+      "secondary_usage": "Derechos de uso secundario incluidos",
+      "secondary_usage_ad": "Puede usarse como material publicitario",
+      "payment_terms": "Términos de pago a 60 días",
+      "unlimited_period": "Período de uso ilimitado",
+      "unlimited_revisions": "Solicitudes de revisión ilimitadas",
+      "other": "Otra condición de riesgo"
+    },
+    "offeredDetails": {
+      "reel": "{count} Reel",
+      "reels": "{count} Reels",
+      "youtubeVideo": "{count} video de YouTube",
+      "youtubeVideos": "{count} videos de YouTube",
+      "instagramStories": "{count} Instagram Stories",
+      "productSponsorship": "Patrocinio de producto + pequeña tarifa",
+      "galaxyReview": "Video de reseña de Galaxy"
+    },
     "messages": "{count} mensajes",
     "proposedAmount": "Monto Propuesto",
     "content": "Contenido",

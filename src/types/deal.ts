@@ -3,7 +3,7 @@ export type DealChannel = 'instagram_dm' | 'email' | 'whatsapp' | 'other';
 export type DealStatus = 'new' | 'in_progress' | 'responded' | 'closed';
 
 export interface ContractRisk {
-  type: 'secondary_usage' | 'unlimited_period' | 'unlimited_revisions' | 'payment_terms' | 'other';
+  type: 'secondary_usage' | 'secondary_usage_ad' | 'unlimited_period' | 'unlimited_revisions' | 'payment_terms' | 'other';
   description: string;
 }
 

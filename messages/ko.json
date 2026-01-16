@@ -42,6 +42,23 @@
       "whatsapp": "왓츠앱",
       "other": "기타"
     },
+    "risks": {
+      "secondary_usage": "2차 사용권 포함",
+      "secondary_usage_ad": "광고 소재로 사용 가능",
+      "payment_terms": "60일 후 결제 조건",
+      "unlimited_period": "무제한 사용 기간",
+      "unlimited_revisions": "무제한 수정 요청 가능",
+      "other": "기타 위험 조건"
+    },
+    "offeredDetails": {
+      "reel": "릴 {count}개",
+      "reels": "릴 {count}개",
+      "youtubeVideo": "유튜브 영상 {count}개",
+      "youtubeVideos": "유튜브 영상 {count}개",
+      "instagramStories": "인스타그램 스토리 {count}개",
+      "productSponsorship": "제품 협찬 + 소정의 비용",
+      "galaxyReview": "갤럭시 제품 리뷰 영상"
+    },
     "messages": "{count}개 메시지",
     "proposedAmount": "제안 금액",
     "content": "콘텐츠",

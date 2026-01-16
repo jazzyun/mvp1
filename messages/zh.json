@@ -42,6 +42,23 @@
       "whatsapp": "WhatsApp",
       "other": "其他"
     },
+    "risks": {
+      "secondary_usage": "包含二次使用权",
+      "secondary_usage_ad": "可用作广告素材",
+      "payment_terms": "60天付款条款",
+      "unlimited_period": "无限使用期限",
+      "unlimited_revisions": "无限修改请求",
+      "other": "其他风险条款"
+    },
+    "offeredDetails": {
+      "reel": "{count}个Reel",
+      "reels": "{count}个Reels",
+      "youtubeVideo": "{count}个YouTube视频",
+      "youtubeVideos": "{count}个YouTube视频",
+      "instagramStories": "{count}个Instagram故事",
+      "productSponsorship": "产品赞助 + 少量费用",
+      "galaxyReview": "Galaxy产品评测视频"
+    },
     "messages": "{count}条消息",
     "proposedAmount": "提议金额",
     "content": "内容",

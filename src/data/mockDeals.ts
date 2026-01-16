@@ -427,7 +427,7 @@ export const mockDeals: Deal[] = [
     priority: 'high',
     risks: [
       { type: 'unlimited_revisions', description: 'Unlimited revision requests' },
-      { type: 'secondary_usage', description: 'Can be used as ad material' },
+      { type: 'secondary_usage_ad', description: 'Can be used as ad material' },
     ],
     status: 'new',
     hasContract: true,
