@@ -82,6 +82,25 @@
       "more": "更多"
     }
   },
+  "feed": {
+    "composePlaceholder": "与社区分享一些内容...",
+    "newPost": "新帖子",
+    "postPlaceholder": "分享你的成就、技巧或开始一场讨论...",
+    "posts": {
+      "1": {
+        "content": "刚完成与一个护肤品牌的6个月大使合同。最好的决定是要求与销售挂钩的绩效奖金。最终比基本费率多赚了40%！"
+      },
+      "2": {
+        "content": "公告：开始在所有合同中添加「加急费」条款。如果品牌想在7天内要内容，+50%。3天内？+100%。从没因此丢过一单。"
+      },
+      "3": {
+        "content": "终于达到了第一个月$10K！花了2年但我们做到了。最大的教训：专注于你喜欢的2-3个品牌，而不是接受每一个合作。"
+      },
+      "4": {
+        "content": "不受欢迎的观点：我现在拒绝80%的品牌合作。不是因为不需要钱，而是因为当我不真诚时，观众能看出来。"
+      }
+    }
+  },
   "signals": {
     "title": "Haus信号",
     "subtitle": "重要资讯",
@@ -145,7 +164,23 @@
     "claim": "领取",
     "claimed": "已领取",
     "locked": "锁定",
-    "pts": "积分"
+    "pts": "积分",
+    "rewards": {
+      "r1": { "title": "1个月专业版免费", "description": "解锁所有专业功能30天" },
+      "r2": { "title": "合同审核", "description": "AI驱动的合同分析" },
+      "r3": { "title": "费率计算器", "description": "高级定价工具访问" },
+      "r4": { "title": "Haus周边", "description": "独家创作者商品优惠$25" },
+      "r5": { "title": "VIP活动访问", "description": "抢先参与聚会和活动" },
+      "r6": { "title": "1对1费率指导", "description": "与谈判专家30分钟通话" }
+    },
+    "perks": {
+      "p1": { "name": "Adobe Creative Cloud", "description": "年度订阅40%折扣" },
+      "p2": { "name": "Canva Pro", "description": "3个月免费试用" },
+      "p3": { "name": "环形灯套装", "description": "专业照明25%折扣" },
+      "p4": { "name": "Epidemic Sound", "description": "30天免费音乐许可" },
+      "p5": { "name": "Later Pro", "description": "前3个月50%折扣" },
+      "p6": { "name": "WeWork热桌", "description": "每月2次免费日通行证" }
+    }
   },
   "anonymous": {
     "title": "匿名",
@@ -188,6 +223,181 @@
       "title": "语言",
       "description": "选择您偏好的语言",
       "saved": "语言偏好已保存"
+    }
+  },
+  "profile": {
+    "title": "个人资料",
+    "edit": "编辑",
+    "tabs": {
+      "overview": "概览",
+      "points": "积分",
+      "analytics": "分析",
+      "rates": "报价",
+      "settings": "设置"
+    },
+    "stats": {
+      "totalReach": "总触达数",
+      "avgEngagement": "平均互动率",
+      "brandDeals": "品牌合作",
+      "pts": "积分",
+      "dayStreak": "天连续"
+    },
+    "overview": {
+      "connectedAccounts": "已连接账户",
+      "achievements": "成就",
+      "mediaKit": "媒体资料包",
+      "pdfReady": "PDF已准备",
+      "mediaKitDescription": "与品牌分享您的专业媒体资料包。包含数据统计、报价和作品集。",
+      "preview": "预览",
+      "share": "分享",
+      "er": "互动率"
+    },
+    "points": {
+      "totalPoints": "总积分",
+      "level": "等级",
+      "progressToLevel": "距等级{level}的进度",
+      "ptsToNextLevel": "积分升级",
+      "dayStreak": "连续登录",
+      "bestStreak": "最佳记录",
+      "referrals": "推荐",
+      "dailyChallenges": "每日挑战",
+      "resetsIn": "重置倒计时",
+      "waysToEarn": "积分获取方式",
+      "inviteFriends": "邀请创作者朋友",
+      "inviteReward": "加入即获{points}积分！",
+      "shareInviteLink": "分享邀请链接",
+      "recentActivity": "最近活动",
+      "levelProgression": "等级进度",
+      "points": "积分",
+      "recurring": "可重复",
+      "challenges": {
+        "dailyLogin": "每日登录",
+        "dailyLoginDesc": "今天登录",
+        "readSignals": "阅读Haus信号",
+        "readSignalsDesc": "阅读2篇文章",
+        "communityEngagement": "社区参与",
+        "communityEngagementDesc": "为3个帖子点赞或评论",
+        "helpCreator": "帮助创作者",
+        "helpCreatorDesc": "标记帖子为有帮助"
+      },
+      "earnCategories": {
+        "accountSetup": "账户设置",
+        "dailyActivities": "每日活动",
+        "community": "社区",
+        "referrals": "推荐",
+        "brandDeals": "品牌合作",
+        "eventsPerks": "活动与福利"
+      },
+      "earnItems": {
+        "connectInstagram": "连接Instagram",
+        "connectTiktok": "连接TikTok",
+        "connectYoutube": "连接YouTube",
+        "connectTwitter": "连接Twitter/X",
+        "connectLinkedin": "连接LinkedIn",
+        "connectPinterest": "连接Pinterest",
+        "completeBio": "完善个人简介",
+        "uploadPhoto": "上传头像",
+        "setRateCard": "设置报价表",
+        "dailyLoginBonus": "每日登录奖励",
+        "sevenDayStreak": "7天连续奖励",
+        "thirtyDayStreak": "30天连续奖励",
+        "readHausSignals": "阅读Haus信号",
+        "useHausAI": "使用Haus AI",
+        "firstCommunityPost": "首次社区发帖",
+        "firstAnonymousPost": "首次匿名发帖",
+        "get10Likes": "帖子获得10个赞",
+        "get50Likes": "帖子获得50个赞",
+        "helpfulResponse": "有帮助的回复",
+        "voteInPoll": "参与投票",
+        "inviteCreator": "邀请创作者",
+        "friendJoins": "朋友加入Haus",
+        "friendCompletesDeal": "朋友完成首单",
+        "completeFirstDeal": "完成首单",
+        "complete5Deals": "完成5单",
+        "complete10Deals": "完成10单",
+        "complete25Deals": "完成25单",
+        "quickResponseBonus": "快速响应奖励",
+        "fiveStarReview": "品牌五星好评",
+        "attendVirtualEvent": "参加线上活动",
+        "attendMeetup": "参加线下聚会",
+        "claimPerk": "领取福利",
+        "shareEvent": "在社交媒体分享活动"
+      },
+      "levels": {
+        "newcomer": "新人",
+        "bronzeCreator": "青铜创作者",
+        "silverCreator": "白银创作者",
+        "goldCreator": "黄金创作者",
+        "platinumCreator": "铂金创作者",
+        "diamondCreator": "钻石创作者",
+        "hausLegend": "Haus传奇"
+      }
+    },
+    "analytics": {
+      "totalEarnings": "总收入",
+      "thisMonth": "本月",
+      "pending": "待结算",
+      "dealsDone": "已完成合作",
+      "monthlyEarnings": "月度收入",
+      "lastSixMonths": "近6个月",
+      "avgDealValue": "平均合作金额",
+      "conversionRate": "转化率",
+      "avgResponse": "平均响应",
+      "inProgress": "进行中",
+      "dealsByCategory": "按类别分类",
+      "topBrands": "热门品牌",
+      "deals": "单",
+      "aiInsights": "AI洞察"
+    },
+    "rates": {
+      "rateCard": "报价表",
+      "editRates": "编辑报价",
+      "mostRequested": "最受欢迎",
+      "pricingInsight": "定价洞察",
+      "pricingInsightText": "您的报价比同等触达量创作者的平均水平低15%。建议在Q1进行更新。",
+      "negotiationPreferences": "谈判偏好",
+      "minimumDealValue": "最低合作金额",
+      "paymentTerms": "付款条款",
+      "rateTypes": {
+        "instagramReel": "Instagram Reel",
+        "instagramStory": "Instagram Story (3条)",
+        "tiktokVideo": "TikTok视频",
+        "youtubeIntegration": "YouTube植入",
+        "youtubeDedicated": "YouTube专题",
+        "bundle": "套餐（多平台）"
+      }
+    },
+    "settingsTab": {
+      "notifications": "通知",
+      "emailNotifications": "邮件通知",
+      "emailNotificationsDesc": "通过邮件接收合作更新",
+      "pushNotifications": "推送通知",
+      "pushNotificationsDesc": "在设备上即时接收提醒",
+      "dealAlerts": "高价值合作提醒",
+      "dealAlertsDesc": "超过$2,000的合作通知",
+      "weeklyDigest": "周报",
+      "weeklyDigestDesc": "每周活动摘要",
+      "aiAssistant": "AI助手",
+      "autoResponse": "自动回复",
+      "autoResponseDesc": "让AI回复初始询问",
+      "autoResponseInfo": "AI将在收到新合作后1小时内发送专业确认，同时您可以查看详情。",
+      "account": "账户",
+      "changePassword": "修改密码",
+      "connectedEmail": "绑定邮箱",
+      "subscription": "订阅",
+      "exportData": "导出数据",
+      "dangerZone": "危险区域",
+      "deleteAccount": "删除账户"
+    },
+    "achievements": {
+      "topCreator": "顶级创作者",
+      "topCreatorDesc": "科技领域收入前5%",
+      "quickResponder": "快速响应者",
+      "quickResponderDesc": "平均响应时间不到2小时",
+      "brandFavorite": "品牌最爱",
+      "brandFavoriteDesc": "15+次重复合作",
+      "risingStar": "新星",
+      "risingStarDesc": "今年增长200%"
     }
   }
 }

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 // Mock profile data
 const profileData = {
@@ -278,6 +279,8 @@ function MiniBarChart({ data }: { data: { month: string; amount: number }[] }) {
 }
 
 export default function ProfilePage() {
+  const t = useTranslations('profile');
+  const tNav = useTranslations('navigation');
   const [activeTab, setActiveTab] = useState<'overview' | 'points' | 'analytics' | 'rates' | 'settings'>('overview');
   const [settings, setSettings] = useState(profileData.settings);
   const [expandedCategory, setExpandedCategory] = useState<string | null>('Daily Activities');
@@ -297,9 +300,9 @@ export default function ProfilePage() {
       <header className="bg-white border-b border-gray-100">
         <div className="max-w-lg mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <h1 className="text-xl font-bold text-gray-900">Profile</h1>
+            <h1 className="text-xl font-bold text-gray-900">{t('title')}</h1>
             <button className="px-3 py-1.5 text-sm font-medium text-violet-600 hover:bg-violet-50 rounded-lg transition-colors">
-              Edit
+              {t('edit')}
             </button>
           </div>
         </div>
@@ -327,12 +330,12 @@ export default function ProfilePage() {
                 <div className="flex items-center gap-1">
                   <span className="text-amber-500">⭐</span>
                   <span className="text-sm font-semibold text-gray-900">{pointsData.totalPoints.toLocaleString()}</span>
-                  <span className="text-xs text-gray-500">pts</span>
+                  <span className="text-xs text-gray-500">{t('stats.pts')}</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="text-orange-500">🔥</span>
                   <span className="text-sm font-semibold text-gray-900">{pointsData.loginStreak}</span>
-                  <span className="text-xs text-gray-500">day streak</span>
+                  <span className="text-xs text-gray-500">{t('stats.dayStreak')}</span>
                 </div>
               </div>
             </div>
@@ -342,15 +345,15 @@ export default function ProfilePage() {
           <div className="grid grid-cols-3 gap-3 mt-6">
             <div className="text-center p-3 bg-gray-50 rounded-xl">
               <p className="text-lg font-bold text-gray-900">1.3M</p>
-              <p className="text-xs text-gray-500">Total Reach</p>
+              <p className="text-xs text-gray-500">{t('stats.totalReach')}</p>
             </div>
             <div className="text-center p-3 bg-gray-50 rounded-xl">
               <p className="text-lg font-bold text-gray-900">4.7%</p>
-              <p className="text-xs text-gray-500">Avg. Engagement</p>
+              <p className="text-xs text-gray-500">{t('stats.avgEngagement')}</p>
             </div>
             <div className="text-center p-3 bg-gray-50 rounded-xl">
               <p className="text-lg font-bold text-gray-900">23</p>
-              <p className="text-xs text-gray-500">Brand Deals</p>
+              <p className="text-xs text-gray-500">{t('stats.brandDeals')}</p>
             </div>
           </div>
 
@@ -382,7 +385,7 @@ export default function ProfilePage() {
                     : 'border-transparent text-gray-500 hover:text-gray-700'
                 }`}
               >
-                {tab === 'points' ? '⭐ Points' : tab.charAt(0).toUpperCase() + tab.slice(1)}
+                {tab === 'points' ? `⭐ ${t('tabs.points')}` : t(`tabs.${tab}`)}
               </button>
             ))}
           </div>
@@ -395,7 +398,7 @@ export default function ProfilePage() {
           <>
             {/* Connected Accounts */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-              <h3 className="font-semibold text-gray-900 mb-4">Connected Accounts</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">{t('overview.connectedAccounts')}</h3>
               <div className="space-y-3">
                 {profileData.connectedAccounts.slice(0, 4).map((account, index) => (
                   <div
@@ -416,7 +419,7 @@ export default function ProfilePage() {
                     {account.connected ? (
                       <div className="text-right">
                         <p className="text-sm font-semibold text-gray-900">{formatFollowers(account.followers)}</p>
-                        <p className="text-xs text-green-600">{account.engagementRate} ER</p>
+                        <p className="text-xs text-green-600">{account.engagementRate} {t('overview.er')}</p>
                       </div>
                     ) : (
                       <button className="px-3 py-1.5 text-xs font-medium text-violet-600 bg-violet-50 rounded-lg hover:bg-violet-100 transition-colors">
@@ -430,7 +433,7 @@ export default function ProfilePage() {
 
             {/* Achievements */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-              <h3 className="font-semibold text-gray-900 mb-4">Achievements</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">{t('overview.achievements')}</h3>
               <div className="grid grid-cols-2 gap-3">
                 {profileData.achievements.map((achievement, index) => (
                   <div key={index} className="p-3 bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl border border-amber-100">
@@ -445,18 +448,18 @@ export default function ProfilePage() {
             {/* Media Kit */}
             <div className="bg-gradient-to-br from-violet-500 to-indigo-600 rounded-2xl p-5 text-white">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold">Media Kit</h3>
-                <span className="text-xs bg-white/20 px-2 py-1 rounded-full">PDF Ready</span>
+                <h3 className="font-semibold">{t('overview.mediaKit')}</h3>
+                <span className="text-xs bg-white/20 px-2 py-1 rounded-full">{t('overview.pdfReady')}</span>
               </div>
               <p className="text-sm text-violet-100 mb-4">
-                Share your professional media kit with brands. Includes stats, rates, and portfolio.
+                {t('overview.mediaKitDescription')}
               </p>
               <div className="flex gap-2">
                 <button className="flex-1 py-2.5 bg-white text-violet-600 rounded-xl text-sm font-medium hover:bg-violet-50 transition-colors">
-                  Preview
+                  {t('overview.preview')}
                 </button>
                 <button className="flex-1 py-2.5 bg-white/20 text-white rounded-xl text-sm font-medium hover:bg-white/30 transition-colors">
-                  Share
+                  {t('overview.share')}
                 </button>
               </div>
             </div>
@@ -469,12 +472,12 @@ export default function ProfilePage() {
             <div className="bg-gradient-to-br from-amber-400 via-orange-500 to-rose-500 rounded-2xl p-5 text-white">
               <div className="flex items-start justify-between mb-4">
                 <div>
-                  <p className="text-amber-100 text-sm">Total Points</p>
+                  <p className="text-amber-100 text-sm">{t('points.totalPoints')}</p>
                   <p className="text-4xl font-bold mt-1">{pointsData.totalPoints.toLocaleString()}</p>
                 </div>
                 <div className="text-right">
                   <div className="px-3 py-1 bg-white/20 rounded-full text-sm font-medium">
-                    Level {pointsData.level}
+                    {t('points.level')} {pointsData.level}
                   </div>
                   <p className="text-amber-100 text-xs mt-1">{pointsData.levelName}</p>
                 </div>
@@ -483,7 +486,7 @@ export default function ProfilePage() {
               {/* Progress to next level */}
               <div className="mb-4">
                 <div className="flex justify-between text-xs mb-1">
-                  <span className="text-amber-100">Progress to Level {pointsData.level + 1}</span>
+                  <span className="text-amber-100">{t('points.progressToLevel', { level: pointsData.level + 1 })}</span>
                   <span className="text-white font-medium">{pointsData.totalPoints.toLocaleString()} / {pointsData.nextLevel.toLocaleString()}</span>
                 </div>
                 <div className="h-2 bg-white/20 rounded-full overflow-hidden">
@@ -492,22 +495,22 @@ export default function ProfilePage() {
                     style={{ width: `${progressToNextLevel}%` }}
                   />
                 </div>
-                <p className="text-xs text-amber-100 mt-1">{(pointsData.nextLevel - pointsData.totalPoints).toLocaleString()} pts to next level</p>
+                <p className="text-xs text-amber-100 mt-1">{(pointsData.nextLevel - pointsData.totalPoints).toLocaleString()} {t('points.ptsToNextLevel')}</p>
               </div>
 
               {/* Streak & Stats */}
               <div className="grid grid-cols-3 gap-3">
                 <div className="bg-white/15 rounded-xl p-3 text-center">
                   <p className="text-2xl font-bold">🔥 {pointsData.loginStreak}</p>
-                  <p className="text-xs text-amber-100">Day Streak</p>
+                  <p className="text-xs text-amber-100">{t('points.dayStreak')}</p>
                 </div>
                 <div className="bg-white/15 rounded-xl p-3 text-center">
                   <p className="text-2xl font-bold">📅 {pointsData.longestStreak}</p>
-                  <p className="text-xs text-amber-100">Best Streak</p>
+                  <p className="text-xs text-amber-100">{t('points.bestStreak')}</p>
                 </div>
                 <div className="bg-white/15 rounded-xl p-3 text-center">
                   <p className="text-2xl font-bold">👋 {pointsData.totalReferrals}</p>
-                  <p className="text-xs text-amber-100">Referrals</p>
+                  <p className="text-xs text-amber-100">{t('points.referrals')}</p>
                 </div>
               </div>
             </div>
@@ -515,8 +518,8 @@ export default function ProfilePage() {
             {/* Daily Challenges */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-gray-900">Daily Challenges</h3>
-                <span className="text-xs text-gray-500">Resets in 8h 32m</span>
+                <h3 className="font-semibold text-gray-900">{t('points.dailyChallenges')}</h3>
+                <span className="text-xs text-gray-500">{t('points.resetsIn')} 8h 32m</span>
               </div>
               <div className="space-y-3">
                 {pointsData.dailyChallenges.map((challenge) => (
@@ -562,7 +565,7 @@ export default function ProfilePage() {
 
             {/* Ways to Earn Points */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-              <h3 className="font-semibold text-gray-900 mb-4">Ways to Earn Points</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">{t('points.waysToEarn')}</h3>
               <div className="space-y-3">
                 {pointsData.earnMethods.map((category) => (
                   <div key={category.category} className="border border-gray-100 rounded-xl overflow-hidden">
@@ -622,20 +625,20 @@ export default function ProfilePage() {
                   👋
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-semibold">Invite Creator Friends</h3>
+                  <h3 className="font-semibold">{t('points.inviteFriends')}</h3>
                   <p className="text-violet-100 text-sm mt-0.5">
-                    Earn <span className="font-bold text-white">1,000 pts</span> when they join!
+                    {t('points.inviteReward', { points: '1,000' })}
                   </p>
                 </div>
               </div>
               <button className="w-full mt-4 py-3 bg-white text-violet-600 rounded-xl font-semibold text-sm hover:bg-violet-50 transition-colors">
-                Share Invite Link
+                {t('points.shareInviteLink')}
               </button>
             </div>
 
             {/* Recent Activity */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-              <h3 className="font-semibold text-gray-900 mb-4">Recent Activity</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">{t('points.recentActivity')}</h3>
               <div className="space-y-3">
                 {pointsData.recentActivity.map((activity, index) => (
                   <div key={index} className="flex items-center gap-3">
@@ -654,7 +657,7 @@ export default function ProfilePage() {
 
             {/* Level Progression */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-              <h3 className="font-semibold text-gray-900 mb-4">Level Progression</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">{t('points.levelProgression')}</h3>
               <div className="space-y-3">
                 {pointsData.levels.map((level, index) => (
                   <div
@@ -673,7 +676,7 @@ export default function ProfilePage() {
                         {level.name}
                       </p>
                       <p className={`text-xs ${pointsData.level >= level.level ? 'text-white/70' : 'text-gray-500'}`}>
-                        {level.minPoints.toLocaleString()} points
+                        {level.minPoints.toLocaleString()} {t('points.points')}
                       </p>
                     </div>
                     {pointsData.level >= level.level ? (
@@ -692,7 +695,7 @@ export default function ProfilePage() {
           <>
             {/* Earnings Overview Card */}
             <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-5 text-white">
-              <p className="text-sm text-gray-400 mb-1">Total Earnings</p>
+              <p className="text-sm text-gray-400 mb-1">{t('analytics.totalEarnings')}</p>
               <div className="flex items-end justify-between mb-4">
                 <p className="text-3xl font-bold">{formatCurrency(analyticsData.totalEarnings)}</p>
                 <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
@@ -706,15 +709,15 @@ export default function ProfilePage() {
               <div className="grid grid-cols-3 gap-3">
                 <div className="bg-white/10 rounded-xl p-3 text-center">
                   <p className="text-lg font-bold">{formatCurrency(analyticsData.thisMonth)}</p>
-                  <p className="text-xs text-gray-400">This Month</p>
+                  <p className="text-xs text-gray-400">{t('analytics.thisMonth')}</p>
                 </div>
                 <div className="bg-white/10 rounded-xl p-3 text-center">
                   <p className="text-lg font-bold">{formatCurrency(analyticsData.pendingPayments)}</p>
-                  <p className="text-xs text-gray-400">Pending</p>
+                  <p className="text-xs text-gray-400">{t('analytics.pending')}</p>
                 </div>
                 <div className="bg-white/10 rounded-xl p-3 text-center">
                   <p className="text-lg font-bold">{analyticsData.dealsCompleted}</p>
-                  <p className="text-xs text-gray-400">Deals Done</p>
+                  <p className="text-xs text-gray-400">{t('analytics.dealsDone')}</p>
                 </div>
               </div>
             </div>
@@ -722,8 +725,8 @@ export default function ProfilePage() {
             {/* Monthly Earnings Chart */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-semibold text-gray-900">Monthly Earnings</h2>
-                <span className="text-xs text-gray-500">Last 6 months</span>
+                <h2 className="font-semibold text-gray-900">{t('analytics.monthlyEarnings')}</h2>
+                <span className="text-xs text-gray-500">{t('analytics.lastSixMonths')}</span>
               </div>
               <MiniBarChart data={analyticsData.monthlyEarnings} />
             </div>
@@ -733,7 +736,7 @@ export default function ProfilePage() {
               <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-lg">💰</span>
-                  <span className="text-xs text-gray-500">Avg. Deal Value</span>
+                  <span className="text-xs text-gray-500">{t('analytics.avgDealValue')}</span>
                 </div>
                 <p className="text-xl font-bold text-gray-900">{formatCurrency(analyticsData.avgDealValue)}</p>
               </div>
@@ -741,7 +744,7 @@ export default function ProfilePage() {
               <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-lg">✅</span>
-                  <span className="text-xs text-gray-500">Conversion Rate</span>
+                  <span className="text-xs text-gray-500">{t('analytics.conversionRate')}</span>
                 </div>
                 <p className="text-xl font-bold text-gray-900">{analyticsData.conversionRate}%</p>
               </div>
@@ -749,7 +752,7 @@ export default function ProfilePage() {
               <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-lg">⚡</span>
-                  <span className="text-xs text-gray-500">Avg. Response</span>
+                  <span className="text-xs text-gray-500">{t('analytics.avgResponse')}</span>
                 </div>
                 <p className="text-xl font-bold text-gray-900">{analyticsData.responseTime}h</p>
               </div>
@@ -757,7 +760,7 @@ export default function ProfilePage() {
               <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-lg">🔄</span>
-                  <span className="text-xs text-gray-500">In Progress</span>
+                  <span className="text-xs text-gray-500">{t('analytics.inProgress')}</span>
                 </div>
                 <p className="text-xl font-bold text-gray-900">{analyticsData.dealsInProgress}</p>
               </div>
@@ -765,7 +768,7 @@ export default function ProfilePage() {
 
             {/* Deals by Category */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-              <h2 className="font-semibold text-gray-900 mb-4">Deals by Category</h2>
+              <h2 className="font-semibold text-gray-900 mb-4">{t('analytics.dealsByCategory')}</h2>
               <div className="space-y-3">
                 {analyticsData.dealsByCategory.map((cat, index) => (
                   <div key={index}>
@@ -786,7 +789,7 @@ export default function ProfilePage() {
 
             {/* Top Brands */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-              <h2 className="font-semibold text-gray-900 mb-4">Top Brands</h2>
+              <h2 className="font-semibold text-gray-900 mb-4">{t('analytics.topBrands')}</h2>
               <div className="space-y-3">
                 {analyticsData.topBrands.map((brand, index) => (
                   <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
@@ -796,7 +799,7 @@ export default function ProfilePage() {
                       </div>
                       <div>
                         <p className="text-sm font-medium text-gray-900">{brand.name}</p>
-                        <p className="text-xs text-gray-500">{brand.deals} deals</p>
+                        <p className="text-xs text-gray-500">{brand.deals} {t('analytics.deals')}</p>
                       </div>
                     </div>
                     <p className="font-semibold text-gray-900">{formatCurrency(brand.earnings)}</p>
@@ -809,7 +812,7 @@ export default function ProfilePage() {
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
               <div className="flex items-center gap-2 mb-4">
                 <span className="text-lg">🤖</span>
-                <h2 className="font-semibold text-gray-900">AI Insights</h2>
+                <h2 className="font-semibold text-gray-900">{t('analytics.aiInsights')}</h2>
               </div>
               <div className="space-y-3">
                 {analyticsData.aiInsights.map((insight, index) => (
@@ -842,8 +845,8 @@ export default function ProfilePage() {
             {/* Rate Card */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-gray-900">Rate Card</h3>
-                <button className="text-xs text-violet-600 font-medium">Edit Rates</button>
+                <h3 className="font-semibold text-gray-900">{t('rates.rateCard')}</h3>
+                <button className="text-xs text-violet-600 font-medium">{t('rates.editRates')}</button>
               </div>
               <div className="space-y-2">
                 {profileData.rateCard.map((rate, index) => (
@@ -857,7 +860,7 @@ export default function ProfilePage() {
                       <div>
                         <p className="text-sm font-medium text-gray-900">{rate.type}</p>
                         {rate.popular && (
-                          <span className="text-xs text-violet-600">Most requested</span>
+                          <span className="text-xs text-violet-600">{t('rates.mostRequested')}</span>
                         )}
                       </div>
                     </div>
@@ -872,9 +875,9 @@ export default function ProfilePage() {
               <div className="flex items-start gap-3">
                 <span className="text-xl">💡</span>
                 <div>
-                  <p className="font-medium text-gray-900 mb-1">Pricing Insight</p>
+                  <p className="font-medium text-gray-900 mb-1">{t('rates.pricingInsight')}</p>
                   <p className="text-sm text-gray-600">
-                    Your rates are 15% below average for creators with similar reach. Consider updating for Q1.
+                    {t('rates.pricingInsightText')}
                   </p>
                 </div>
               </div>
@@ -882,10 +885,10 @@ export default function ProfilePage() {
 
             {/* Negotiation Settings */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-              <h3 className="font-semibold text-gray-900 mb-4">Negotiation Preferences</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">{t('rates.negotiationPreferences')}</h3>
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm text-gray-700 mb-2 block">Minimum Deal Value</label>
+                  <label className="text-sm text-gray-700 mb-2 block">{t('rates.minimumDealValue')}</label>
                   <div className="flex gap-2">
                     {['$500', '$1,000', '$2,000', '$5,000'].map((amount) => (
                       <button
@@ -898,7 +901,7 @@ export default function ProfilePage() {
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm text-gray-700 mb-2 block">Payment Terms</label>
+                  <label className="text-sm text-gray-700 mb-2 block">{t('rates.paymentTerms')}</label>
                   <div className="flex gap-2">
                     {['Net 15', 'Net 30', 'Net 45', 'Net 60'].map((term) => (
                       <button
@@ -919,13 +922,13 @@ export default function ProfilePage() {
           <>
             {/* Notifications */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-              <h3 className="font-semibold text-gray-900 mb-4">Notifications</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">{t('settingsTab.notifications')}</h3>
               <div className="space-y-4">
                 {[
-                  { key: 'emailNotifications', label: 'Email Notifications', description: 'Receive deal updates via email' },
-                  { key: 'pushNotifications', label: 'Push Notifications', description: 'Get instant alerts on your device' },
-                  { key: 'dealAlerts', label: 'High-Value Deal Alerts', description: 'Notify for deals over $2,000' },
-                  { key: 'weeklyDigest', label: 'Weekly Digest', description: 'Summary of your weekly activity' },
+                  { key: 'emailNotifications', label: t('settingsTab.emailNotifications'), description: t('settingsTab.emailNotificationsDesc') },
+                  { key: 'pushNotifications', label: t('settingsTab.pushNotifications'), description: t('settingsTab.pushNotificationsDesc') },
+                  { key: 'dealAlerts', label: t('settingsTab.dealAlerts'), description: t('settingsTab.dealAlertsDesc') },
+                  { key: 'weeklyDigest', label: t('settingsTab.weeklyDigest'), description: t('settingsTab.weeklyDigestDesc') },
                 ].map((setting) => (
                   <div key={setting.key} className="flex items-center justify-between">
                     <div>
@@ -955,11 +958,11 @@ export default function ProfilePage() {
 
             {/* AI Assistant */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-              <h3 className="font-semibold text-gray-900 mb-4">AI Assistant</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">{t('settingsTab.aiAssistant')}</h3>
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <p className="text-sm font-medium text-gray-900">Auto-Response</p>
-                  <p className="text-xs text-gray-500">Let AI respond to initial inquiries</p>
+                  <p className="text-sm font-medium text-gray-900">{t('settingsTab.autoResponse')}</p>
+                  <p className="text-xs text-gray-500">{t('settingsTab.autoResponseDesc')}</p>
                 </div>
                 <button
                   onClick={() => toggleSetting('autoResponse')}
@@ -977,7 +980,7 @@ export default function ProfilePage() {
               {settings.autoResponse && (
                 <div className="p-3 bg-violet-50 rounded-xl border border-violet-100">
                   <p className="text-xs text-violet-700">
-                    AI will send a professional acknowledgment within 1 hour of receiving new deals, while you review the details.
+                    {t('settingsTab.autoResponseInfo')}
                   </p>
                 </div>
               )}
@@ -985,22 +988,22 @@ export default function ProfilePage() {
 
             {/* Account */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-              <h3 className="font-semibold text-gray-900 mb-4">Account</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">{t('settingsTab.account')}</h3>
               <div className="space-y-3">
                 <button className="w-full flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-                  <span className="text-sm text-gray-700">Change Password</span>
+                  <span className="text-sm text-gray-700">{t('settingsTab.changePassword')}</span>
                   <span className="text-gray-400">→</span>
                 </button>
                 <button className="w-full flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-                  <span className="text-sm text-gray-700">Connected Email</span>
+                  <span className="text-sm text-gray-700">{t('settingsTab.connectedEmail')}</span>
                   <span className="text-sm text-gray-500">{profileData.email}</span>
                 </button>
                 <button className="w-full flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-                  <span className="text-sm text-gray-700">Subscription</span>
+                  <span className="text-sm text-gray-700">{t('settingsTab.subscription')}</span>
                   <span className="text-sm text-violet-600 font-medium">{profileData.tier}</span>
                 </button>
                 <button className="w-full flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-                  <span className="text-sm text-gray-700">Export Data</span>
+                  <span className="text-sm text-gray-700">{t('settingsTab.exportData')}</span>
                   <span className="text-gray-400">→</span>
                 </button>
               </div>
@@ -1008,9 +1011,9 @@ export default function ProfilePage() {
 
             {/* Danger Zone */}
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-red-100">
-              <h3 className="font-semibold text-red-600 mb-4">Danger Zone</h3>
+              <h3 className="font-semibold text-red-600 mb-4">{t('settingsTab.dangerZone')}</h3>
               <button className="w-full py-3 text-sm font-medium text-red-600 bg-red-50 rounded-xl hover:bg-red-100 transition-colors">
-                Delete Account
+                {t('settingsTab.deleteAccount')}
               </button>
             </div>
           </>
@@ -1025,19 +1028,19 @@ export default function ProfilePage() {
               <svg className="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              <span className="text-xs">Assistant</span>
+              <span className="text-xs">{tNav('assistant')}</span>
             </Link>
             <Link href="/community" className="flex flex-col items-center text-gray-400 hover:text-gray-600 transition-colors">
               <svg className="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
-              <span className="text-xs">Community</span>
+              <span className="text-xs">{tNav('community')}</span>
             </Link>
             <Link href="/profile" className="flex flex-col items-center text-violet-600">
               <svg className="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
-              <span className="text-xs font-medium">Profile</span>
+              <span className="text-xs font-medium">{tNav('profile')}</span>
             </Link>
           </div>
         </div>

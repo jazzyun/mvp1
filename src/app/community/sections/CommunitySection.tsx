@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 const communityPosts = [
   {
@@ -9,7 +10,6 @@ const communityPosts = [
     handle: '@emmacreates',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&q=80',
     verified: true,
-    content: 'Just wrapped a 6-month ambassador deal with a skincare brand. Best decision I made was asking for performance bonuses tied to sales. Ended up making 40% more than the base rate!',
     likes: 423,
     comments: 67,
     timeAgo: '1h',
@@ -20,7 +20,6 @@ const communityPosts = [
     handle: '@davidkim',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&q=80',
     verified: true,
-    content: 'PSA: Started adding a "rush fee" clause to all my contracts. If brands want content in less than 7 days, it\'s +50%. Less than 3 days? +100%. Haven\'t lost a single deal over it.',
     likes: 891,
     comments: 134,
     timeAgo: '3h',
@@ -31,7 +30,6 @@ const communityPosts = [
     handle: '@lisapark',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&q=80',
     verified: false,
-    content: 'Finally hit my first $10K month! Took 2 years but we made it. Biggest lesson: focus on 2-3 brands you love rather than taking every deal.',
     likes: 1567,
     comments: 234,
     timeAgo: '5h',
@@ -42,7 +40,6 @@ const communityPosts = [
     handle: '@jameschen',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&q=80',
     verified: true,
-    content: 'Unpopular opinion: I turn down 80% of brand deals now. Not because I don\'t need the money, but because my audience can tell when I\'m not genuine.',
     likes: 678,
     comments: 156,
     timeAgo: '8h',
@@ -50,6 +47,8 @@ const communityPosts = [
 ];
 
 export default function CommunitySection() {
+  const t = useTranslations('feed');
+  const tCommon = useTranslations('common');
   const [showCompose, setShowCompose] = useState(false);
   const [newPost, setNewPost] = useState('');
   const [likedPosts, setLikedPosts] = useState<string[]>([]);
@@ -74,7 +73,7 @@ export default function CommunitySection() {
             onClick={() => setShowCompose(true)}
             className="flex-1 text-left px-4 py-2.5 bg-gray-50 rounded-xl text-gray-400 text-sm hover:bg-gray-100 transition-colors"
           >
-            Share something with the community...
+            {t('composePlaceholder')}
           </button>
         </div>
       </div>
@@ -114,7 +113,7 @@ export default function CommunitySection() {
 
             {/* Content */}
             <div className="px-4 py-3">
-              <p className="text-gray-800 text-[15px] leading-relaxed">{post.content}</p>
+              <p className="text-gray-800 text-[15px] leading-relaxed">{t(`posts.${post.id}.content`)}</p>
             </div>
 
             {/* Actions */}
@@ -157,14 +156,14 @@ export default function CommunitySection() {
                 onClick={() => setShowCompose(false)}
                 className="text-gray-500 font-medium text-sm"
               >
-                Cancel
+                {tCommon('cancel')}
               </button>
-              <span className="font-semibold text-gray-900">New Post</span>
+              <span className="font-semibold text-gray-900">{t('newPost')}</span>
               <button
                 className="bg-violet-600 text-white px-4 py-1.5 rounded-full text-sm font-medium disabled:opacity-50"
                 disabled={!newPost.trim()}
               >
-                Post
+                {tCommon('post')}
               </button>
             </div>
 
@@ -175,7 +174,7 @@ export default function CommunitySection() {
               <textarea
                 value={newPost}
                 onChange={(e) => setNewPost(e.target.value)}
-                placeholder="Share your wins, tips, or start a discussion..."
+                placeholder={t('postPlaceholder')}
                 className="flex-1 text-gray-900 placeholder-gray-400 resize-none focus:outline-none min-h-[120px] text-[15px]"
                 autoFocus
               />

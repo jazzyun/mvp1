@@ -82,6 +82,25 @@
       "more": "Más"
     }
   },
+  "feed": {
+    "composePlaceholder": "Comparte algo con la comunidad...",
+    "newPost": "Nueva Publicación",
+    "postPlaceholder": "Comparte tus logros, consejos o inicia una discusión...",
+    "posts": {
+      "1": {
+        "content": "Acabo de cerrar un acuerdo de embajador de 6 meses con una marca de skincare. La mejor decisión fue pedir bonos de rendimiento ligados a las ventas. ¡Terminé ganando 40% más que la tarifa base!"
+      },
+      "2": {
+        "content": "Aviso: Empecé a agregar una cláusula de \"tarifa urgente\" a todos mis contratos. Si las marcas quieren contenido en menos de 7 días, +50%. ¿Menos de 3 días? +100%. No he perdido ningún acuerdo por esto."
+      },
+      "3": {
+        "content": "¡Finalmente alcancé mi primer mes de $10K! Tomó 2 años pero lo logramos. Mayor lección: enfócate en 2-3 marcas que ames en lugar de aceptar cada oferta."
+      },
+      "4": {
+        "content": "Opinión impopular: Ahora rechazo el 80% de las ofertas de marcas. No porque no necesite el dinero, sino porque mi audiencia nota cuando no soy genuino."
+      }
+    }
+  },
   "signals": {
     "title": "Señales Haus",
     "subtitle": "Información que importa",
@@ -145,7 +164,23 @@
     "claim": "Reclamar",
     "claimed": "Reclamado",
     "locked": "Bloqueado",
-    "pts": "pts"
+    "pts": "pts",
+    "rewards": {
+      "r1": { "title": "1 Mes Pro Gratis", "description": "Desbloquea todas las funciones Pro por 30 días" },
+      "r2": { "title": "Revisión de Contrato", "description": "Análisis de contrato con IA" },
+      "r3": { "title": "Calculadora de Tarifas", "description": "Acceso a herramienta de precios avanzada" },
+      "r4": { "title": "Merch Haus", "description": "$25 de descuento en productos exclusivos" },
+      "r5": { "title": "Acceso VIP a Eventos", "description": "Acceso anticipado a meetups y eventos" },
+      "r6": { "title": "Coaching 1:1 de Tarifas", "description": "Llamada de 30 min con experto en negociación" }
+    },
+    "perks": {
+      "p1": { "name": "Adobe Creative Cloud", "description": "40% de descuento en suscripción anual" },
+      "p2": { "name": "Canva Pro", "description": "3 meses de prueba gratis" },
+      "p3": { "name": "Kit de Ring Light", "description": "25% de descuento en iluminación profesional" },
+      "p4": { "name": "Epidemic Sound", "description": "30 días gratis de licencia musical" },
+      "p5": { "name": "Later Pro", "description": "50% de descuento los primeros 3 meses" },
+      "p6": { "name": "WeWork Hot Desk", "description": "2 pases diarios gratis por mes" }
+    }
   },
   "anonymous": {
     "title": "Anónimo",
@@ -188,6 +223,181 @@
       "title": "Idioma",
       "description": "Selecciona tu idioma preferido",
       "saved": "Preferencia de idioma guardada"
+    }
+  },
+  "profile": {
+    "title": "Perfil",
+    "edit": "Editar",
+    "tabs": {
+      "overview": "Resumen",
+      "points": "Puntos",
+      "analytics": "Análisis",
+      "rates": "Tarifas",
+      "settings": "Configuración"
+    },
+    "stats": {
+      "totalReach": "Alcance Total",
+      "avgEngagement": "Engagement Prom.",
+      "brandDeals": "Acuerdos de Marca",
+      "pts": "pts",
+      "dayStreak": "días seguidos"
+    },
+    "overview": {
+      "connectedAccounts": "Cuentas Conectadas",
+      "achievements": "Logros",
+      "mediaKit": "Media Kit",
+      "pdfReady": "PDF Listo",
+      "mediaKitDescription": "Comparte tu media kit profesional con marcas. Incluye estadísticas, tarifas y portafolio.",
+      "preview": "Vista Previa",
+      "share": "Compartir",
+      "er": "ER"
+    },
+    "points": {
+      "totalPoints": "Puntos Totales",
+      "level": "Nivel",
+      "progressToLevel": "Progreso al Nivel {level}",
+      "ptsToNextLevel": "pts para el siguiente nivel",
+      "dayStreak": "Racha de Días",
+      "bestStreak": "Mejor Racha",
+      "referrals": "Referidos",
+      "dailyChallenges": "Desafíos Diarios",
+      "resetsIn": "Se reinicia en",
+      "waysToEarn": "Formas de Ganar Puntos",
+      "inviteFriends": "Invita a Creadores Amigos",
+      "inviteReward": "¡Gana {points} pts cuando se unan!",
+      "shareInviteLink": "Compartir Enlace de Invitación",
+      "recentActivity": "Actividad Reciente",
+      "levelProgression": "Progresión de Nivel",
+      "points": "puntos",
+      "recurring": "Recurrente",
+      "challenges": {
+        "dailyLogin": "Inicio Diario",
+        "dailyLoginDesc": "Inicia sesión hoy",
+        "readSignals": "Leer Haus Signals",
+        "readSignalsDesc": "Lee 2 artículos",
+        "communityEngagement": "Participación Comunitaria",
+        "communityEngagementDesc": "Da like o comenta en 3 posts",
+        "helpCreator": "Ayuda a un Creador",
+        "helpCreatorDesc": "Marca un post como útil"
+      },
+      "earnCategories": {
+        "accountSetup": "Configuración de Cuenta",
+        "dailyActivities": "Actividades Diarias",
+        "community": "Comunidad",
+        "referrals": "Referidos",
+        "brandDeals": "Acuerdos de Marca",
+        "eventsPerks": "Eventos y Beneficios"
+      },
+      "earnItems": {
+        "connectInstagram": "Conectar Instagram",
+        "connectTiktok": "Conectar TikTok",
+        "connectYoutube": "Conectar YouTube",
+        "connectTwitter": "Conectar Twitter/X",
+        "connectLinkedin": "Conectar LinkedIn",
+        "connectPinterest": "Conectar Pinterest",
+        "completeBio": "Completar Biografía",
+        "uploadPhoto": "Subir Foto de Perfil",
+        "setRateCard": "Establecer Tarjeta de Tarifas",
+        "dailyLoginBonus": "Bono de Inicio Diario",
+        "sevenDayStreak": "Bono de 7 Días Seguidos",
+        "thirtyDayStreak": "Bono de 30 Días Seguidos",
+        "readHausSignals": "Leer Haus Signals",
+        "useHausAI": "Usar Haus AI",
+        "firstCommunityPost": "Primer Post Comunitario",
+        "firstAnonymousPost": "Primer Post Anónimo",
+        "get10Likes": "Obtener 10 Likes en Post",
+        "get50Likes": "Obtener 50 Likes en Post",
+        "helpfulResponse": "Respuesta Útil",
+        "voteInPoll": "Votar en Encuesta",
+        "inviteCreator": "Invitar a un Creador",
+        "friendJoins": "Un Amigo se Une a Haus",
+        "friendCompletesDeal": "Amigo Completa Primer Acuerdo",
+        "completeFirstDeal": "Completar Primer Acuerdo",
+        "complete5Deals": "Completar 5 Acuerdos",
+        "complete10Deals": "Completar 10 Acuerdos",
+        "complete25Deals": "Completar 25 Acuerdos",
+        "quickResponseBonus": "Bono de Respuesta Rápida",
+        "fiveStarReview": "Reseña 5 Estrellas de Marca",
+        "attendVirtualEvent": "Asistir a Evento Virtual",
+        "attendMeetup": "Asistir a Meetup Presencial",
+        "claimPerk": "Reclamar un Beneficio",
+        "shareEvent": "Compartir Evento en Redes"
+      },
+      "levels": {
+        "newcomer": "Nuevo",
+        "bronzeCreator": "Creador Bronce",
+        "silverCreator": "Creador Plata",
+        "goldCreator": "Creador Oro",
+        "platinumCreator": "Creador Platino",
+        "diamondCreator": "Creador Diamante",
+        "hausLegend": "Leyenda Haus"
+      }
+    },
+    "analytics": {
+      "totalEarnings": "Ganancias Totales",
+      "thisMonth": "Este Mes",
+      "pending": "Pendiente",
+      "dealsDone": "Acuerdos Completados",
+      "monthlyEarnings": "Ganancias Mensuales",
+      "lastSixMonths": "Últimos 6 meses",
+      "avgDealValue": "Valor Prom. de Acuerdo",
+      "conversionRate": "Tasa de Conversión",
+      "avgResponse": "Resp. Promedio",
+      "inProgress": "En Progreso",
+      "dealsByCategory": "Acuerdos por Categoría",
+      "topBrands": "Marcas Principales",
+      "deals": "acuerdos",
+      "aiInsights": "Insights de IA"
+    },
+    "rates": {
+      "rateCard": "Tarjeta de Tarifas",
+      "editRates": "Editar Tarifas",
+      "mostRequested": "Más solicitado",
+      "pricingInsight": "Insight de Precios",
+      "pricingInsightText": "Tus tarifas están 15% por debajo del promedio para creadores con alcance similar. Considera actualizar para Q1.",
+      "negotiationPreferences": "Preferencias de Negociación",
+      "minimumDealValue": "Valor Mínimo de Acuerdo",
+      "paymentTerms": "Términos de Pago",
+      "rateTypes": {
+        "instagramReel": "Instagram Reel",
+        "instagramStory": "Instagram Story (3x)",
+        "tiktokVideo": "Video TikTok",
+        "youtubeIntegration": "Integración YouTube",
+        "youtubeDedicated": "YouTube Dedicado",
+        "bundle": "Paquete (Multi-plataforma)"
+      }
+    },
+    "settingsTab": {
+      "notifications": "Notificaciones",
+      "emailNotifications": "Notificaciones por Email",
+      "emailNotificationsDesc": "Recibir actualizaciones de acuerdos por email",
+      "pushNotifications": "Notificaciones Push",
+      "pushNotificationsDesc": "Recibir alertas instantáneas en tu dispositivo",
+      "dealAlerts": "Alertas de Acuerdos de Alto Valor",
+      "dealAlertsDesc": "Notificar para acuerdos mayores a $2,000",
+      "weeklyDigest": "Resumen Semanal",
+      "weeklyDigestDesc": "Resumen de tu actividad semanal",
+      "aiAssistant": "Asistente IA",
+      "autoResponse": "Respuesta Automática",
+      "autoResponseDesc": "Permitir que la IA responda consultas iniciales",
+      "autoResponseInfo": "La IA enviará un reconocimiento profesional dentro de 1 hora de recibir nuevos acuerdos, mientras revisas los detalles.",
+      "account": "Cuenta",
+      "changePassword": "Cambiar Contraseña",
+      "connectedEmail": "Email Conectado",
+      "subscription": "Suscripción",
+      "exportData": "Exportar Datos",
+      "dangerZone": "Zona de Peligro",
+      "deleteAccount": "Eliminar Cuenta"
+    },
+    "achievements": {
+      "topCreator": "Creador Top",
+      "topCreatorDesc": "Top 5% de ganancias en Tech",
+      "quickResponder": "Respuesta Rápida",
+      "quickResponderDesc": "Respuesta promedio menor a 2 horas",
+      "brandFavorite": "Favorito de Marcas",
+      "brandFavoriteDesc": "15+ colaboraciones repetidas",
+      "risingStar": "Estrella en Ascenso",
+      "risingStarDesc": "200% de crecimiento este año"
     }
   }
 }

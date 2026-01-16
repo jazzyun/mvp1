@@ -82,6 +82,25 @@
       "more": "More"
     }
   },
+  "feed": {
+    "composePlaceholder": "Share something with the community...",
+    "newPost": "New Post",
+    "postPlaceholder": "Share your wins, tips, or start a discussion...",
+    "posts": {
+      "1": {
+        "content": "Just wrapped a 6-month ambassador deal with a skincare brand. Best decision I made was asking for performance bonuses tied to sales. Ended up making 40% more than the base rate!"
+      },
+      "2": {
+        "content": "PSA: Started adding a \"rush fee\" clause to all my contracts. If brands want content in less than 7 days, it's +50%. Less than 3 days? +100%. Haven't lost a single deal over it."
+      },
+      "3": {
+        "content": "Finally hit my first $10K month! Took 2 years but we made it. Biggest lesson: focus on 2-3 brands you love rather than taking every deal."
+      },
+      "4": {
+        "content": "Unpopular opinion: I turn down 80% of brand deals now. Not because I don't need the money, but because my audience can tell when I'm not genuine."
+      }
+    }
+  },
   "signals": {
     "title": "Haus Signals",
     "subtitle": "Intel that matters",
@@ -145,7 +164,23 @@
     "claim": "Claim",
     "claimed": "Claimed",
     "locked": "Locked",
-    "pts": "pts"
+    "pts": "pts",
+    "rewards": {
+      "r1": { "title": "Free Month Pro", "description": "Unlock all Pro features for 30 days" },
+      "r2": { "title": "Contract Review", "description": "AI-powered contract analysis" },
+      "r3": { "title": "Rate Calculator", "description": "Advanced pricing tool access" },
+      "r4": { "title": "Haus Merch", "description": "$25 off exclusive creator gear" },
+      "r5": { "title": "VIP Event Access", "description": "Early access to meetups & events" },
+      "r6": { "title": "1:1 Rate Coaching", "description": "30-min call with negotiation expert" }
+    },
+    "perks": {
+      "p1": { "name": "Adobe Creative Cloud", "description": "40% off annual subscription" },
+      "p2": { "name": "Canva Pro", "description": "3 months free trial" },
+      "p3": { "name": "Ring Light Kit", "description": "25% off professional lighting" },
+      "p4": { "name": "Epidemic Sound", "description": "30 days free music licensing" },
+      "p5": { "name": "Later Pro", "description": "50% off first 3 months" },
+      "p6": { "name": "WeWork Hot Desk", "description": "2 free day passes per month" }
+    }
   },
   "anonymous": {
     "title": "Anonymous",
@@ -188,6 +223,181 @@
       "title": "Language",
       "description": "Select your preferred language",
       "saved": "Language preference saved"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "edit": "Edit",
+    "tabs": {
+      "overview": "Overview",
+      "points": "Points",
+      "analytics": "Analytics",
+      "rates": "Rates",
+      "settings": "Settings"
+    },
+    "stats": {
+      "totalReach": "Total Reach",
+      "avgEngagement": "Avg. Engagement",
+      "brandDeals": "Brand Deals",
+      "pts": "pts",
+      "dayStreak": "day streak"
+    },
+    "overview": {
+      "connectedAccounts": "Connected Accounts",
+      "achievements": "Achievements",
+      "mediaKit": "Media Kit",
+      "pdfReady": "PDF Ready",
+      "mediaKitDescription": "Share your professional media kit with brands. Includes stats, rates, and portfolio.",
+      "preview": "Preview",
+      "share": "Share",
+      "er": "ER"
+    },
+    "points": {
+      "totalPoints": "Total Points",
+      "level": "Level",
+      "progressToLevel": "Progress to Level {level}",
+      "ptsToNextLevel": "pts to next level",
+      "dayStreak": "Day Streak",
+      "bestStreak": "Best Streak",
+      "referrals": "Referrals",
+      "dailyChallenges": "Daily Challenges",
+      "resetsIn": "Resets in",
+      "waysToEarn": "Ways to Earn Points",
+      "inviteFriends": "Invite Creator Friends",
+      "inviteReward": "Earn {points} pts when they join!",
+      "shareInviteLink": "Share Invite Link",
+      "recentActivity": "Recent Activity",
+      "levelProgression": "Level Progression",
+      "points": "points",
+      "recurring": "Recurring",
+      "challenges": {
+        "dailyLogin": "Daily Login",
+        "dailyLoginDesc": "Log in today",
+        "readSignals": "Read Haus Signals",
+        "readSignalsDesc": "Read 2 articles",
+        "communityEngagement": "Community Engagement",
+        "communityEngagementDesc": "Like or comment on 3 posts",
+        "helpCreator": "Help a Creator",
+        "helpCreatorDesc": "Mark a post as helpful"
+      },
+      "earnCategories": {
+        "accountSetup": "Account Setup",
+        "dailyActivities": "Daily Activities",
+        "community": "Community",
+        "referrals": "Referrals",
+        "brandDeals": "Brand Deals",
+        "eventsPerks": "Events & Perks"
+      },
+      "earnItems": {
+        "connectInstagram": "Connect Instagram",
+        "connectTiktok": "Connect TikTok",
+        "connectYoutube": "Connect YouTube",
+        "connectTwitter": "Connect Twitter/X",
+        "connectLinkedin": "Connect LinkedIn",
+        "connectPinterest": "Connect Pinterest",
+        "completeBio": "Complete Profile Bio",
+        "uploadPhoto": "Upload Profile Photo",
+        "setRateCard": "Set Rate Card",
+        "dailyLoginBonus": "Daily Login Bonus",
+        "sevenDayStreak": "7-Day Streak Bonus",
+        "thirtyDayStreak": "30-Day Streak Bonus",
+        "readHausSignals": "Read Haus Signals",
+        "useHausAI": "Use Haus AI",
+        "firstCommunityPost": "First Community Post",
+        "firstAnonymousPost": "First Anonymous Post",
+        "get10Likes": "Get 10 Likes on Post",
+        "get50Likes": "Get 50 Likes on Post",
+        "helpfulResponse": "Helpful Response",
+        "voteInPoll": "Vote in Poll",
+        "inviteCreator": "Invite a Creator",
+        "friendJoins": "Friend Joins Haus",
+        "friendCompletesDeal": "Friend Completes First Deal",
+        "completeFirstDeal": "Complete First Deal",
+        "complete5Deals": "Complete 5 Deals",
+        "complete10Deals": "Complete 10 Deals",
+        "complete25Deals": "Complete 25 Deals",
+        "quickResponseBonus": "Quick Response Bonus",
+        "fiveStarReview": "5-Star Brand Review",
+        "attendVirtualEvent": "Attend Virtual Event",
+        "attendMeetup": "Attend In-Person Meetup",
+        "claimPerk": "Claim a Perk",
+        "shareEvent": "Share Event on Social"
+      },
+      "levels": {
+        "newcomer": "Newcomer",
+        "bronzeCreator": "Bronze Creator",
+        "silverCreator": "Silver Creator",
+        "goldCreator": "Gold Creator",
+        "platinumCreator": "Platinum Creator",
+        "diamondCreator": "Diamond Creator",
+        "hausLegend": "Haus Legend"
+      }
+    },
+    "analytics": {
+      "totalEarnings": "Total Earnings",
+      "thisMonth": "This Month",
+      "pending": "Pending",
+      "dealsDone": "Deals Done",
+      "monthlyEarnings": "Monthly Earnings",
+      "lastSixMonths": "Last 6 months",
+      "avgDealValue": "Avg. Deal Value",
+      "conversionRate": "Conversion Rate",
+      "avgResponse": "Avg. Response",
+      "inProgress": "In Progress",
+      "dealsByCategory": "Deals by Category",
+      "topBrands": "Top Brands",
+      "deals": "deals",
+      "aiInsights": "AI Insights"
+    },
+    "rates": {
+      "rateCard": "Rate Card",
+      "editRates": "Edit Rates",
+      "mostRequested": "Most requested",
+      "pricingInsight": "Pricing Insight",
+      "pricingInsightText": "Your rates are 15% below average for creators with similar reach. Consider updating for Q1.",
+      "negotiationPreferences": "Negotiation Preferences",
+      "minimumDealValue": "Minimum Deal Value",
+      "paymentTerms": "Payment Terms",
+      "rateTypes": {
+        "instagramReel": "Instagram Reel",
+        "instagramStory": "Instagram Story (3x)",
+        "tiktokVideo": "TikTok Video",
+        "youtubeIntegration": "YouTube Integration",
+        "youtubeDedicated": "YouTube Dedicated",
+        "bundle": "Bundle (Multi-platform)"
+      }
+    },
+    "settingsTab": {
+      "notifications": "Notifications",
+      "emailNotifications": "Email Notifications",
+      "emailNotificationsDesc": "Receive deal updates via email",
+      "pushNotifications": "Push Notifications",
+      "pushNotificationsDesc": "Get instant alerts on your device",
+      "dealAlerts": "High-Value Deal Alerts",
+      "dealAlertsDesc": "Notify for deals over $2,000",
+      "weeklyDigest": "Weekly Digest",
+      "weeklyDigestDesc": "Summary of your weekly activity",
+      "aiAssistant": "AI Assistant",
+      "autoResponse": "Auto-Response",
+      "autoResponseDesc": "Let AI respond to initial inquiries",
+      "autoResponseInfo": "AI will send a professional acknowledgment within 1 hour of receiving new deals, while you review the details.",
+      "account": "Account",
+      "changePassword": "Change Password",
+      "connectedEmail": "Connected Email",
+      "subscription": "Subscription",
+      "exportData": "Export Data",
+      "dangerZone": "Danger Zone",
+      "deleteAccount": "Delete Account"
+    },
+    "achievements": {
+      "topCreator": "Top Creator",
+      "topCreatorDesc": "Top 5% earnings in Tech",
+      "quickResponder": "Quick Responder",
+      "quickResponderDesc": "Avg response under 2 hours",
+      "brandFavorite": "Brand Favorite",
+      "brandFavoriteDesc": "15+ repeat collaborations",
+      "risingStar": "Rising Star",
+      "risingStarDesc": "200% growth this year"
     }
   }
 }

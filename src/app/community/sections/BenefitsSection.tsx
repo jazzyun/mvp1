@@ -6,56 +6,44 @@ import { useTranslations } from 'next-intl';
 
 // Points-redeemable rewards
 const redeemableRewards = [
-  { id: 'r1', title: 'Free Month Pro', description: 'Unlock all Pro features for 30 days', points: 5000, icon: '👑', color: 'from-violet-500 to-purple-600' },
-  { id: 'r2', title: 'Contract Review', description: 'AI-powered contract analysis', points: 2500, icon: '📝', color: 'from-blue-500 to-cyan-500' },
-  { id: 'r3', title: 'Rate Calculator', description: 'Advanced pricing tool access', points: 1500, icon: '💰', color: 'from-emerald-500 to-green-600' },
-  { id: 'r4', title: 'Haus Merch', description: '$25 off exclusive creator gear', points: 3000, icon: '👕', color: 'from-pink-500 to-rose-500' },
-  { id: 'r5', title: 'VIP Event Access', description: 'Early access to meetups & events', points: 8000, icon: '🎟️', color: 'from-amber-500 to-orange-500' },
-  { id: 'r6', title: '1:1 Rate Coaching', description: '30-min call with negotiation expert', points: 10000, icon: '📞', color: 'from-indigo-500 to-violet-600' },
+  { id: 'r1', points: 5000, icon: '👑', color: 'from-violet-500 to-purple-600' },
+  { id: 'r2', points: 2500, icon: '📝', color: 'from-blue-500 to-cyan-500' },
+  { id: 'r3', points: 1500, icon: '💰', color: 'from-emerald-500 to-green-600' },
+  { id: 'r4', points: 3000, icon: '👕', color: 'from-pink-500 to-rose-500' },
+  { id: 'r5', points: 8000, icon: '🎟️', color: 'from-amber-500 to-orange-500' },
+  { id: 'r6', points: 10000, icon: '📞', color: 'from-indigo-500 to-violet-600' },
 ];
 
 const userPoints = 12450; // This would come from user context/state
 
 const freePerks = [
   {
-    id: '1',
-    name: 'Adobe Creative Cloud',
-    description: '40% off annual subscription',
+    id: 'p1',
     partner: 'Adobe',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Adobe_Creative_Cloud_rainbow_icon.svg/512px-Adobe_Creative_Cloud_rainbow_icon.svg.png',
   },
   {
-    id: '2',
-    name: 'Canva Pro',
-    description: '3 months free trial',
+    id: 'p2',
     partner: 'Canva',
     logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Canva_Logo.svg/512px-Canva_Logo.svg.png',
   },
   {
-    id: '3',
-    name: 'Ring Light Kit',
-    description: '25% off professional lighting',
+    id: 'p3',
     partner: 'Lume Cube',
     logo: null,
   },
   {
-    id: '4',
-    name: 'Epidemic Sound',
-    description: '30 days free music licensing',
+    id: 'p4',
     partner: 'Epidemic Sound',
     logo: null,
   },
   {
-    id: '5',
-    name: 'Later Pro',
-    description: '50% off first 3 months',
+    id: 'p5',
     partner: 'Later',
     logo: null,
   },
   {
-    id: '6',
-    name: 'WeWork Hot Desk',
-    description: '2 free day passes per month',
+    id: 'p6',
     partner: 'WeWork',
     logo: null,
   },
@@ -115,8 +103,8 @@ export default function BenefitsSection() {
                   <span className="text-2xl">{reward.icon}</span>
                 </div>
                 <div className="p-3">
-                  <h4 className="font-semibold text-gray-900 text-sm mb-0.5">{reward.title}</h4>
-                  <p className="text-xs text-gray-500 line-clamp-1 mb-2">{reward.description}</p>
+                  <h4 className="font-semibold text-gray-900 text-sm mb-0.5">{t(`rewards.${reward.id}.title`)}</h4>
+                  <p className="text-xs text-gray-500 line-clamp-1 mb-2">{t(`rewards.${reward.id}.description`)}</p>
                   <div className="flex items-center justify-between">
                     <span className={`text-xs font-semibold ${canAfford ? 'text-amber-500' : 'text-gray-400'}`}>
                       {reward.points.toLocaleString()} {t('pts')}
@@ -158,12 +146,12 @@ export default function BenefitsSection() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <h4 className="font-semibold text-gray-900 text-sm truncate">{perk.name}</h4>
+                    <h4 className="font-semibold text-gray-900 text-sm truncate">{t(`perks.${perk.id}.name`)}</h4>
                     <span className="px-1.5 py-0.5 bg-emerald-100 text-emerald-600 rounded text-[10px] font-medium">
                       {t('free')}
                     </span>
                   </div>
-                  <p className="text-xs text-gray-500 mt-0.5">{perk.description}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{t(`perks.${perk.id}.description`)}</p>
                 </div>
                 <button
                   onClick={() => !claimedPerks.includes(perk.id) && handleClaimPerk(perk.id)}

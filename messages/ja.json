@@ -82,6 +82,25 @@
       "more": "その他"
     }
   },
+  "feed": {
+    "composePlaceholder": "コミュニティと共有しましょう...",
+    "newPost": "新規投稿",
+    "postPlaceholder": "成果やヒントを共有したり、議論を始めましょう...",
+    "posts": {
+      "1": {
+        "content": "スキンケアブランドとの6ヶ月のアンバサダー契約を締結しました。一番良い決断は売上に連動したパフォーマンスボーナスを要求したことです。基本料金より40%多く稼げました！"
+      },
+      "2": {
+        "content": "お知らせ：すべての契約書に「急ぎ料金」条項を追加し始めました。ブランドが7日以内にコンテンツを望む場合は+50%。3日以内？+100%。これで一件も失っていません。"
+      },
+      "3": {
+        "content": "ついに初めての月$10Kを達成しました！2年かかりましたがやり遂げました。最大の教訓：すべての案件を受けるより、好きな2-3のブランドに集中すること。"
+      },
+      "4": {
+        "content": "不人気な意見：今はブランド案件の80%を断っています。お金が必要ないからではなく、本心でないと視聴者にわかってしまうからです。"
+      }
+    }
+  },
   "signals": {
     "title": "ハウスシグナル",
     "subtitle": "重要な情報",
@@ -145,7 +164,23 @@
     "claim": "獲得",
     "claimed": "獲得済み",
     "locked": "ロック中",
-    "pts": "ポイント"
+    "pts": "ポイント",
+    "rewards": {
+      "r1": { "title": "1ヶ月プロ無料", "description": "30日間すべてのプロ機能をアンロック" },
+      "r2": { "title": "契約書レビュー", "description": "AI搭載の契約書分析" },
+      "r3": { "title": "料金計算機", "description": "高度な価格設定ツールへのアクセス" },
+      "r4": { "title": "ハウスグッズ", "description": "限定クリエイターグッズ$25オフ" },
+      "r5": { "title": "VIPイベントアクセス", "description": "ミートアップやイベントへの早期アクセス" },
+      "r6": { "title": "1対1料金コーチング", "description": "交渉エキスパートとの30分通話" }
+    },
+    "perks": {
+      "p1": { "name": "Adobe Creative Cloud", "description": "年間サブスクリプション40%オフ" },
+      "p2": { "name": "Canva Pro", "description": "3ヶ月無料トライアル" },
+      "p3": { "name": "リングライトキット", "description": "プロ用照明25%オフ" },
+      "p4": { "name": "Epidemic Sound", "description": "30日間無料音楽ライセンス" },
+      "p5": { "name": "Later Pro", "description": "最初の3ヶ月50%オフ" },
+      "p6": { "name": "WeWorkホットデスク", "description": "月2回の無料デイパス" }
+    }
   },
   "anonymous": {
     "title": "匿名",
@@ -188,6 +223,181 @@
       "title": "言語",
       "description": "ご希望の言語を選択してください",
       "saved": "言語設定が保存されました"
+    }
+  },
+  "profile": {
+    "title": "プロフィール",
+    "edit": "編集",
+    "tabs": {
+      "overview": "概要",
+      "points": "ポイント",
+      "analytics": "分析",
+      "rates": "料金",
+      "settings": "設定"
+    },
+    "stats": {
+      "totalReach": "総リーチ数",
+      "avgEngagement": "平均エンゲージメント",
+      "brandDeals": "ブランド案件",
+      "pts": "ポイント",
+      "dayStreak": "日連続"
+    },
+    "overview": {
+      "connectedAccounts": "連携済みアカウント",
+      "achievements": "実績",
+      "mediaKit": "メディアキット",
+      "pdfReady": "PDF準備完了",
+      "mediaKitDescription": "ブランドと共有できるプロフェッショナルなメディアキットです。統計、料金、ポートフォリオが含まれています。",
+      "preview": "プレビュー",
+      "share": "共有",
+      "er": "ER"
+    },
+    "points": {
+      "totalPoints": "総ポイント",
+      "level": "レベル",
+      "progressToLevel": "レベル{level}への進捗",
+      "ptsToNextLevel": "ポイントで次のレベルへ",
+      "dayStreak": "連続ログイン",
+      "bestStreak": "最高記録",
+      "referrals": "紹介",
+      "dailyChallenges": "デイリーチャレンジ",
+      "resetsIn": "リセットまで",
+      "waysToEarn": "ポイントを稼ぐ方法",
+      "inviteFriends": "クリエイターの友達を招待",
+      "inviteReward": "参加すると{points}ポイント獲得！",
+      "shareInviteLink": "招待リンクを共有",
+      "recentActivity": "最近のアクティビティ",
+      "levelProgression": "レベル進捗",
+      "points": "ポイント",
+      "recurring": "繰り返し",
+      "challenges": {
+        "dailyLogin": "デイリーログイン",
+        "dailyLoginDesc": "今日ログインする",
+        "readSignals": "ハウスシグナルを読む",
+        "readSignalsDesc": "2つの記事を読む",
+        "communityEngagement": "コミュニティ参加",
+        "communityEngagementDesc": "3つの投稿にいいねまたはコメント",
+        "helpCreator": "クリエイターを助ける",
+        "helpCreatorDesc": "投稿を「役立った」にマーク"
+      },
+      "earnCategories": {
+        "accountSetup": "アカウント設定",
+        "dailyActivities": "デイリーアクティビティ",
+        "community": "コミュニティ",
+        "referrals": "紹介",
+        "brandDeals": "ブランド案件",
+        "eventsPerks": "イベント＆特典"
+      },
+      "earnItems": {
+        "connectInstagram": "Instagram連携",
+        "connectTiktok": "TikTok連携",
+        "connectYoutube": "YouTube連携",
+        "connectTwitter": "Twitter/X連携",
+        "connectLinkedin": "LinkedIn連携",
+        "connectPinterest": "Pinterest連携",
+        "completeBio": "プロフィール紹介を完成",
+        "uploadPhoto": "プロフィール写真をアップロード",
+        "setRateCard": "料金表を設定",
+        "dailyLoginBonus": "デイリーログインボーナス",
+        "sevenDayStreak": "7日連続ボーナス",
+        "thirtyDayStreak": "30日連続ボーナス",
+        "readHausSignals": "ハウスシグナルを読む",
+        "useHausAI": "ハウスAIを使用",
+        "firstCommunityPost": "初めてのコミュニティ投稿",
+        "firstAnonymousPost": "初めての匿名投稿",
+        "get10Likes": "投稿に10いいね獲得",
+        "get50Likes": "投稿に50いいね獲得",
+        "helpfulResponse": "役立つ回答",
+        "voteInPoll": "投票に参加",
+        "inviteCreator": "クリエイターを招待",
+        "friendJoins": "友達がハウスに参加",
+        "friendCompletesDeal": "友達が初めての案件を完了",
+        "completeFirstDeal": "初めての案件を完了",
+        "complete5Deals": "5件の案件を完了",
+        "complete10Deals": "10件の案件を完了",
+        "complete25Deals": "25件の案件を完了",
+        "quickResponseBonus": "クイックレスポンスボーナス",
+        "fiveStarReview": "5つ星ブランドレビュー",
+        "attendVirtualEvent": "バーチャルイベントに参加",
+        "attendMeetup": "対面ミートアップに参加",
+        "claimPerk": "特典を獲得",
+        "shareEvent": "SNSでイベントを共有"
+      },
+      "levels": {
+        "newcomer": "新規会員",
+        "bronzeCreator": "ブロンズクリエイター",
+        "silverCreator": "シルバークリエイター",
+        "goldCreator": "ゴールドクリエイター",
+        "platinumCreator": "プラチナクリエイター",
+        "diamondCreator": "ダイヤモンドクリエイター",
+        "hausLegend": "ハウスレジェンド"
+      }
+    },
+    "analytics": {
+      "totalEarnings": "総収益",
+      "thisMonth": "今月",
+      "pending": "保留中",
+      "dealsDone": "完了した案件",
+      "monthlyEarnings": "月別収益",
+      "lastSixMonths": "過去6ヶ月",
+      "avgDealValue": "平均案件額",
+      "conversionRate": "コンバージョン率",
+      "avgResponse": "平均応答",
+      "inProgress": "進行中",
+      "dealsByCategory": "カテゴリ別案件",
+      "topBrands": "トップブランド",
+      "deals": "件",
+      "aiInsights": "AIインサイト"
+    },
+    "rates": {
+      "rateCard": "料金表",
+      "editRates": "料金を編集",
+      "mostRequested": "最もリクエストが多い",
+      "pricingInsight": "価格インサイト",
+      "pricingInsightText": "あなたの料金は、同様のリーチを持つクリエイターの平均より15%低いです。Q1に更新を検討してください。",
+      "negotiationPreferences": "交渉設定",
+      "minimumDealValue": "最小案件額",
+      "paymentTerms": "支払い条件",
+      "rateTypes": {
+        "instagramReel": "Instagram リール",
+        "instagramStory": "Instagram ストーリー (3件)",
+        "tiktokVideo": "TikTok動画",
+        "youtubeIntegration": "YouTube 協賛",
+        "youtubeDedicated": "YouTube 専用",
+        "bundle": "バンドル（マルチプラットフォーム）"
+      }
+    },
+    "settingsTab": {
+      "notifications": "通知",
+      "emailNotifications": "メール通知",
+      "emailNotificationsDesc": "メールで案件の更新を受け取る",
+      "pushNotifications": "プッシュ通知",
+      "pushNotificationsDesc": "デバイスで即座にアラートを受け取る",
+      "dealAlerts": "高額案件アラート",
+      "dealAlertsDesc": "$2,000以上の案件を通知",
+      "weeklyDigest": "週間ダイジェスト",
+      "weeklyDigestDesc": "週間アクティビティの概要",
+      "aiAssistant": "AIアシスタント",
+      "autoResponse": "自動応答",
+      "autoResponseDesc": "AIが最初の問い合わせに応答",
+      "autoResponseInfo": "AIが新しい案件を受け取ってから1時間以内にプロフェッショナルな確認を送信し、詳細を確認できます。",
+      "account": "アカウント",
+      "changePassword": "パスワード変更",
+      "connectedEmail": "連携済みメール",
+      "subscription": "サブスクリプション",
+      "exportData": "データをエクスポート",
+      "dangerZone": "危険ゾーン",
+      "deleteAccount": "アカウント削除"
+    },
+    "achievements": {
+      "topCreator": "トップクリエイター",
+      "topCreatorDesc": "テック分野で収益上位5%",
+      "quickResponder": "クイックレスポンダー",
+      "quickResponderDesc": "平均応答時間2時間未満",
+      "brandFavorite": "ブランドお気に入り",
+      "brandFavoriteDesc": "15回以上のリピートコラボ",
+      "risingStar": "ライジングスター",
+      "risingStarDesc": "今年200%の成長"
     }
   }
 }
