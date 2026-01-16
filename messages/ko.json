@@ -6,7 +6,11 @@
     "error": "오류가 발생했습니다",
     "success": "성공",
     "search": "검색",
-    "more": "더보기"
+    "more": "더보기",
+    "seeAll": "모두 보기",
+    "share": "공유",
+    "post": "게시",
+    "by": "작성자"
   },
   "navigation": {
     "assistant": "어시스턴트",
@@ -57,6 +61,45 @@
       "perks": "혜택",
       "more": "더보기"
     }
+  },
+  "signals": {
+    "title": "하우스 시그널",
+    "subtitle": "중요한 정보",
+    "readTime": "{time} 읽기",
+    "keyTakeaway": "핵심 요점",
+    "categories": {
+      "all": "전체",
+      "market": "마켓",
+      "alert": "알림",
+      "guide": "가이드",
+      "news": "뉴스",
+      "story": "스토리"
+    }
+  },
+  "benefits": {
+    "title": "혜택",
+    "subtitle": "회원 전용 혜택",
+    "redeemWithPoints": "포인트로 교환",
+    "earnMore": "더 모으기",
+    "freePerks": "무료 혜택",
+    "free": "무료",
+    "redeem": "교환",
+    "redeemed": "교환됨",
+    "claim": "받기",
+    "claimed": "받음",
+    "locked": "잠김",
+    "pts": "포인트"
+  },
+  "anonymous": {
+    "title": "익명",
+    "subtitle": "솔직한 대화를 위한 안전한 공간",
+    "postButton": "+ 게시",
+    "identityProtected": "신원 보호",
+    "identityProtectedDesc": "게시물은 완전히 익명입니다",
+    "helpful": "도움됨",
+    "postAnonymously": "익명으로 게시",
+    "identityHidden": "신원이 완전히 숨겨집니다",
+    "placeholder": "무슨 생각을 하고 계세요? 공개적으로 게시할 수 없는 내용을 공유하세요..."
   },
   "settings": {
     "title": "설정",

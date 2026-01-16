@@ -6,7 +6,11 @@
     "error": "Ocurrió un error",
     "success": "Éxito",
     "search": "Buscar",
-    "more": "Más"
+    "more": "Más",
+    "seeAll": "Ver todo",
+    "share": "Compartir",
+    "post": "Publicar",
+    "by": "Por"
   },
   "navigation": {
     "assistant": "Asistente",
@@ -57,6 +61,45 @@
       "perks": "Beneficios",
       "more": "Más"
     }
+  },
+  "signals": {
+    "title": "Señales Haus",
+    "subtitle": "Información que importa",
+    "readTime": "{time} de lectura",
+    "keyTakeaway": "Punto Clave",
+    "categories": {
+      "all": "Todo",
+      "market": "Mercado",
+      "alert": "Alerta",
+      "guide": "Guía",
+      "news": "Noticias",
+      "story": "Historia"
+    }
+  },
+  "benefits": {
+    "title": "Beneficios",
+    "subtitle": "Beneficios exclusivos para miembros",
+    "redeemWithPoints": "Canjear con Puntos",
+    "earnMore": "Ganar más",
+    "freePerks": "Beneficios Gratis",
+    "free": "GRATIS",
+    "redeem": "Canjear",
+    "redeemed": "Canjeado",
+    "claim": "Reclamar",
+    "claimed": "Reclamado",
+    "locked": "Bloqueado",
+    "pts": "pts"
+  },
+  "anonymous": {
+    "title": "Anónimo",
+    "subtitle": "Espacio seguro para hablar",
+    "postButton": "+ Publicar",
+    "identityProtected": "Identidad Protegida",
+    "identityProtectedDesc": "Tus publicaciones son completamente anónimas",
+    "helpful": "Útil",
+    "postAnonymously": "Publicar Anónimamente",
+    "identityHidden": "Tu identidad está completamente oculta",
+    "placeholder": "¿Qué tienes en mente? Comparte algo que no puedes publicar públicamente..."
   },
   "settings": {
     "title": "Configuración",

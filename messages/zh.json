@@ -6,7 +6,11 @@
     "error": "发生错误",
     "success": "成功",
     "search": "搜索",
-    "more": "更多"
+    "more": "更多",
+    "seeAll": "查看全部",
+    "share": "分享",
+    "post": "发布",
+    "by": "作者"
   },
   "navigation": {
     "assistant": "助手",
@@ -57,6 +61,45 @@
       "perks": "福利",
       "more": "更多"
     }
+  },
+  "signals": {
+    "title": "Haus信号",
+    "subtitle": "重要资讯",
+    "readTime": "{time}阅读",
+    "keyTakeaway": "关键要点",
+    "categories": {
+      "all": "全部",
+      "market": "市场",
+      "alert": "警报",
+      "guide": "指南",
+      "news": "新闻",
+      "story": "故事"
+    }
+  },
+  "benefits": {
+    "title": "福利",
+    "subtitle": "会员专属福利",
+    "redeemWithPoints": "积分兑换",
+    "earnMore": "赚取更多",
+    "freePerks": "免费福利",
+    "free": "免费",
+    "redeem": "兑换",
+    "redeemed": "已兑换",
+    "claim": "领取",
+    "claimed": "已领取",
+    "locked": "锁定",
+    "pts": "积分"
+  },
+  "anonymous": {
+    "title": "匿名",
+    "subtitle": "畅所欲言的安全空间",
+    "postButton": "+ 发布",
+    "identityProtected": "身份保护",
+    "identityProtectedDesc": "您的帖子完全匿名",
+    "helpful": "有帮助",
+    "postAnonymously": "匿名发布",
+    "identityHidden": "您的身份完全隐藏",
+    "placeholder": "在想什么？分享一些你无法公开发布的内容..."
   },
   "settings": {
     "title": "设置",

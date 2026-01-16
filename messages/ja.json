@@ -6,7 +6,11 @@
     "error": "エラーが発生しました",
     "success": "成功",
     "search": "検索",
-    "more": "もっと見る"
+    "more": "もっと見る",
+    "seeAll": "すべて見る",
+    "share": "共有",
+    "post": "投稿",
+    "by": "作成者"
   },
   "navigation": {
     "assistant": "アシスタント",
@@ -57,6 +61,45 @@
       "perks": "特典",
       "more": "その他"
     }
+  },
+  "signals": {
+    "title": "ハウスシグナル",
+    "subtitle": "重要な情報",
+    "readTime": "{time}で読める",
+    "keyTakeaway": "重要ポイント",
+    "categories": {
+      "all": "すべて",
+      "market": "マーケット",
+      "alert": "アラート",
+      "guide": "ガイド",
+      "news": "ニュース",
+      "story": "ストーリー"
+    }
+  },
+  "benefits": {
+    "title": "特典",
+    "subtitle": "会員限定の特典",
+    "redeemWithPoints": "ポイントで交換",
+    "earnMore": "もっと貯める",
+    "freePerks": "無料特典",
+    "free": "無料",
+    "redeem": "交換",
+    "redeemed": "交換済み",
+    "claim": "獲得",
+    "claimed": "獲得済み",
+    "locked": "ロック中",
+    "pts": "ポイント"
+  },
+  "anonymous": {
+    "title": "匿名",
+    "subtitle": "本音を話せる安全な場所",
+    "postButton": "+ 投稿",
+    "identityProtected": "身元保護",
+    "identityProtectedDesc": "投稿は完全に匿名です",
+    "helpful": "役立った",
+    "postAnonymously": "匿名で投稿",
+    "identityHidden": "あなたの身元は完全に隠されます",
+    "placeholder": "何を考えていますか？公開できないことを共有してください..."
   },
   "settings": {
     "title": "設定",

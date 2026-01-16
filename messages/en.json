@@ -6,7 +6,11 @@
     "error": "An error occurred",
     "success": "Success",
     "search": "Search",
-    "more": "More"
+    "more": "More",
+    "seeAll": "See all",
+    "share": "Share",
+    "post": "Post",
+    "by": "By"
   },
   "navigation": {
     "assistant": "Assistant",
@@ -57,6 +61,45 @@
       "perks": "Perks",
       "more": "More"
     }
+  },
+  "signals": {
+    "title": "Haus Signals",
+    "subtitle": "Intel that matters",
+    "readTime": "{time} read",
+    "keyTakeaway": "Key Takeaway",
+    "categories": {
+      "all": "All",
+      "market": "Market",
+      "alert": "Alert",
+      "guide": "Guide",
+      "news": "News",
+      "story": "Story"
+    }
+  },
+  "benefits": {
+    "title": "Perks",
+    "subtitle": "Exclusive benefits for members",
+    "redeemWithPoints": "Redeem with Points",
+    "earnMore": "Earn more",
+    "freePerks": "Free Perks",
+    "free": "FREE",
+    "redeem": "Redeem",
+    "redeemed": "Redeemed",
+    "claim": "Claim",
+    "claimed": "Claimed",
+    "locked": "Locked",
+    "pts": "pts"
+  },
+  "anonymous": {
+    "title": "Anonymous",
+    "subtitle": "Safe space for real talk",
+    "postButton": "+ Post",
+    "identityProtected": "Identity Protected",
+    "identityProtectedDesc": "Your posts are completely anonymous",
+    "helpful": "Helpful",
+    "postAnonymously": "Post Anonymously",
+    "identityHidden": "Your identity is completely hidden",
+    "placeholder": "What's on your mind? Share something you can't post publicly..."
   },
   "settings": {
     "title": "Settings",

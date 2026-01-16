@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 const anonymousPosts = [
   {
@@ -56,6 +57,8 @@ const anonymousPosts = [
 ];
 
 export default function AnonymousSection() {
+  const t = useTranslations('anonymous');
+  const tCommon = useTranslations('common');
   const [showCompose, setShowCompose] = useState(false);
   const [newPost, setNewPost] = useState('');
   const [helpfulPosts, setHelpfulPosts] = useState<string[]>([]);
@@ -79,14 +82,14 @@ export default function AnonymousSection() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-white tracking-tight">Anonymous</h2>
-            <p className="text-sm text-gray-500 mt-0.5">Safe space for real talk</p>
+            <h2 className="text-2xl font-bold text-white tracking-tight">{t('title')}</h2>
+            <p className="text-sm text-gray-500 mt-0.5">{t('subtitle')}</p>
           </div>
           <button
             onClick={() => setShowCompose(true)}
             className="bg-white text-gray-900 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100 transition-colors"
           >
-            + Post
+            {t('postButton')}
           </button>
         </div>
 
@@ -98,8 +101,8 @@ export default function AnonymousSection() {
             </svg>
           </div>
           <div>
-            <p className="text-white text-sm font-medium">Identity Protected</p>
-            <p className="text-gray-500 text-xs">Your posts are completely anonymous</p>
+            <p className="text-white text-sm font-medium">{t('identityProtected')}</p>
+            <p className="text-gray-500 text-xs">{t('identityProtectedDesc')}</p>
           </div>
         </div>
 
@@ -116,7 +119,7 @@ export default function AnonymousSection() {
                     </svg>
                   </div>
                   <div>
-                    <span className="text-white text-sm font-medium">Anonymous</span>
+                    <span className="text-white text-sm font-medium">{t('title')}</span>
                     <span className="text-gray-500 text-xs ml-2">· {post.timeAgo}</span>
                   </div>
                 </div>
@@ -164,7 +167,7 @@ export default function AnonymousSection() {
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Helpful · {post.helpfulCount + (helpfulPosts.includes(post.id) ? 1 : 0)}</span>
+                  <span>{t('helpful')} · {post.helpfulCount + (helpfulPosts.includes(post.id) ? 1 : 0)}</span>
                 </button>
               </div>
             </div>
@@ -181,14 +184,14 @@ export default function AnonymousSection() {
                 onClick={() => setShowCompose(false)}
                 className="text-gray-400 font-medium text-sm"
               >
-                Cancel
+                {tCommon('cancel')}
               </button>
-              <span className="font-semibold text-white">Post Anonymously</span>
+              <span className="font-semibold text-white">{t('postAnonymously')}</span>
               <button
                 className="bg-white text-gray-900 px-4 py-1.5 rounded-full text-sm font-semibold disabled:opacity-50"
                 disabled={!newPost.trim()}
               >
-                Post
+                {tCommon('post')}
               </button>
             </div>
 
@@ -196,13 +199,13 @@ export default function AnonymousSection() {
               <svg className="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
-              <span className="text-violet-300 text-xs">Your identity is completely hidden</span>
+              <span className="text-violet-300 text-xs">{t('identityHidden')}</span>
             </div>
 
             <textarea
               value={newPost}
               onChange={(e) => setNewPost(e.target.value)}
-              placeholder="What's on your mind? Share something you can't post publicly..."
+              placeholder={t('placeholder')}
               className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white placeholder-gray-500 resize-none focus:outline-none focus:border-violet-500/50 min-h-[120px] text-[15px]"
               autoFocus
             />

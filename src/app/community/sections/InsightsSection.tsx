@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 const signalsData = [
   {
     id: '1',
-    category: 'MARKET',
+    category: 'market',
     categoryColor: 'from-blue-500 to-cyan-500',
     headline: 'Beauty Brands Are Spending 40% More This Quarter',
     subheadline: 'Q1 2025 is shaping up to be the best quarter for beauty creators in 3 years.',
@@ -22,7 +23,7 @@ const signalsData = [
   },
   {
     id: '2',
-    category: 'ALERT',
+    category: 'alert',
     categoryColor: 'from-red-500 to-rose-500',
     headline: 'The "Perpetuity" Trap Is Back',
     subheadline: 'Brands are hiding unlimited usage rights in new contract language.',
@@ -39,7 +40,7 @@ const signalsData = [
   },
   {
     id: '3',
-    category: 'GUIDE',
+    category: 'guide',
     categoryColor: 'from-emerald-500 to-green-500',
     headline: 'How Top Creators Get 3x Their Initial Offers',
     subheadline: 'The negotiation framework that\'s working right now.',
@@ -57,7 +58,7 @@ const signalsData = [
   },
   {
     id: '4',
-    category: 'NEWS',
+    category: 'news',
     categoryColor: 'from-violet-500 to-purple-500',
     headline: 'TikTok Shop Commissions Dropping to 2%',
     subheadline: 'March changes will hit most creators hard.',
@@ -74,7 +75,7 @@ const signalsData = [
   },
   {
     id: '5',
-    category: 'STORY',
+    category: 'story',
     categoryColor: 'from-amber-500 to-orange-500',
     headline: 'From $500 to $15K: One Creator\'s Journey',
     subheadline: 'Mike stopped saying yes to everything.',
@@ -91,16 +92,18 @@ const signalsData = [
   },
 ];
 
-const categories = ['All', 'Market', 'Alert', 'Guide', 'News', 'Story'];
-
 export default function InsightsSection() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const t = useTranslations('signals');
+  const tCommon = useTranslations('common');
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [savedPosts, setSavedPosts] = useState<string[]>([]);
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
 
-  const filteredSignals = selectedCategory === 'All'
+  const categories = ['all', 'market', 'alert', 'guide', 'news', 'story'];
+
+  const filteredSignals = selectedCategory === 'all'
     ? signalsData
-    : signalsData.filter(post => post.category.toLowerCase() === selectedCategory.toLowerCase());
+    : signalsData.filter(post => post.category === selectedCategory);
 
   const toggleSave = (postId: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -118,16 +121,16 @@ export default function InsightsSection() {
       {/* Section Header */}
       <div className="flex items-end justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Haus Signals</h2>
-          <p className="text-sm text-gray-500 mt-0.5">Intel that matters</p>
+          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">{t('title')}</h2>
+          <p className="text-sm text-gray-500 mt-0.5">{t('subtitle')}</p>
         </div>
         <button className="text-sm text-violet-600 font-medium hover:text-violet-700">
-          See all
+          {tCommon('seeAll')}
         </button>
       </div>
 
       {/* Featured Cards - Horizontal Scroll */}
-      {selectedCategory === 'All' && (
+      {selectedCategory === 'all' && (
         <div className="flex gap-4 overflow-x-auto pb-2 -mx-5 px-5 snap-x snap-mandatory scrollbar-hide">
           {hotSignals.map((signal) => (
             <div
@@ -144,7 +147,7 @@ export default function InsightsSection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className={`absolute top-3 left-3 px-2.5 py-1 bg-gradient-to-r ${signal.categoryColor} text-white text-[10px] font-bold rounded-full uppercase tracking-wider`}>
-                  {signal.category}
+                  {t(`categories.${signal.category}`)}
                 </div>
                 <div className="absolute bottom-3 left-3 right-3">
                   <h3 className="text-white font-semibold text-sm leading-tight line-clamp-2 drop-shadow-md">
@@ -187,14 +190,14 @@ export default function InsightsSection() {
                 : 'bg-white text-gray-600 border border-gray-200 hover:border-gray-300'
             }`}
           >
-            {cat}
+            {t(`categories.${cat}`)}
           </button>
         ))}
       </div>
 
       {/* Signal List */}
       <div className="space-y-4">
-        {(selectedCategory === 'All' ? signalsData.filter(s => !s.isHot) : filteredSignals).map((signal) => (
+        {(selectedCategory === 'all' ? signalsData.filter(s => !s.isHot) : filteredSignals).map((signal) => (
           <div
             key={signal.id}
             onClick={() => setExpandedCard(expandedCard === signal.id ? null : signal.id)}
@@ -209,7 +212,7 @@ export default function InsightsSection() {
                   className="w-full h-full object-cover"
                 />
                 <div className={`absolute bottom-1.5 left-1.5 px-1.5 py-0.5 bg-gradient-to-r ${signal.categoryColor} text-white text-[9px] font-bold rounded uppercase`}>
-                  {signal.category}
+                  {t(`categories.${signal.category}`)}
                 </div>
               </div>
 
@@ -221,7 +224,7 @@ export default function InsightsSection() {
                   </h3>
                 </div>
                 <div className="flex items-center justify-between mt-2">
-                  <span className="text-[11px] text-gray-400">{signal.readTime} read</span>
+                  <span className="text-[11px] text-gray-400">{t('readTime', { time: signal.readTime })}</span>
                   <button
                     onClick={(e) => toggleSave(signal.id, e)}
                     className={`transition-colors ${
@@ -253,13 +256,13 @@ export default function InsightsSection() {
                 </div>
 
                 <div className="bg-gray-50 rounded-xl p-4">
-                  <p className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold mb-1">Key Takeaway</p>
+                  <p className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold mb-1">{t('keyTakeaway')}</p>
                   <p className="text-gray-900 text-sm font-medium">{signal.takeaway}</p>
                 </div>
 
                 <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
-                  <span className="text-xs text-gray-400">By {signal.author}</span>
-                  <button className="text-xs text-violet-600 font-medium">Share →</button>
+                  <span className="text-xs text-gray-400">{tCommon('by')} {signal.author}</span>
+                  <button className="text-xs text-violet-600 font-medium">{tCommon('share')} →</button>
                 </div>
               </div>
             )}

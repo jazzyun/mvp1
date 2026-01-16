@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 // Points-redeemable rewards
 const redeemableRewards = [
@@ -61,6 +62,8 @@ const freePerks = [
 ];
 
 export default function BenefitsSection() {
+  const t = useTranslations('benefits');
+  const tCommon = useTranslations('common');
   const [claimedPerks, setClaimedPerks] = useState<string[]>(['2', '6']);
   const [redeemedRewards, setRedeemedRewards] = useState<string[]>([]);
 
@@ -77,11 +80,11 @@ export default function BenefitsSection() {
       {/* Header */}
       <div className="flex items-end justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Perks</h2>
-          <p className="text-sm text-gray-500 mt-0.5">Exclusive benefits for members</p>
+          <h2 className="text-2xl font-bold text-gray-900 tracking-tight">{t('title')}</h2>
+          <p className="text-sm text-gray-500 mt-0.5">{t('subtitle')}</p>
         </div>
         <Link href="/community/benefits" className="text-sm text-violet-600 font-medium hover:text-violet-700">
-          See all
+          {tCommon('seeAll')}
         </Link>
       </div>
 
@@ -89,13 +92,13 @@ export default function BenefitsSection() {
       <div>
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
-            <h3 className="text-sm font-semibold text-gray-900">Redeem with Points</h3>
+            <h3 className="text-sm font-semibold text-gray-900">{t('redeemWithPoints')}</h3>
             <span className="px-2 py-0.5 bg-amber-100 text-amber-700 rounded-full text-xs font-semibold">
-              {userPoints.toLocaleString()} pts
+              {userPoints.toLocaleString()} {t('pts')}
             </span>
           </div>
           <Link href="/profile" className="text-xs text-violet-600 font-medium">
-            Earn more →
+            {t('earnMore')} →
           </Link>
         </div>
         <div className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 snap-x snap-mandatory scrollbar-hide">
@@ -116,7 +119,7 @@ export default function BenefitsSection() {
                   <p className="text-xs text-gray-500 line-clamp-1 mb-2">{reward.description}</p>
                   <div className="flex items-center justify-between">
                     <span className={`text-xs font-semibold ${canAfford ? 'text-amber-500' : 'text-gray-400'}`}>
-                      {reward.points.toLocaleString()} pts
+                      {reward.points.toLocaleString()} {t('pts')}
                     </span>
                     <button
                       onClick={() => canAfford && !redeemedRewards.includes(reward.id) && handleRedeemReward(reward.id)}
@@ -129,7 +132,7 @@ export default function BenefitsSection() {
                       }`}
                       disabled={!canAfford || redeemedRewards.includes(reward.id)}
                     >
-                      {redeemedRewards.includes(reward.id) ? 'Redeemed' : canAfford ? 'Redeem' : 'Locked'}
+                      {redeemedRewards.includes(reward.id) ? t('redeemed') : canAfford ? t('redeem') : t('locked')}
                     </button>
                   </div>
                 </div>
@@ -141,7 +144,7 @@ export default function BenefitsSection() {
 
       {/* Free Perks */}
       <div>
-        <h3 className="text-sm font-semibold text-gray-900 mb-3">Free Perks</h3>
+        <h3 className="text-sm font-semibold text-gray-900 mb-3">{t('freePerks')}</h3>
         <div className="space-y-3">
           {freePerks.map((perk) => (
             <div key={perk.id} className="bg-white rounded-2xl border border-gray-100 p-4">
@@ -157,7 +160,7 @@ export default function BenefitsSection() {
                   <div className="flex items-center gap-2">
                     <h4 className="font-semibold text-gray-900 text-sm truncate">{perk.name}</h4>
                     <span className="px-1.5 py-0.5 bg-emerald-100 text-emerald-600 rounded text-[10px] font-medium">
-                      FREE
+                      {t('free')}
                     </span>
                   </div>
                   <p className="text-xs text-gray-500 mt-0.5">{perk.description}</p>
@@ -171,7 +174,7 @@ export default function BenefitsSection() {
                   }`}
                   disabled={claimedPerks.includes(perk.id)}
                 >
-                  {claimedPerks.includes(perk.id) ? 'Claimed' : 'Claim'}
+                  {claimedPerks.includes(perk.id) ? t('claimed') : t('claim')}
                 </button>
               </div>
             </div>
