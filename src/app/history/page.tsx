@@ -49,72 +49,72 @@ export default function HistoryPage() {
     <div className="min-h-screen bg-white">
       {/* Header - Airbnb style */}
       <header className="bg-white border-b border-[#EBEBEB] sticky top-0 z-10">
-        <div className="max-w-2xl mx-auto px-6 py-5">
-          <div className="flex items-center gap-4">
+        <div className="max-w-lg mx-auto px-4 sm:px-5 py-4">
+          <div className="flex items-center gap-3">
             <Link
               href="/"
-              className="w-10 h-10 rounded-full border border-[#DDDDDD] bg-white flex items-center justify-center hover:border-[#222222] hover:shadow-sm transition-all"
+              className="w-9 h-9 rounded-full border border-[#DDDDDD] bg-white flex items-center justify-center hover:border-[#222222] hover:shadow-sm transition-all flex-shrink-0"
             >
-              <svg className="w-5 h-5 text-[#222222]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-[#222222]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
               </svg>
             </Link>
-            <h1 className="text-2xl font-bold text-[#222222] tracking-tight">Deal History</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-[#222222] tracking-tight">Deal History</h1>
           </div>
         </div>
       </header>
 
       {/* Stats Summary - Airbnb cards */}
-      <div className="max-w-2xl mx-auto px-6 py-6">
-        <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="bg-[#F7F7F7] rounded-xl p-5">
-            <p className="text-3xl font-bold text-[#222222]">{stats.completedDeals}</p>
-            <p className="text-sm text-[#717171] mt-1">Completed</p>
+      <div className="max-w-lg mx-auto px-4 sm:px-5 py-5">
+        <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
+          <div className="bg-[#F7F7F7] rounded-xl p-3 sm:p-4">
+            <p className="text-xl sm:text-2xl font-bold text-[#222222]">{stats.completedDeals}</p>
+            <p className="text-[10px] sm:text-xs text-[#717171] mt-0.5">Completed</p>
           </div>
-          <div className="bg-[#F7F7F7] rounded-xl p-5">
-            <p className="text-3xl font-bold text-[#008A05]">${(stats.totalEarnings / 1000).toFixed(1)}K</p>
-            <p className="text-sm text-[#717171] mt-1">Earned</p>
+          <div className="bg-[#F7F7F7] rounded-xl p-3 sm:p-4">
+            <p className="text-xl sm:text-2xl font-bold text-[#008A05]">${(stats.totalEarnings / 1000).toFixed(1)}K</p>
+            <p className="text-[10px] sm:text-xs text-[#717171] mt-0.5">Earned</p>
           </div>
-          <div className="bg-[#F7F7F7] rounded-xl p-5">
-            <p className="text-3xl font-bold text-[#FF385C]">{stats.avgRating.toFixed(1)}</p>
-            <p className="text-sm text-[#717171] mt-1">Avg Rating</p>
+          <div className="bg-[#F7F7F7] rounded-xl p-3 sm:p-4">
+            <p className="text-xl sm:text-2xl font-bold text-[#FF385C]">{stats.avgRating.toFixed(1)}</p>
+            <p className="text-[10px] sm:text-xs text-[#717171] mt-0.5">Avg Rating</p>
           </div>
         </div>
 
         {/* Deal List */}
-        <div className="space-y-4 pb-8">
+        <div className="space-y-3 pb-6">
           {dealHistory.map((deal) => {
             const statusStyles = getStatusStyles(deal.status);
             return (
               <div
                 key={deal.id}
-                className="bg-white rounded-xl border border-[#DDDDDD] p-5 hover:shadow-lg hover:border-[#B0B0B0] transition-all"
+                className="bg-white rounded-xl border border-[#DDDDDD] p-4 hover:shadow-lg hover:border-[#B0B0B0] transition-all"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-4">
-                    <span className="w-12 h-12 flex items-center justify-center text-2xl bg-[#F7F7F7] rounded-xl">
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <div className="flex items-center gap-3 min-w-0 flex-1">
+                    <span className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center text-xl sm:text-2xl bg-[#F7F7F7] rounded-xl flex-shrink-0">
                       {deal.brandLogo}
                     </span>
-                    <div>
-                      <h3 className="text-lg font-semibold text-[#222222]">{deal.brandName}</h3>
-                      <p className="text-sm text-[#717171]">{deal.contentType}</p>
+                    <div className="min-w-0">
+                      <h3 className="text-base sm:text-lg font-semibold text-[#222222] truncate">{deal.brandName}</h3>
+                      <p className="text-xs sm:text-sm text-[#717171]">{deal.contentType}</p>
                     </div>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusStyles.bg} ${statusStyles.text}`}>
+                  <span className={`px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-semibold ${statusStyles.bg} ${statusStyles.text} flex-shrink-0`}>
                     {statusStyles.label}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <p className="text-xl font-bold text-[#222222]">${deal.amount.toLocaleString()}</p>
+                  <div className="flex items-center gap-3">
+                    <p className="text-lg sm:text-xl font-bold text-[#222222]">${deal.amount.toLocaleString()}</p>
                     {deal.rating && <StarRating rating={deal.rating} />}
                   </div>
-                  <p className="text-sm text-[#717171]">{formatDate(deal.completedAt)}</p>
+                  <p className="text-xs sm:text-sm text-[#717171]">{formatDate(deal.completedAt)}</p>
                 </div>
 
                 {deal.notes && (
-                  <p className="mt-3 text-sm text-[#717171] italic border-t border-[#EBEBEB] pt-3">{deal.notes}</p>
+                  <p className="mt-3 text-xs sm:text-sm text-[#717171] italic border-t border-[#EBEBEB] pt-3">{deal.notes}</p>
                 )}
               </div>
             );

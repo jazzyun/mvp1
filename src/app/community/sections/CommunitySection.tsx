@@ -62,7 +62,7 @@ export default function CommunitySection() {
   };
 
   return (
-    <div className="px-5 py-6 space-y-5">
+    <div className="px-4 sm:px-5 py-5 space-y-4">
       {/* Compose Box */}
       <div className="bg-white rounded-2xl border border-[#DDDDDD] p-4">
         <div className="flex items-start gap-3">

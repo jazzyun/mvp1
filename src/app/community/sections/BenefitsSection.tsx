@@ -64,7 +64,7 @@ export default function BenefitsSection() {
   };
 
   return (
-    <div className="px-5 py-6 space-y-6">
+    <div className="px-4 sm:px-5 py-5 space-y-5">
       {/* Header */}
       <div className="flex items-end justify-between">
         <div>
@@ -89,7 +89,7 @@ export default function BenefitsSection() {
             {t('earnMore')} →
           </Link>
         </div>
-        <div className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 snap-x snap-mandatory scrollbar-hide">
+        <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 sm:-mx-5 sm:px-5 snap-x snap-mandatory scrollbar-hide">
           {redeemableRewards.map((reward) => {
             const canAfford = userPoints >= reward.points;
             return (

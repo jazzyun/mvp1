@@ -52,7 +52,7 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
   const priorityStyles = getPriorityStyles(deal.priority);
 
   return (
-    <div className="bg-white rounded-xl border border-[#DDDDDD] p-6 hover:shadow-lg hover:border-[#B0B0B0] transition-all duration-200 group">
+    <div className="bg-white rounded-xl border border-[#DDDDDD] p-4 sm:p-5 hover:shadow-lg hover:border-[#B0B0B0] transition-all duration-200 group">
       {/* Header: Priority + Time */}
       <div className="flex items-center justify-between mb-4">
         <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${priorityStyles.bg} ${priorityStyles.text}`}>

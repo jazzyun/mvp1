@@ -35,7 +35,7 @@ const menuItems = [
 
 export default function MenuSection() {
   return (
-    <div className="px-5 py-6 space-y-6">
+    <div className="px-4 sm:px-5 py-5 space-y-5">
       {/* Profile Card */}
       <div className="bg-white rounded-3xl border border-[#DDDDDD] p-5 hover:shadow-lg transition-all">
         <div className="flex items-center gap-4">

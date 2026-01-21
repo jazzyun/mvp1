@@ -71,7 +71,7 @@ export default function InsightsSection() {
   const hotSignals = signalsData.filter(s => s.isHot);
 
   return (
-    <div className="px-5 py-6 space-y-6">
+    <div className="px-4 sm:px-5 py-5 space-y-5">
       {/* Section Header */}
       <div className="flex items-end justify-between">
         <div>
@@ -85,7 +85,7 @@ export default function InsightsSection() {
 
       {/* Featured Cards - Horizontal Scroll */}
       {selectedCategory === 'all' && (
-        <div className="flex gap-4 overflow-x-auto pb-2 -mx-5 px-5 snap-x snap-mandatory scrollbar-hide">
+        <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 sm:-mx-5 sm:px-5 snap-x snap-mandatory scrollbar-hide">
           {hotSignals.map((signal) => (
             <div
               key={signal.id}
@@ -133,7 +133,7 @@ export default function InsightsSection() {
       )}
 
       {/* Category Pills */}
-      <div className="flex gap-2 overflow-x-auto pb-1 -mx-5 px-5 scrollbar-hide">
+      <div className="flex gap-2 overflow-x-auto pb-1 -mx-4 px-4 sm:-mx-5 sm:px-5 scrollbar-hide">
         {categories.map((cat) => (
           <button
             key={cat}

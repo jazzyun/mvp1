@@ -73,7 +73,7 @@ export default function AnonymousSection() {
 
   return (
     <div className="bg-[#F7F7F7] min-h-screen -mt-6 pt-6">
-      <div className="px-5 py-6 space-y-5">
+      <div className="px-4 sm:px-5 py-5 space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
