@@ -36,7 +36,7 @@ const mockVideos: VideoItem[] = [
     id: '1',
     platform: 'instagram',
     thumbnail: '🎬',
-    title: 'New skincare routine ✨',
+    title: 'New skincare routine',
     postedAt: '2h ago',
     views: '12.4K',
   },
@@ -126,27 +126,23 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
   const getStatusIcon = (status: 'pass' | 'fail' | 'warning') => {
     switch (status) {
       case 'pass':
-        return <span className="text-green-500">✓</span>;
+        return <svg className="w-4 h-4 text-[#008A05]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>;
       case 'fail':
-        return <span className="text-red-500">✗</span>;
+        return <svg className="w-4 h-4 text-[#C13515]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>;
       case 'warning':
-        return <span className="text-amber-500">!</span>;
+        return <svg className="w-4 h-4 text-[#B45309]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>;
     }
   };
 
   const getStatusBg = (status: 'pass' | 'fail' | 'warning') => {
     switch (status) {
       case 'pass':
-        return 'bg-green-50 border-green-200';
+        return 'bg-[#E6F9E6] border-[#B8E6B8]';
       case 'fail':
-        return 'bg-red-50 border-red-200';
+        return 'bg-[#FFF0F3] border-[#FFCCD5]';
       case 'warning':
-        return 'bg-amber-50 border-amber-200';
+        return 'bg-[#FFF8E6] border-[#FFE4B3]';
     }
-  };
-
-  const getPlatformIcon = (platform: 'instagram' | 'tiktok') => {
-    return platform === 'instagram' ? '📸' : '🎵';
   };
 
   const passCount = results?.reduce((acc, cat) => acc + cat.results.filter(r => r.status === 'pass').length, 0) || 0;
@@ -156,34 +152,38 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/40"
         onClick={handleClose}
       />
 
       {/* Modal */}
-      <div className="relative w-full max-w-lg max-h-[90vh] bg-white rounded-t-3xl sm:rounded-2xl overflow-hidden animate-slide-up">
+      <div className="relative w-full max-w-lg max-h-[90vh] bg-white border border-[#DDDDDD] rounded-t-3xl sm:rounded-2xl overflow-hidden shadow-xl animate-slide-up">
         {/* Header */}
-        <div className="sticky top-0 bg-white border-b border-gray-100 px-5 py-4">
+        <div className="sticky top-0 bg-white border-b border-[#EBEBEB] px-5 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               {(selectedVideo || results) && (
                 <button
                   onClick={handleBack}
-                  className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors mr-3"
+                  className="w-8 h-8 rounded-full border border-[#DDDDDD] bg-white flex items-center justify-center text-[#717171] hover:border-[#222222] hover:text-[#222222] transition-all mr-3"
                 >
-                  ←
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
+                  </svg>
                 </button>
               )}
               <div>
-                <p className="text-sm text-gray-500">Guidelines Check</p>
-                <h2 className="text-lg font-bold text-gray-900">{brandName}</h2>
+                <p className="text-sm text-[#717171]">Guidelines Check</p>
+                <h2 className="text-lg font-semibold text-[#222222]">{brandName}</h2>
               </div>
             </div>
             <button
               onClick={handleClose}
-              className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+              className="w-10 h-10 rounded-full border border-[#DDDDDD] bg-white flex items-center justify-center text-[#717171] hover:border-[#222222] hover:text-[#222222] transition-all"
             >
-              ✕
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
           </div>
         </div>
@@ -193,7 +193,7 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
           {/* Video Selection */}
           {!selectedVideo && !isChecking && !results && (
             <div>
-              <p className="text-sm text-gray-500 mb-4">
+              <p className="text-sm text-[#717171] mb-4">
                 Select a video to check
               </p>
               <div className="space-y-3">
@@ -201,20 +201,22 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
                   <button
                     key={video.id}
                     onClick={() => handleSelectVideo(video)}
-                    className="w-full flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors text-left"
+                    className="w-full flex items-center p-4 bg-[#F7F7F7] border border-[#DDDDDD] rounded-xl hover:bg-white hover:border-[#222222] hover:shadow-md transition-all text-left"
                   >
-                    <div className="w-14 h-14 rounded-lg bg-gray-200 flex items-center justify-center text-2xl mr-4">
+                    <div className="w-14 h-14 rounded-xl bg-white border border-[#EBEBEB] flex items-center justify-center text-2xl mr-4">
                       {video.thumbnail}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm">{getPlatformIcon(video.platform)}</span>
-                        <span className="text-xs text-gray-400 capitalize">{video.platform}</span>
+                        <span className="text-sm">{video.platform === 'instagram' ? '📸' : '🎵'}</span>
+                        <span className="text-xs text-[#717171] capitalize">{video.platform}</span>
                       </div>
-                      <p className="text-sm font-medium text-gray-900 truncate">{video.title}</p>
-                      <p className="text-xs text-gray-500">{video.postedAt} · {video.views} views</p>
+                      <p className="text-sm font-medium text-[#222222] truncate">{video.title}</p>
+                      <p className="text-xs text-[#717171]">{video.postedAt} · {video.views} views</p>
                     </div>
-                    <span className="text-gray-400 ml-2">→</span>
+                    <svg className="w-5 h-5 text-[#717171] ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                    </svg>
                   </button>
                 ))}
               </div>
@@ -224,15 +226,17 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
           {/* Checking State */}
           {isChecking && selectedVideo && (
             <div className="py-12 text-center">
-              <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gray-100 flex items-center justify-center text-3xl">
+              <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-[#F7F7F7] border border-[#DDDDDD] flex items-center justify-center text-3xl">
                 {selectedVideo.thumbnail}
               </div>
-              <p className="text-sm text-gray-500 mb-4">{selectedVideo.title}</p>
-              <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center animate-pulse">
-                <span className="text-xl">🔍</span>
+              <p className="text-sm text-[#717171] mb-4">{selectedVideo.title}</p>
+              <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[#FFF0F3] border border-[#FFCCD5] flex items-center justify-center">
+                <svg className="w-6 h-6 text-[#FF385C] animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
               </div>
-              <p className="text-gray-900 font-medium mb-1">Analyzing video...</p>
-              <p className="text-sm text-gray-500">Checking guideline requirements</p>
+              <p className="text-[#222222] font-medium mb-1">Analyzing video...</p>
+              <p className="text-sm text-[#717171]">Checking guideline requirements</p>
             </div>
           )}
 
@@ -240,28 +244,28 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
           {results && !isChecking && selectedVideo && (
             <div className="space-y-6">
               {/* Selected Video */}
-              <div className="flex items-center p-3 bg-gray-50 rounded-xl">
-                <div className="w-12 h-12 rounded-lg bg-gray-200 flex items-center justify-center text-xl mr-3">
+              <div className="flex items-center p-3 bg-[#F7F7F7] border border-[#DDDDDD] rounded-xl">
+                <div className="w-12 h-12 rounded-xl bg-white border border-[#EBEBEB] flex items-center justify-center text-xl mr-3">
                   {selectedVideo.thumbnail}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate">{selectedVideo.title}</p>
-                  <p className="text-xs text-gray-500">{getPlatformIcon(selectedVideo.platform)} {selectedVideo.platform}</p>
+                  <p className="text-sm font-medium text-[#222222] truncate">{selectedVideo.title}</p>
+                  <p className="text-xs text-[#717171]">{selectedVideo.platform === 'instagram' ? '📸' : '🎵'} {selectedVideo.platform}</p>
                 </div>
               </div>
 
               {/* Summary */}
-              <div className="bg-gray-50 rounded-xl p-4 text-center">
-                <p className="text-3xl font-bold text-gray-900 mb-1">
+              <div className="bg-[#F7F7F7] border border-[#DDDDDD] rounded-xl p-4 text-center">
+                <p className="text-3xl font-bold text-[#222222] mb-1">
                   {passCount}/{totalCount}
                 </p>
-                <p className="text-sm text-gray-500">Requirements met</p>
+                <p className="text-sm text-[#717171]">Requirements met</p>
               </div>
 
               {/* Detailed Results */}
               {results.map((section, index) => (
                 <div key={index}>
-                  <h3 className="text-sm font-semibold text-gray-900 mb-3">
+                  <h3 className="text-sm font-semibold text-[#222222] mb-3">
                     {section.category}
                   </h3>
                   <div className="space-y-2">
@@ -270,13 +274,13 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
                         key={reqIndex}
                         className={`flex items-start p-3 rounded-xl border ${getStatusBg(result.status)}`}
                       >
-                        <span className="w-6 h-6 rounded-full bg-white flex items-center justify-center mr-3 flex-shrink-0 text-sm font-bold">
+                        <span className="w-6 h-6 rounded-full bg-white flex items-center justify-center mr-3 flex-shrink-0">
                           {getStatusIcon(result.status)}
                         </span>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm text-gray-900">{result.requirement}</p>
+                          <p className="text-sm text-[#222222]">{result.requirement}</p>
                           {result.note && (
-                            <p className="text-xs text-gray-500 mt-0.5">{result.note}</p>
+                            <p className="text-xs text-[#717171] mt-0.5">{result.note}</p>
                           )}
                         </div>
                       </div>
@@ -288,7 +292,7 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
               {/* Share Button */}
               <button
                 onClick={handleClose}
-                className="w-full py-3 bg-gray-900 text-white rounded-xl font-medium hover:bg-gray-800 transition-colors"
+                className="w-full py-3 bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white rounded-lg font-semibold hover:from-[#D70466] hover:via-[#BD1E59] hover:to-[#BD1E59] transition-all"
               >
                 Share Results
               </button>

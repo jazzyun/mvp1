@@ -46,7 +46,10 @@
       "glossier": "글로시에",
       "nike": "나이키",
       "local_cafe": "로컬 카페 브랜드",
-      "samsung": "삼성전자"
+      "samsung": "삼성전자",
+      "sephora": "세포라",
+      "spotify": "스포티파이",
+      "zara": "자라"
     },
     "risks": {
       "secondary_usage": "2차 사용권 포함",
@@ -60,9 +63,12 @@
       "one_reel": "릴 1개",
       "youtube_and_stories": "유튜브 영상 1개 + 인스타그램 스토리 3개",
       "product_sponsorship": "제품 협찬 + 소정의 비용",
-      "galaxy_review": "갤럭시 제품 리뷰 영상"
+      "galaxy_review": "갤럭시 제품 리뷰 영상",
+      "reels_and_tutorial": "릴 2개 + 튜토리얼 1개",
+      "product_gifting": "제품 협찬 + 유료 콜라보 가능성"
     },
-    "messages": "{count}개 메시지",
+    "threads": "스레드",
+    "dealHistory": "딜 히스토리",
     "proposedAmount": "제안 금액",
     "content": "콘텐츠",
     "toBeDiscussed": "협의 예정",

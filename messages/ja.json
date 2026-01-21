@@ -46,7 +46,10 @@
       "glossier": "グロッシアー",
       "nike": "ナイキ",
       "local_cafe": "ローカルカフェブランド",
-      "samsung": "サムスン電子"
+      "samsung": "サムスン電子",
+      "sephora": "セフォラ",
+      "spotify": "Spotify",
+      "zara": "ザラ"
     },
     "risks": {
       "secondary_usage": "二次使用権が含まれています",
@@ -60,9 +63,12 @@
       "one_reel": "リール1本",
       "youtube_and_stories": "YouTube動画1本 + Instagramストーリー3件",
       "product_sponsorship": "製品提供 + 少額報酬",
-      "galaxy_review": "Galaxy製品レビュー動画"
+      "galaxy_review": "Galaxy製品レビュー動画",
+      "reels_and_tutorial": "リール2本 + チュートリアル1本",
+      "product_gifting": "製品提供 + 有料コラボの可能性"
     },
-    "messages": "{count}件のメッセージ",
+    "threads": "スレッド",
+    "dealHistory": "案件履歴",
     "proposedAmount": "提案金額",
     "content": "コンテンツ",
     "toBeDiscussed": "要相談",

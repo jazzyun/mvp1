@@ -270,7 +270,7 @@ export const mockDeals: Deal[] = [
         ],
       },
     ],
-    requiresPerformance: false,
+    requiresPerformance: true,
     conversation: {
       brandEmail: 'creator.marketing@nike.com',
       channel: 'email',
@@ -608,6 +608,293 @@ export const mockDeals: Deal[] = [
           'Unlimited revisions clause must be negotiated',
           'Additional fee negotiation recommended if ad material usage rights included',
           'NDA clause prevents sharing pre-launch information',
+        ],
+      },
+    },
+  },
+  {
+    id: '5',
+    brandName: 'Sephora',
+    brandKey: 'sephora',
+    channel: 'email',
+    offeredAmount: 3500,
+    offeredDetails: '2 Reels + 1 Tutorial',
+    contentTypeKey: 'reels_and_tutorial',
+    receivedAt: new Date(Date.now() - 6 * 60 * 60 * 1000),
+    priority: 'medium',
+    risks: [
+      { type: 'secondary_usage', description: 'Secondary usage rights included' },
+    ],
+    status: 'new',
+    hasContract: true,
+    contract: {
+      summary: 'Sephora holiday campaign featuring new makeup collection. Requesting tutorial and product showcase.',
+      deliverables: [
+        'Instagram Reels x2 (30-60 seconds each)',
+        'Full tutorial video (5-8 minutes)',
+        'Before/after transformations',
+      ],
+      payment: {
+        amount: '$3,500',
+        method: 'Bank transfer',
+        timing: 'Net 30 (within 30 days after content posting)',
+        riskLevel: 'low',
+      },
+      timeline: {
+        contentDeadline: 'February 10, 2024',
+        reviewPeriod: '5 business days',
+        campaignPeriod: 'February 14, 2024 ~ March 14, 2024',
+      },
+      usageRights: [
+        {
+          label: 'Usage Period',
+          value: '6 months',
+          riskLevel: 'low',
+        },
+        {
+          label: 'Secondary Usage',
+          value: 'Can be used on brand website and email marketing',
+          riskLevel: 'medium',
+          warning: 'May appear in Sephora marketing materials',
+        },
+      ],
+      restrictions: [
+        'No competitor product mentions for 30 days',
+        'Must use provided product samples',
+      ],
+      aiNotes: [
+        '✅ Payment terms and amount are fair for deliverables.',
+        '⚠️ Secondary usage includes email marketing - consider if this affects your rate.',
+        '✅ 6 month usage period is reasonable.',
+      ],
+    },
+    hasGuidelines: true,
+    guidelines: [
+      {
+        category: 'Content Style',
+        requirements: [
+          'Clean, well-lit beauty content',
+          'Show product application techniques',
+          'Include product swatches on skin',
+        ],
+      },
+      {
+        category: 'Branding',
+        requirements: [
+          '@sephora tag required',
+          '#SephoraPartner hashtag',
+          'Mention product names accurately',
+        ],
+      },
+    ],
+    requiresPerformance: true,
+    brandProfile: {
+      logo: '💋',
+      industry: 'Beauty Retail',
+      description: 'Sephora is a leading beauty retailer offering a wide selection of makeup, skincare, and fragrance products from prestigious brands worldwide.',
+      founded: '1969',
+      headquarters: 'Paris, France',
+      socialFollowers: {
+        instagram: '21M',
+        youtube: '1.2M',
+        tiktok: '3.8M',
+      },
+      recentNews: [
+        {
+          title: 'Sephora Expands Clean Beauty Selection',
+          source: 'WWD',
+          date: '2024.01.12',
+          sentiment: 'positive',
+        },
+      ],
+      creatorReviews: {
+        avgRating: 4.3,
+        totalReviews: 445,
+        paymentSpeed: 'fast',
+        communicationRating: 4.2,
+        reuseProbability: '68%',
+      },
+      aiRecommendation: {
+        shouldCollaborate: true,
+        reasons: [
+          'Premium beauty retailer with high brand recognition',
+          'Fair payment for deliverables',
+          'Good creator reviews',
+        ],
+        warnings: [
+          'Secondary usage clause needs review',
+        ],
+      },
+    },
+  },
+  {
+    id: '6',
+    brandName: 'Spotify',
+    brandKey: 'spotify',
+    channel: 'instagram_dm',
+    offeredAmount: 4500,
+    offeredDetails: '1 YouTube Video + Stories',
+    contentTypeKey: 'youtube_and_stories',
+    receivedAt: new Date(Date.now() - 12 * 60 * 60 * 1000),
+    priority: 'high',
+    risks: [],
+    status: 'new',
+    hasContract: true,
+    contract: {
+      summary: 'Spotify Wrapped campaign collaboration. Showcasing your music listening habits and favorite features.',
+      deliverables: [
+        'YouTube video x1 (8-12 minutes)',
+        'Instagram Stories x5 showing your Wrapped',
+        'Authentic reaction to your stats',
+      ],
+      payment: {
+        amount: '$4,500',
+        method: 'Bank transfer',
+        timing: 'Net 15 (within 15 days after content posting)',
+        riskLevel: 'low',
+      },
+      timeline: {
+        contentDeadline: 'December 5, 2024',
+        reviewPeriod: '3 business days',
+        campaignPeriod: 'December 1, 2024 ~ December 31, 2024',
+      },
+      usageRights: [
+        {
+          label: 'Usage Period',
+          value: '1 year',
+          riskLevel: 'low',
+        },
+        {
+          label: 'Secondary Usage',
+          value: 'None',
+          riskLevel: 'low',
+        },
+      ],
+      restrictions: [
+        'No competing music streaming service mentions',
+      ],
+      aiNotes: [
+        '✅ Excellent payment terms - Net 15 is very fast.',
+        '✅ No secondary usage - great for your rights.',
+        '✅ Fun, creative content opportunity.',
+      ],
+    },
+    hasGuidelines: true,
+    guidelines: [
+      {
+        category: 'Content Focus',
+        requirements: [
+          'Show genuine reaction to Wrapped stats',
+          'Highlight favorite features',
+          'Share personal music journey',
+        ],
+      },
+    ],
+    requiresPerformance: false,
+    brandProfile: {
+      logo: '🎵',
+      industry: 'Music Streaming',
+      description: 'Spotify is the world\'s largest music streaming platform with millions of songs and podcasts available to listeners worldwide.',
+      founded: '2006',
+      headquarters: 'Stockholm, Sweden',
+      socialFollowers: {
+        instagram: '28M',
+        youtube: '35M',
+        tiktok: '8.5M',
+      },
+      recentNews: [
+        {
+          title: 'Spotify Wrapped 2024 Features AI DJ',
+          source: 'TechCrunch',
+          date: '2024.01.08',
+          sentiment: 'positive',
+        },
+      ],
+      creatorReviews: {
+        avgRating: 4.7,
+        totalReviews: 312,
+        paymentSpeed: 'fast',
+        communicationRating: 4.6,
+        reuseProbability: '82%',
+      },
+      aiRecommendation: {
+        shouldCollaborate: true,
+        reasons: [
+          'Top-tier brand with excellent creator reviews',
+          'Fast payment (Net 15)',
+          'No secondary usage rights - great terms',
+          'Fun, engaging content opportunity',
+        ],
+        warnings: [],
+      },
+    },
+  },
+  {
+    id: '7',
+    brandName: 'Zara',
+    brandKey: 'zara',
+    channel: 'email',
+    offeredAmount: null,
+    offeredDetails: 'Product gifting + potential paid collab',
+    contentTypeKey: 'product_gifting',
+    receivedAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000),
+    priority: 'low',
+    risks: [
+      { type: 'other', description: 'No guaranteed payment' },
+    ],
+    status: 'new',
+    hasContract: false,
+    hasGuidelines: false,
+    guidelines: [],
+    requiresPerformance: false,
+    conversation: {
+      brandEmail: 'influencers@zara.com',
+      channel: 'email',
+      messages: [
+        {
+          id: 'z1',
+          sender: 'brand',
+          senderName: 'Zara PR Team',
+          content: 'Hi!\n\nWe love your style and would love to send you some pieces from our new collection. If it goes well, we\'d love to discuss a paid collaboration for our spring campaign.\n\nLet us know if you\'re interested!',
+          timestamp: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000),
+        },
+      ],
+    },
+    brandProfile: {
+      logo: '👗',
+      industry: 'Fast Fashion',
+      description: 'Zara is a Spanish fast fashion retailer known for trendy, affordable clothing and rapid product turnover.',
+      founded: '1975',
+      headquarters: 'A Coruna, Spain',
+      socialFollowers: {
+        instagram: '59M',
+        tiktok: '7.2M',
+      },
+      recentNews: [
+        {
+          title: 'Zara Launches Sustainable Collection',
+          source: 'Vogue Business',
+          date: '2024.01.14',
+          sentiment: 'positive',
+        },
+      ],
+      creatorReviews: {
+        avgRating: 3.5,
+        totalReviews: 89,
+        paymentSpeed: 'slow',
+        communicationRating: 3.2,
+        reuseProbability: '35%',
+      },
+      aiRecommendation: {
+        shouldCollaborate: false,
+        reasons: [
+          'Large fashion brand with good exposure',
+        ],
+        warnings: [
+          'No guaranteed payment - only product gifting',
+          'Lower creator ratings (3.5/5)',
+          'Slow payment history when paid',
+          'Consider requesting paid terms upfront',
         ],
       },
     },

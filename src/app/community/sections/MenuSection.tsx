@@ -37,32 +37,32 @@ export default function MenuSection() {
   return (
     <div className="px-5 py-6 space-y-6">
       {/* Profile Card */}
-      <div className="bg-white rounded-3xl border border-gray-100 p-5">
+      <div className="bg-white rounded-3xl border border-[#DDDDDD] p-5 hover:shadow-lg transition-all">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white text-xl font-bold shadow-lg shadow-orange-500/25">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF385C] to-[#D70466] flex items-center justify-center text-white text-xl font-bold shadow-lg">
             J
           </div>
           <div className="flex-1">
-            <h3 className="font-semibold text-gray-900">Jazz</h3>
-            <p className="text-sm text-gray-500">@jazzcreates</p>
+            <h3 className="font-semibold text-[#222222]">Jazz</h3>
+            <p className="text-sm text-[#717171]">@jazzcreates</p>
           </div>
-          <Link href="/community/profile" className="px-4 py-2 bg-gray-100 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors">
+          <Link href="/community/profile" className="px-4 py-2 bg-[#F7F7F7] border border-[#DDDDDD] rounded-xl text-sm font-medium text-[#484848] hover:bg-[#EBEBEB] hover:text-[#222222] transition-colors">
             View
           </Link>
         </div>
 
         <div className="grid grid-cols-3 gap-3 mt-5">
-          <div className="bg-gray-50 rounded-2xl p-3 text-center">
-            <p className="text-lg font-bold text-gray-900">2,450</p>
-            <p className="text-xs text-gray-500">Points</p>
+          <div className="bg-[#F7F7F7] border border-[#EBEBEB] rounded-2xl p-3 text-center">
+            <p className="text-lg font-bold text-[#222222]">2,450</p>
+            <p className="text-xs text-[#717171]">Points</p>
           </div>
-          <div className="bg-gray-50 rounded-2xl p-3 text-center">
-            <p className="text-lg font-bold text-gray-900">12</p>
-            <p className="text-xs text-gray-500">Referrals</p>
+          <div className="bg-[#F7F7F7] border border-[#EBEBEB] rounded-2xl p-3 text-center">
+            <p className="text-lg font-bold text-[#222222]">12</p>
+            <p className="text-xs text-[#717171]">Referrals</p>
           </div>
-          <div className="bg-violet-50 rounded-2xl p-3 text-center">
-            <p className="text-lg font-bold text-violet-600">Pro</p>
-            <p className="text-xs text-gray-500">Tier</p>
+          <div className="bg-[#FFF0F3] border border-[#FFCCD5] rounded-2xl p-3 text-center">
+            <p className="text-lg font-bold text-[#FF385C]">Pro</p>
+            <p className="text-xs text-[#717171]">Tier</p>
           </div>
         </div>
       </div>
@@ -70,31 +70,31 @@ export default function MenuSection() {
       {/* Menu Items */}
       {menuItems.map((group) => (
         <div key={group.section}>
-          <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-1">
+          <h3 className="text-xs font-semibold text-[#717171] uppercase tracking-wider mb-3 px-1">
             {group.section}
           </h3>
-          <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+          <div className="bg-white rounded-2xl border border-[#DDDDDD] overflow-hidden">
             {group.items.map((item, index) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors ${
-                  index !== group.items.length - 1 ? 'border-b border-gray-100' : ''
+                className={`flex items-center gap-4 p-4 hover:bg-[#F7F7F7] transition-colors ${
+                  index !== group.items.length - 1 ? 'border-b border-[#EBEBEB]' : ''
                 }`}
               >
-                <div className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-lg">
+                <div className="w-10 h-10 rounded-xl bg-[#F7F7F7] border border-[#EBEBEB] flex items-center justify-center text-lg">
                   {item.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium text-gray-900 text-sm">{item.name}</p>
-                  <p className="text-xs text-gray-500">{item.desc}</p>
+                  <p className="font-medium text-[#222222] text-sm">{item.name}</p>
+                  <p className="text-xs text-[#717171]">{item.desc}</p>
                 </div>
                 {item.badge && (
-                  <span className="px-2 py-1 bg-violet-100 text-violet-600 rounded-full text-xs font-semibold">
+                  <span className="px-2 py-1 bg-[#FFF0F3] text-[#FF385C] rounded-full text-xs font-semibold border border-[#FFCCD5]">
                     {item.badge}
                   </span>
                 )}
-                <svg className="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-[#B0B0B0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
@@ -104,7 +104,7 @@ export default function MenuSection() {
       ))}
 
       {/* Sign Out */}
-      <button className="w-full py-3 text-center text-red-500 font-medium text-sm hover:bg-red-50 rounded-xl transition-colors">
+      <button className="w-full py-3 text-center text-[#C13515] font-medium text-sm hover:bg-[#FFF0F3] rounded-xl transition-colors">
         Sign Out
       </button>
     </div>

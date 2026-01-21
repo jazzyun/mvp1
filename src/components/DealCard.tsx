@@ -42,9 +42,9 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
 
   const getPriorityStyles = (priority: DealPriority): { bg: string; text: string; label: string } => {
     const styles: Record<DealPriority, { bg: string; text: string }> = {
-      high: { bg: 'bg-red-100', text: 'text-red-700' },
-      medium: { bg: 'bg-yellow-100', text: 'text-yellow-700' },
-      low: { bg: 'bg-gray-100', text: 'text-gray-600' },
+      high: { bg: 'bg-[#FFF0F3]', text: 'text-[#C13515]' },
+      medium: { bg: 'bg-[#FFF8E6]', text: 'text-[#B45309]' },
+      low: { bg: 'bg-[#F7F7F7]', text: 'text-[#717171]' },
     };
     return { ...styles[priority], label: t(`priority.${priority}`) };
   };
@@ -52,83 +52,91 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
   const priorityStyles = getPriorityStyles(deal.priority);
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-4">
-      {/* Priority Badge */}
-      <div className="mb-3">
+    <div className="bg-white rounded-xl border border-[#DDDDDD] p-6 hover:shadow-lg hover:border-[#B0B0B0] transition-all duration-200 group">
+      {/* Header: Priority + Time */}
+      <div className="flex items-center justify-between mb-4">
         <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${priorityStyles.bg} ${priorityStyles.text}`}>
           {priorityStyles.label}
         </span>
+        <span className="text-sm text-[#717171]">{formatTimeAgo(deal.receivedAt)}</span>
       </div>
 
       {/* Brand Info */}
-      <div className="mb-4">
-        <div className="flex items-center justify-between mb-1">
-          <button
-            onClick={() => onViewBrandProfile(deal.id)}
-            className="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors flex items-center gap-1"
-          >
-            {deal.brandKey ? t(`brands.${deal.brandKey}`) : deal.brandName}
-            <span className="text-xs text-gray-400">ⓘ</span>
-          </button>
-          <span className="text-sm text-gray-500">{formatTimeAgo(deal.receivedAt)}</span>
-        </div>
-        <div className="flex items-center justify-between">
-          <p className="text-sm text-gray-500">
-            <span className="inline-flex items-center">
-              <span className="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>
-              {formatChannel(deal.channel)}
-            </span>
-          </p>
-          {deal.conversation && (
-            <button
-              onClick={() => onViewConversation(deal.id)}
-              className="text-xs text-blue-600 hover:text-blue-700 flex items-center gap-1"
-            >
-              <span>💬</span>
-              <span>{t('messages', { count: deal.conversation.messages.length })}</span>
-            </button>
+      <div className="mb-5">
+        <div className="flex items-center gap-3 mb-2">
+          {deal.brandProfile?.logo && (
+            <span className="w-12 h-12 flex items-center justify-center text-2xl bg-[#F7F7F7] rounded-xl flex-shrink-0">{deal.brandProfile.logo}</span>
           )}
+          <div className="flex-1">
+            <button
+              onClick={() => onViewBrandProfile(deal.id)}
+              className="text-lg font-semibold text-[#222222] hover:text-[#FF385C] transition-colors flex items-center gap-2"
+            >
+              {deal.brandKey ? t(`brands.${deal.brandKey}`) : deal.brandName}
+              <span className="w-5 h-5 flex items-center justify-center rounded-full bg-[#F7F7F7] hover:bg-[#FF385C]/10 transition-colors">
+                <svg className="w-3 h-3 text-[#717171]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </span>
+            </button>
+            <div className="flex items-center gap-3 mt-1">
+              <span className="text-sm text-[#717171] flex items-center">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FF385C] mr-2"></span>
+                {formatChannel(deal.channel)}
+              </span>
+              {deal.conversation && (
+                <button
+                  onClick={() => onViewConversation(deal.id)}
+                  className="text-sm text-[#FF385C] hover:text-[#E31C5F] flex items-center gap-1 transition-colors"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                  <span>{t('threads')}</span>
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Offer Details */}
-      <div className="bg-gray-50 rounded-xl p-4 mb-4">
+      {/* Offer Details - Card style */}
+      <div className="bg-[#F7F7F7] rounded-xl p-4 mb-4">
         <div className="flex justify-between items-start">
           <div>
-            <p className="text-sm text-gray-500 mb-1">{t('proposedAmount')}</p>
-            <p className="text-xl font-bold text-gray-900">{formatAmount(deal.offeredAmount, t('toBeDiscussed'))}</p>
+            <p className="text-xs text-[#717171] uppercase tracking-wider mb-1 font-medium">{t('proposedAmount')}</p>
+            <p className="text-2xl font-bold text-[#222222]">{formatAmount(deal.offeredAmount, t('toBeDiscussed'))}</p>
           </div>
           <div className="text-right">
-            <p className="text-sm text-gray-500 mb-1">{t('content')}</p>
-            <p className="text-sm font-medium text-gray-700">{deal.contentTypeKey ? t(`contentTypes.${deal.contentTypeKey}`) : deal.offeredDetails}</p>
+            <p className="text-xs text-[#717171] uppercase tracking-wider mb-1 font-medium">{t('content')}</p>
+            <p className="text-sm font-medium text-[#484848]">{deal.contentTypeKey ? t(`contentTypes.${deal.contentTypeKey}`) : deal.offeredDetails}</p>
           </div>
         </div>
       </div>
 
-      {/* Risk Warnings */}
+      {/* Risk Warnings - Airbnb amber style */}
       {deal.risks.length > 0 && (
-        <div className="mb-4 space-y-2">
+        <div className="mb-5 space-y-1">
           {deal.risks.map((risk, index) => (
-            <div key={index} className="flex items-start text-sm">
-              <span className="text-amber-500 mr-2 flex-shrink-0">⚠️</span>
-              <span className="text-gray-700">{t(`risks.${risk.type}`)}</span>
-            </div>
+            <p key={index} className="text-sm text-[#B45309] italic">
+              ! {t(`risks.${risk.type}`)}
+            </p>
           ))}
         </div>
       )}
 
-      {/* Action Buttons */}
-      <div className="flex gap-2 flex-wrap">
+      {/* Action Buttons - Airbnb style */}
+      <div className="flex gap-3 flex-wrap">
         <button
           onClick={() => onReply(deal.id)}
-          className="flex-1 min-w-[100px] px-4 py-3 bg-gray-900 text-white rounded-xl font-medium text-sm hover:bg-gray-800 transition-colors"
+          className="flex-1 min-w-[100px] px-5 py-3 bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white rounded-lg font-semibold text-sm hover:from-[#D70466] hover:via-[#BD1E59] hover:to-[#BD1E59] transition-all text-center"
         >
           {t('reply')}
         </button>
         {deal.hasGuidelines && (
           <button
             onClick={() => onCheckGuidelines(deal.id)}
-            className="flex-1 min-w-[100px] px-4 py-3 bg-blue-50 border border-blue-200 text-blue-700 rounded-xl font-medium text-sm hover:bg-blue-100 transition-colors"
+            className="flex-1 min-w-[100px] px-5 py-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all text-center"
           >
             {t('checkGuidelines')}
           </button>
@@ -136,7 +144,7 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
         {deal.hasContract && (
           <button
             onClick={() => onReviewContract(deal.id)}
-            className="flex-1 min-w-[100px] px-4 py-3 bg-white border border-gray-200 text-gray-700 rounded-xl font-medium text-sm hover:bg-gray-50 transition-colors"
+            className="flex-1 min-w-[100px] px-5 py-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all text-center"
           >
             {t('reviewContract')}
           </button>
@@ -144,7 +152,7 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
         {deal.requiresPerformance && (
           <button
             onClick={() => onSendPerformance(deal.id)}
-            className="flex-1 min-w-[100px] px-4 py-3 bg-white border border-gray-200 text-gray-700 rounded-xl font-medium text-sm hover:bg-gray-50 transition-colors"
+            className="flex-1 min-w-[100px] px-5 py-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all text-center"
           >
             {t('sendPerformance')}
           </button>

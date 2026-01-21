@@ -46,7 +46,10 @@
       "glossier": "Glossier",
       "nike": "Nike",
       "local_cafe": "Local Cafe Brand",
-      "samsung": "Samsung Electronics"
+      "samsung": "Samsung Electronics",
+      "sephora": "Sephora",
+      "spotify": "Spotify",
+      "zara": "Zara"
     },
     "risks": {
       "secondary_usage": "Secondary usage rights included",
@@ -60,9 +63,12 @@
       "one_reel": "1 Reel",
       "youtube_and_stories": "1 YouTube video + 3 Instagram Stories",
       "product_sponsorship": "Product sponsorship + small fee",
-      "galaxy_review": "Galaxy product review video"
+      "galaxy_review": "Galaxy product review video",
+      "reels_and_tutorial": "2 Reels + 1 Tutorial",
+      "product_gifting": "Product gifting + potential paid collab"
     },
-    "messages": "{count} messages",
+    "threads": "Threads",
+    "dealHistory": "Deal History",
     "proposedAmount": "Proposed Amount",
     "content": "Content",
     "toBeDiscussed": "To be discussed",

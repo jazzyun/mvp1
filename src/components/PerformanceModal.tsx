@@ -32,7 +32,7 @@ const mockPerformanceData: VideoPerformance[] = [
     id: '1',
     platform: 'instagram',
     thumbnail: '🎬',
-    title: 'New skincare routine ✨',
+    title: 'New skincare routine',
     postedAt: '2024.01.15',
     metrics: {
       views: 124500,
@@ -114,17 +114,6 @@ function getPlatformIcon(platform: 'instagram' | 'tiktok' | 'youtube') {
   }
 }
 
-function getPlatformColor(platform: 'instagram' | 'tiktok' | 'youtube') {
-  switch (platform) {
-    case 'instagram':
-      return 'bg-gradient-to-r from-purple-500 to-pink-500';
-    case 'tiktok':
-      return 'bg-black';
-    case 'youtube':
-      return 'bg-red-600';
-  }
-}
-
 export default function PerformanceModal({ brandName, isOpen, onClose }: PerformanceModalProps) {
   const [videos, setVideos] = useState<VideoPerformance[]>(mockPerformanceData);
   const [isSending, setIsSending] = useState(false);
@@ -174,24 +163,26 @@ export default function PerformanceModal({ brandName, isOpen, onClose }: Perform
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/40"
         onClick={handleClose}
       />
 
       {/* Modal */}
-      <div className="relative w-full max-w-lg max-h-[90vh] bg-white rounded-t-3xl sm:rounded-2xl overflow-hidden animate-slide-up">
+      <div className="relative w-full max-w-lg max-h-[90vh] bg-white border border-[#DDDDDD] rounded-t-3xl sm:rounded-2xl overflow-hidden shadow-xl animate-slide-up">
         {/* Header */}
-        <div className="sticky top-0 bg-white border-b border-gray-100 px-5 py-4 z-10">
+        <div className="sticky top-0 bg-white border-b border-[#EBEBEB] px-5 py-4 z-10">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-500">Send Performance</p>
-              <h2 className="text-lg font-bold text-gray-900">{brandName}</h2>
+              <p className="text-sm text-[#717171]">Send Performance</p>
+              <h2 className="text-lg font-semibold text-[#222222]">{brandName}</h2>
             </div>
             <button
               onClick={handleClose}
-              className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors"
+              className="w-10 h-10 rounded-full border border-[#DDDDDD] bg-white flex items-center justify-center text-[#717171] hover:border-[#222222] hover:text-[#222222] transition-all"
             >
-              ✕
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
           </div>
         </div>
@@ -201,16 +192,18 @@ export default function PerformanceModal({ brandName, isOpen, onClose }: Perform
           {/* Success State */}
           {isSent ? (
             <div className="py-12 text-center">
-              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center">
-                <span className="text-4xl">✓</span>
+              <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-[#E6F9E6] border border-[#B8E6B8] flex items-center justify-center">
+                <svg className="w-10 h-10 text-[#008A05]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Sent!</h3>
-              <p className="text-sm text-gray-500 mb-6">
+              <h3 className="text-xl font-semibold text-[#222222] mb-2">Sent!</h3>
+              <p className="text-sm text-[#717171] mb-6">
                 Performance report has been sent to {brandName}.
               </p>
               <button
                 onClick={handleClose}
-                className="px-8 py-3 bg-gray-900 text-white rounded-xl font-medium hover:bg-gray-800 transition-colors"
+                className="px-8 py-3 bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white rounded-lg font-semibold hover:from-[#D70466] hover:via-[#BD1E59] hover:to-[#BD1E59] transition-all"
               >
                 Done
               </button>
@@ -219,7 +212,7 @@ export default function PerformanceModal({ brandName, isOpen, onClose }: Perform
             <>
               {/* Video Selection */}
               <div className="mb-6">
-                <p className="text-sm text-gray-500 mb-4">
+                <p className="text-sm text-[#717171] mb-4">
                   Select content to send
                 </p>
                 <div className="space-y-3">
@@ -227,36 +220,38 @@ export default function PerformanceModal({ brandName, isOpen, onClose }: Perform
                     <button
                       key={video.id}
                       onClick={() => toggleSelection(video.id)}
-                      className={`w-full flex items-center p-4 rounded-xl border-2 transition-all text-left ${
+                      className={`w-full flex items-center p-4 rounded-xl border transition-all text-left ${
                         video.selected
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-gray-100 bg-gray-50 hover:border-gray-200'
+                          ? 'border-[#FF385C] bg-[#FFF0F3]'
+                          : 'border-[#DDDDDD] bg-[#F7F7F7] hover:border-[#B0B0B0] hover:bg-white'
                       }`}
                     >
                       {/* Checkbox */}
                       <div className={`w-6 h-6 rounded-full border-2 mr-4 flex items-center justify-center flex-shrink-0 ${
                         video.selected
-                          ? 'border-blue-500 bg-blue-500'
-                          : 'border-gray-300'
+                          ? 'border-[#FF385C] bg-[#FF385C]'
+                          : 'border-[#DDDDDD]'
                       }`}>
-                        {video.selected && <span className="text-white text-sm">✓</span>}
+                        {video.selected && (
+                          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        )}
                       </div>
 
                       {/* Thumbnail */}
-                      <div className="w-12 h-12 rounded-lg bg-gray-200 flex items-center justify-center text-xl mr-3">
+                      <div className="w-12 h-12 rounded-xl bg-white border border-[#EBEBEB] flex items-center justify-center text-xl mr-3">
                         {video.thumbnail}
                       </div>
 
                       {/* Info */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className={`w-5 h-5 rounded flex items-center justify-center text-xs text-white ${getPlatformColor(video.platform)}`}>
-                            {getPlatformIcon(video.platform)}
-                          </span>
-                          <span className="text-xs text-gray-400">{video.postedAt}</span>
+                          <span className="text-xs">{getPlatformIcon(video.platform)}</span>
+                          <span className="text-xs text-[#717171]">{video.postedAt}</span>
                         </div>
-                        <p className="text-sm font-medium text-gray-900 truncate">{video.title}</p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-sm font-medium text-[#222222] truncate">{video.title}</p>
+                        <p className="text-xs text-[#717171]">
                           {formatNumber(video.metrics.views)} views · {video.metrics.engagementRate}% engagement
                         </p>
                       </div>
@@ -267,32 +262,32 @@ export default function PerformanceModal({ brandName, isOpen, onClose }: Perform
 
               {/* Performance Summary */}
               {hasSelection && (
-                <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-5 text-white mb-6">
-                  <h3 className="text-sm font-medium text-gray-400 mb-4">Performance Summary</h3>
+                <div className="bg-[#F7F7F7] border border-[#DDDDDD] rounded-2xl p-5 mb-6">
+                  <h3 className="text-sm font-medium text-[#717171] mb-4">Performance Summary</h3>
 
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div>
-                      <p className="text-2xl font-bold">{formatNumber(totals.views)}</p>
-                      <p className="text-xs text-gray-400">Total Views</p>
+                      <p className="text-2xl font-bold text-[#222222]">{formatNumber(totals.views)}</p>
+                      <p className="text-xs text-[#717171]">Total Views</p>
                     </div>
                     <div>
-                      <p className="text-2xl font-bold">{avgEngagement}%</p>
-                      <p className="text-xs text-gray-400">Avg. Engagement</p>
+                      <p className="text-2xl font-bold text-[#222222]">{avgEngagement}%</p>
+                      <p className="text-xs text-[#717171]">Avg. Engagement</p>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-3 gap-3">
-                    <div className="bg-white/10 rounded-xl p-3 text-center">
-                      <p className="text-lg font-bold">{formatNumber(totals.likes)}</p>
-                      <p className="text-xs text-gray-400">Likes</p>
+                    <div className="bg-white border border-[#EBEBEB] rounded-xl p-3 text-center">
+                      <p className="text-lg font-bold text-[#222222]">{formatNumber(totals.likes)}</p>
+                      <p className="text-xs text-[#717171]">Likes</p>
                     </div>
-                    <div className="bg-white/10 rounded-xl p-3 text-center">
-                      <p className="text-lg font-bold">{formatNumber(totals.comments)}</p>
-                      <p className="text-xs text-gray-400">Comments</p>
+                    <div className="bg-white border border-[#EBEBEB] rounded-xl p-3 text-center">
+                      <p className="text-lg font-bold text-[#222222]">{formatNumber(totals.comments)}</p>
+                      <p className="text-xs text-[#717171]">Comments</p>
                     </div>
-                    <div className="bg-white/10 rounded-xl p-3 text-center">
-                      <p className="text-lg font-bold">{formatNumber(totals.shares)}</p>
-                      <p className="text-xs text-gray-400">Shares</p>
+                    <div className="bg-white border border-[#EBEBEB] rounded-xl p-3 text-center">
+                      <p className="text-lg font-bold text-[#222222]">{formatNumber(totals.shares)}</p>
+                      <p className="text-xs text-[#717171]">Shares</p>
                     </div>
                   </div>
                 </div>
@@ -300,26 +295,36 @@ export default function PerformanceModal({ brandName, isOpen, onClose }: Perform
 
               {/* Report Preview */}
               {hasSelection && (
-                <div className="bg-gray-50 rounded-xl p-4 mb-6">
+                <div className="bg-[#F7F7F7] border border-[#DDDDDD] rounded-xl p-4 mb-6">
                   <div className="flex items-center gap-2 mb-3">
-                    <span>📊</span>
-                    <p className="text-sm font-medium text-gray-900">Report includes</p>
+                    <svg className="w-4 h-4 text-[#717171]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <p className="text-sm font-medium text-[#222222]">Report includes</p>
                   </div>
-                  <ul className="space-y-2 text-sm text-gray-600">
+                  <ul className="space-y-2 text-sm text-[#484848]">
                     <li className="flex items-center gap-2">
-                      <span className="text-green-500">✓</span>
+                      <svg className="w-4 h-4 text-[#008A05]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
                       Views, likes, comments, shares statistics
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="text-green-500">✓</span>
+                      <svg className="w-4 h-4 text-[#008A05]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
                       Audience demographics (age, gender, region)
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="text-green-500">✓</span>
+                      <svg className="w-4 h-4 text-[#008A05]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
                       Watch time retention graph
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="text-green-500">✓</span>
+                      <svg className="w-4 h-4 text-[#008A05]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
                       Reach and impressions
                     </li>
                   </ul>
@@ -330,11 +335,13 @@ export default function PerformanceModal({ brandName, isOpen, onClose }: Perform
               <button
                 onClick={handleSend}
                 disabled={!hasSelection || isSending}
-                className="w-full py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                className="w-full py-3 bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white rounded-lg font-semibold hover:from-[#D70466] hover:via-[#BD1E59] hover:to-[#BD1E59] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSending ? (
                   <span className="flex items-center justify-center gap-2">
-                    <span className="animate-spin">⏳</span>
+                    <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
                     Sending...
                   </span>
                 ) : hasSelection ? (

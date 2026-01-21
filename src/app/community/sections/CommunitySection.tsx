@@ -64,14 +64,14 @@ export default function CommunitySection() {
   return (
     <div className="px-5 py-6 space-y-5">
       {/* Compose Box */}
-      <div className="bg-white rounded-2xl border border-gray-100 p-4">
+      <div className="bg-white rounded-2xl border border-[#DDDDDD] p-4">
         <div className="flex items-start gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#FF385C] to-[#D70466] flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
             J
           </div>
           <button
             onClick={() => setShowCompose(true)}
-            className="flex-1 text-left px-4 py-2.5 bg-gray-50 rounded-xl text-gray-400 text-sm hover:bg-gray-100 transition-colors"
+            className="flex-1 text-left px-4 py-2.5 bg-[#F7F7F7] border border-[#DDDDDD] rounded-xl text-[#717171] text-sm hover:bg-[#EBEBEB] hover:border-[#B0B0B0] transition-colors"
           >
             {t('composePlaceholder')}
           </button>
@@ -81,7 +81,7 @@ export default function CommunitySection() {
       {/* Posts Feed */}
       <div className="space-y-4">
         {communityPosts.map((post) => (
-          <div key={post.id} className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+          <div key={post.id} className="bg-white rounded-2xl border border-[#DDDDDD] overflow-hidden hover:shadow-lg hover:border-[#B0B0B0] transition-all">
             {/* Author */}
             <div className="p-4 pb-0">
               <div className="flex items-start justify-between">
@@ -93,17 +93,17 @@ export default function CommunitySection() {
                   />
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-semibold text-gray-900 text-sm">{post.author}</span>
+                      <span className="font-semibold text-[#222222] text-sm">{post.author}</span>
                       {post.verified && (
-                        <svg className="w-4 h-4 text-violet-500" fill="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 text-[#FF385C]" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                       )}
                     </div>
-                    <span className="text-xs text-gray-400">{post.handle} · {post.timeAgo}</span>
+                    <span className="text-xs text-[#717171]">{post.handle} · {post.timeAgo}</span>
                   </div>
                 </div>
-                <button className="text-gray-400 hover:text-gray-600 p-1">
+                <button className="text-[#717171] hover:text-[#484848] p-1">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
                   </svg>
@@ -113,17 +113,17 @@ export default function CommunitySection() {
 
             {/* Content */}
             <div className="px-4 py-3">
-              <p className="text-gray-800 text-[15px] leading-relaxed">{t(`posts.${post.id}.content`)}</p>
+              <p className="text-[#484848] text-[15px] leading-relaxed">{t(`posts.${post.id}.content`)}</p>
             </div>
 
             {/* Actions */}
-            <div className="px-4 py-3 border-t border-gray-50 flex items-center gap-1">
+            <div className="px-4 py-3 border-t border-[#EBEBEB] flex items-center gap-1">
               <button
                 onClick={() => toggleLike(post.id)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-colors ${
                   likedPosts.includes(post.id)
-                    ? 'bg-red-50 text-red-500'
-                    : 'hover:bg-gray-50 text-gray-500'
+                    ? 'bg-[#FFF0F3] text-[#FF385C]'
+                    : 'hover:bg-[#F7F7F7] text-[#717171]'
                 }`}
               >
                 <svg className="w-5 h-5" fill={likedPosts.includes(post.id) ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
@@ -131,13 +131,13 @@ export default function CommunitySection() {
                 </svg>
                 <span className="text-sm font-medium">{post.likes + (likedPosts.includes(post.id) ? 1 : 0)}</span>
               </button>
-              <button className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-gray-50 text-gray-500 transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-[#F7F7F7] text-[#717171] transition-colors">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
                 <span className="text-sm font-medium">{post.comments}</span>
               </button>
-              <button className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-gray-50 text-gray-500 transition-colors ml-auto">
+              <button className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-[#F7F7F7] text-[#717171] transition-colors ml-auto">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                 </svg>
@@ -150,17 +150,17 @@ export default function CommunitySection() {
       {/* Compose Modal */}
       {showCompose && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-end justify-center">
-          <div className="bg-white w-full max-w-lg rounded-t-3xl p-5">
+          <div className="bg-white w-full max-w-lg rounded-t-3xl p-5 border-t border-[#DDDDDD]">
             <div className="flex items-center justify-between mb-4">
               <button
                 onClick={() => setShowCompose(false)}
-                className="text-gray-500 font-medium text-sm"
+                className="text-[#717171] font-medium text-sm"
               >
                 {tCommon('cancel')}
               </button>
-              <span className="font-semibold text-gray-900">{t('newPost')}</span>
+              <span className="font-semibold text-[#222222]">{t('newPost')}</span>
               <button
-                className="bg-violet-600 text-white px-4 py-1.5 rounded-full text-sm font-medium disabled:opacity-50"
+                className="bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white px-4 py-1.5 rounded-full text-sm font-medium disabled:opacity-50"
                 disabled={!newPost.trim()}
               >
                 {tCommon('post')}
@@ -168,25 +168,25 @@ export default function CommunitySection() {
             </div>
 
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#FF385C] to-[#D70466] flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
                 J
               </div>
               <textarea
                 value={newPost}
                 onChange={(e) => setNewPost(e.target.value)}
                 placeholder={t('postPlaceholder')}
-                className="flex-1 text-gray-900 placeholder-gray-400 resize-none focus:outline-none min-h-[120px] text-[15px]"
+                className="flex-1 bg-transparent text-[#222222] placeholder-[#717171] resize-none focus:outline-none min-h-[120px] text-[15px]"
                 autoFocus
               />
             </div>
 
-            <div className="flex items-center gap-2 mt-4 pt-4 border-t border-gray-100">
-              <button className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors">
+            <div className="flex items-center gap-2 mt-4 pt-4 border-t border-[#EBEBEB]">
+              <button className="w-10 h-10 rounded-xl bg-[#F7F7F7] border border-[#DDDDDD] flex items-center justify-center text-[#717171] hover:bg-[#EBEBEB] transition-colors">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               </button>
-              <button className="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors">
+              <button className="w-10 h-10 rounded-xl bg-[#F7F7F7] border border-[#DDDDDD] flex items-center justify-center text-[#717171] hover:bg-[#EBEBEB] transition-colors">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>

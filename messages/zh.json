@@ -46,7 +46,10 @@
       "glossier": "Glossier",
       "nike": "耐克",
       "local_cafe": "本地咖啡品牌",
-      "samsung": "三星电子"
+      "samsung": "三星电子",
+      "sephora": "丝芙兰",
+      "spotify": "Spotify",
+      "zara": "Zara"
     },
     "risks": {
       "secondary_usage": "包含二次使用权",
@@ -60,9 +63,12 @@
       "one_reel": "1个Reel",
       "youtube_and_stories": "1个YouTube视频 + 3个Instagram故事",
       "product_sponsorship": "产品赞助 + 少量费用",
-      "galaxy_review": "Galaxy产品评测视频"
+      "galaxy_review": "Galaxy产品评测视频",
+      "reels_and_tutorial": "2个Reels + 1个教程",
+      "product_gifting": "产品赠送 + 潜在付费合作"
     },
-    "messages": "{count}条消息",
+    "threads": "对话",
+    "dealHistory": "合作历史",
     "proposedAmount": "提议金额",
     "content": "内容",
     "toBeDiscussed": "待讨论",

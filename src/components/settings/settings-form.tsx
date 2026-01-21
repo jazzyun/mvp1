@@ -24,7 +24,6 @@ export function SettingsForm() {
         });
 
         if (response.ok) {
-          // Redirect to home with new locale applied
           window.location.href = "/";
         } else {
           setMessage(tCommon("error"));
@@ -38,15 +37,15 @@ export function SettingsForm() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-medium text-gray-900">
+        <h2 className="text-lg font-semibold text-[#222222]">
           {t("language.title")}
         </h2>
-        <p className="mt-1 text-sm text-gray-500">{t("language.description")}</p>
+        <p className="mt-1 text-sm text-[#717171]">{t("language.description")}</p>
         <div className="mt-4">
           <select
             value={selectedLocale}
             onChange={(e) => setSelectedLocale(e.target.value as Locale)}
-            className="block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="block w-full rounded-lg border border-[#DDDDDD] bg-white px-4 py-3 text-[#222222] shadow-sm focus:border-[#222222] focus:outline-none focus:ring-1 focus:ring-[#222222]"
             disabled={isPending}
           >
             {locales.map((locale) => (
@@ -59,7 +58,7 @@ export function SettingsForm() {
       </div>
 
       {message && (
-        <p className="text-sm text-green-600">{message}</p>
+        <p className="text-sm text-[#008A05]">{message}</p>
       )}
 
       <div className="flex justify-end space-x-3">
@@ -67,7 +66,7 @@ export function SettingsForm() {
           type="button"
           onClick={handleSave}
           disabled={isPending || selectedLocale === currentLocale}
-          className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="rounded-lg bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] px-6 py-3 text-sm font-semibold text-white hover:from-[#D70466] hover:via-[#BD1E59] hover:to-[#BD1E59] focus:outline-none focus:ring-2 focus:ring-[#FF385C] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
         >
           {isPending ? tCommon("loading") : tCommon("save")}
         </button>
