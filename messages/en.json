@@ -73,6 +73,9 @@
     "content": "Content",
     "toBeDiscussed": "To be discussed",
     "reply": "Reply",
+    "guideline": "Guideline",
+    "checkGuideline": "Check Guideline",
+    "showGuideline": "Show Guideline",
     "checkGuidelines": "Check Guidelines",
     "reviewContract": "Review Contract",
     "sendPerformance": "Send Performance"

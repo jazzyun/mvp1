@@ -98,28 +98,30 @@ export default function ConversationModal({ brandName, conversation, isOpen, onC
       document.body.style.left = '0';
       document.body.style.right = '0';
       document.body.style.overflow = 'hidden';
-    } else {
-      const scrollY = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.overflow = '';
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }
+
+      // Prevent touchmove on document for iOS
+      const preventTouchMove = (e: TouchEvent) => {
+        const target = e.target as HTMLElement;
+        const isScrollable = target.closest('[data-modal-content]');
+        if (!isScrollable) {
+          e.preventDefault();
+        }
+      };
+      document.addEventListener('touchmove', preventTouchMove, { passive: false });
+
+      return () => {
+        document.removeEventListener('touchmove', preventTouchMove);
+        const savedScrollY = document.body.style.top;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.overflow = '';
+        if (savedScrollY) {
+          window.scrollTo(0, parseInt(savedScrollY || '0') * -1);
+        }
+      };
     }
-    return () => {
-      const scrollY = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.overflow = '';
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }
-    };
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -182,7 +184,7 @@ export default function ConversationModal({ brandName, conversation, isOpen, onC
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-5 bg-white overscroll-contain" style={{ maxHeight: 'calc(90vh - 140px)' }}>
+        <div data-modal-content className="flex-1 overflow-y-auto p-5 bg-white overscroll-contain" style={{ maxHeight: 'calc(90vh - 140px)' }}>
           {groupedMessages.map((group, groupIndex) => (
             <div key={groupIndex}>
               {/* Date divider */}

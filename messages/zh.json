@@ -73,6 +73,9 @@
     "content": "内容",
     "toBeDiscussed": "待讨论",
     "reply": "回复",
+    "guideline": "指南",
+    "checkGuideline": "检查指南",
+    "showGuideline": "查看指南",
     "checkGuidelines": "查看指南",
     "reviewContract": "审核合同",
     "sendPerformance": "发送业绩"

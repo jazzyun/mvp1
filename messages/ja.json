@@ -73,6 +73,9 @@
     "content": "コンテンツ",
     "toBeDiscussed": "要相談",
     "reply": "返信する",
+    "guideline": "ガイドライン",
+    "checkGuideline": "ガイドラインチェック",
+    "showGuideline": "ガイドラインを見る",
     "checkGuidelines": "ガイドライン確認",
     "reviewContract": "契約書確認",
     "sendPerformance": "実績を送信"

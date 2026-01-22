@@ -91,28 +91,30 @@ export default function ReplyModal({ deal, isOpen, onClose }: ReplyModalProps) {
       document.body.style.left = '0';
       document.body.style.right = '0';
       document.body.style.overflow = 'hidden';
-    } else {
-      const scrollY = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.overflow = '';
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }
+
+      // Prevent touchmove on document for iOS
+      const preventTouchMove = (e: TouchEvent) => {
+        const target = e.target as HTMLElement;
+        const isScrollable = target.closest('[data-modal-content]');
+        if (!isScrollable) {
+          e.preventDefault();
+        }
+      };
+      document.addEventListener('touchmove', preventTouchMove, { passive: false });
+
+      return () => {
+        document.removeEventListener('touchmove', preventTouchMove);
+        const savedScrollY = document.body.style.top;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.overflow = '';
+        if (savedScrollY) {
+          window.scrollTo(0, parseInt(savedScrollY || '0') * -1);
+        }
+      };
     }
-    return () => {
-      const scrollY = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.overflow = '';
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }
-    };
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -182,7 +184,7 @@ export default function ReplyModal({ deal, isOpen, onClose }: ReplyModalProps) {
         </div>
 
         {/* Content */}
-        <div className="overflow-y-auto p-5 overscroll-contain" style={{ maxHeight: 'calc(90vh - 80px)' }}>
+        <div data-modal-content className="overflow-y-auto p-5 overscroll-contain" style={{ maxHeight: 'calc(90vh - 80px)' }}>
           {/* Success State */}
           {isSent ? (
             <div className="py-12 text-center">

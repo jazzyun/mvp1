@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import DealCard from '@/components/DealCard';
 import GuidelinesModal from '@/components/GuidelinesModal';
+import ShowGuidelinesModal from '@/components/ShowGuidelinesModal';
 import ContractReviewModal from '@/components/ContractReviewModal';
 import PerformanceModal from '@/components/PerformanceModal';
 import ReplyModal from '@/components/ReplyModal';
@@ -20,6 +21,7 @@ export default function BrandDealsInbox() {
   const [deals] = useState<Deal[]>(mockDeals);
   const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
   const [isGuidelinesOpen, setIsGuidelinesOpen] = useState(false);
+  const [isShowGuidelinesOpen, setIsShowGuidelinesOpen] = useState(false);
   const [isContractOpen, setIsContractOpen] = useState(false);
   const [isPerformanceOpen, setIsPerformanceOpen] = useState(false);
   const [isReplyOpen, setIsReplyOpen] = useState(false);
@@ -69,6 +71,19 @@ export default function BrandDealsInbox() {
 
   const handleCloseGuidelines = () => {
     setIsGuidelinesOpen(false);
+    setSelectedDeal(null);
+  };
+
+  const handleShowGuidelines = (dealId: string) => {
+    const deal = deals.find(d => d.id === dealId);
+    if (deal) {
+      setSelectedDeal(deal);
+      setIsShowGuidelinesOpen(true);
+    }
+  };
+
+  const handleCloseShowGuidelines = () => {
+    setIsShowGuidelinesOpen(false);
     setSelectedDeal(null);
   };
 
@@ -172,6 +187,7 @@ export default function BrandDealsInbox() {
                 onReply={handleReply}
                 onViewConversation={handleViewConversation}
                 onCheckGuidelines={handleCheckGuidelines}
+                onShowGuidelines={handleShowGuidelines}
                 onReviewContract={handleReviewContract}
                 onSendPerformance={handleSendPerformance}
                 onViewBrandProfile={handleViewBrandProfile}
@@ -237,13 +253,23 @@ export default function BrandDealsInbox() {
         />
       )}
 
-      {/* Guidelines Modal */}
+      {/* Guidelines Modal (Check with video) */}
       {selectedDeal && (
         <GuidelinesModal
           brandName={selectedDeal.brandName}
           guidelines={selectedDeal.guidelines}
           isOpen={isGuidelinesOpen}
           onClose={handleCloseGuidelines}
+        />
+      )}
+
+      {/* Show Guidelines Modal (View only) */}
+      {selectedDeal && (
+        <ShowGuidelinesModal
+          brandName={selectedDeal.brandName}
+          guidelines={selectedDeal.guidelines}
+          isOpen={isShowGuidelinesOpen}
+          onClose={handleCloseShowGuidelines}
         />
       )}
 

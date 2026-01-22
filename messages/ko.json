@@ -73,6 +73,9 @@
     "content": "콘텐츠",
     "toBeDiscussed": "협의 예정",
     "reply": "답장하기",
+    "guideline": "가이드라인",
+    "checkGuideline": "가이드라인 체크",
+    "showGuideline": "가이드라인 보기",
     "checkGuidelines": "가이드라인 확인",
     "reviewContract": "계약서 검토",
     "sendPerformance": "성과 전송"

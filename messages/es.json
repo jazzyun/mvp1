@@ -73,6 +73,9 @@
     "content": "Contenido",
     "toBeDiscussed": "Por discutir",
     "reply": "Responder",
+    "guideline": "Directrices",
+    "checkGuideline": "Verificar Directrices",
+    "showGuideline": "Ver Directrices",
     "checkGuidelines": "Ver Directrices",
     "reviewContract": "Revisar Contrato",
     "sendPerformance": "Enviar Rendimiento"

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Deal, DealChannel, DealPriority } from '@/types/deal';
 
@@ -8,6 +9,7 @@ interface DealCardProps {
   onReply: (dealId: string) => void;
   onViewConversation: (dealId: string) => void;
   onCheckGuidelines: (dealId: string) => void;
+  onShowGuidelines: (dealId: string) => void;
   onReviewContract: (dealId: string) => void;
   onSendPerformance: (dealId: string) => void;
   onViewBrandProfile: (dealId: string) => void;
@@ -18,8 +20,21 @@ function formatAmount(amount: number | null, toBeDiscussedText: string): string 
   return `$${amount.toLocaleString()}`;
 }
 
-export default function DealCard({ deal, onReply, onViewConversation, onCheckGuidelines, onReviewContract, onSendPerformance, onViewBrandProfile }: DealCardProps) {
+export default function DealCard({ deal, onReply, onViewConversation, onCheckGuidelines, onShowGuidelines, onReviewContract, onSendPerformance, onViewBrandProfile }: DealCardProps) {
   const t = useTranslations('deals');
+  const [showGuidelineMenu, setShowGuidelineMenu] = useState(false);
+  const guidelineMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (guidelineMenuRef.current && !guidelineMenuRef.current.contains(event.target as Node)) {
+        setShowGuidelineMenu(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const formatTimeAgo = (date: Date): string => {
     const now = new Date();
@@ -134,12 +149,45 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
           {t('reply')}
         </button>
         {deal.hasGuidelines && (
-          <button
-            onClick={() => onCheckGuidelines(deal.id)}
-            className="flex-1 min-w-[100px] px-5 py-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all text-center"
-          >
-            {t('checkGuidelines')}
-          </button>
+          <div className="relative flex-1 min-w-[100px]" ref={guidelineMenuRef}>
+            <button
+              onClick={() => setShowGuidelineMenu(!showGuidelineMenu)}
+              className="w-full px-5 py-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all text-center flex items-center justify-center gap-2"
+            >
+              {t('guideline')}
+              <svg className={`w-4 h-4 transition-transform ${showGuidelineMenu ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {showGuidelineMenu && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-[#DDDDDD] rounded-xl shadow-lg overflow-hidden z-20">
+                <button
+                  onClick={() => {
+                    onCheckGuidelines(deal.id);
+                    setShowGuidelineMenu(false);
+                  }}
+                  className="w-full px-4 py-3 text-left text-sm text-[#222222] hover:bg-[#F7F7F7] transition-colors flex items-center gap-3"
+                >
+                  <svg className="w-5 h-5 text-[#FF385C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {t('checkGuideline')}
+                </button>
+                <button
+                  onClick={() => {
+                    onShowGuidelines(deal.id);
+                    setShowGuidelineMenu(false);
+                  }}
+                  className="w-full px-4 py-3 text-left text-sm text-[#222222] hover:bg-[#F7F7F7] transition-colors flex items-center gap-3 border-t border-[#EBEBEB]"
+                >
+                  <svg className="w-5 h-5 text-[#717171]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  {t('showGuideline')}
+                </button>
+              </div>
+            )}
+          </div>
         )}
         {deal.hasContract && (
           <button
