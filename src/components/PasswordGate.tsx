@@ -135,7 +135,7 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
               className="w-full h-full object-cover"
               onEnded={() => setWelcomePhase('enter')}
             >
-              <source src="/main%20vid.mp4" type="video/mp4" />
+              <source src="/intro.mp4" type="video/mp4" />
             </video>
           </div>
         )}
