@@ -127,12 +127,12 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
       >
         {/* Video Intro */}
         {welcomePhase === 'intro' && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black">
+          <div className="absolute inset-0 flex items-center justify-center bg-[#E11D48]">
             <video
               autoPlay
               muted
               playsInline
-              className="w-full h-full object-cover"
+              className="w-full max-w-lg h-auto object-contain"
               onEnded={() => setWelcomePhase('enter')}
             >
               <source src="/intro.mp4" type="video/mp4" />
