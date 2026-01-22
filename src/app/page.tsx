@@ -129,12 +129,11 @@ export default function BrandDealsInbox() {
             <div className="flex items-center gap-2 flex-shrink-0">
               <Link
                 href="/history"
-                className="h-9 w-9 sm:w-auto sm:px-3 rounded-full border border-[#DDDDDD] bg-white flex items-center justify-center gap-1.5 hover:border-[#222222] hover:shadow-sm transition-all"
+                className="w-9 h-9 rounded-full border border-[#DDDDDD] bg-white flex items-center justify-center hover:border-[#222222] hover:shadow-sm transition-all"
               >
                 <svg className="w-4 h-4 text-[#222222]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span className="hidden sm:inline text-sm font-medium text-[#222222]">{tDeals('dealHistory')}</span>
               </Link>
               <button
                 onClick={() => window.location.reload()}
