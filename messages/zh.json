@@ -77,8 +77,9 @@
     "checkGuideline": "检查指南",
     "showGuideline": "查看指南",
     "checkGuidelines": "查看指南",
-    "reviewContract": "审核合同",
-    "sendPerformance": "发送业绩"
+    "reviewContract": "合同",
+    "sendPerformance": "业绩",
+    "viewContent": "内容"
   },
   "community": {
     "title": "创作者之家",

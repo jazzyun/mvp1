@@ -77,8 +77,9 @@
     "checkGuideline": "Check Guideline",
     "showGuideline": "Show Guideline",
     "checkGuidelines": "Check Guidelines",
-    "reviewContract": "Review Contract",
-    "sendPerformance": "Send Performance"
+    "reviewContract": "Contract",
+    "sendPerformance": "Performance",
+    "viewContent": "Content"
   },
   "community": {
     "title": "The Haus",

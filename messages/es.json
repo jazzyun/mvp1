@@ -77,8 +77,9 @@
     "checkGuideline": "Verificar Directrices",
     "showGuideline": "Ver Directrices",
     "checkGuidelines": "Ver Directrices",
-    "reviewContract": "Revisar Contrato",
-    "sendPerformance": "Enviar Rendimiento"
+    "reviewContract": "Contrato",
+    "sendPerformance": "Rendimiento",
+    "viewContent": "Contenido"
   },
   "community": {
     "title": "The Haus",

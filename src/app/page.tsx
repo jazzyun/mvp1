@@ -11,6 +11,7 @@ import PerformanceModal from '@/components/PerformanceModal';
 import ReplyModal from '@/components/ReplyModal';
 import ConversationModal from '@/components/ConversationModal';
 import BrandProfileModal from '@/components/BrandProfileModal';
+import ContentListModal from '@/components/ContentListModal';
 import { mockDeals, getTodayDealsCount } from '@/data/mockDeals';
 import { Deal } from '@/types/deal';
 
@@ -27,6 +28,7 @@ export default function BrandDealsInbox() {
   const [isReplyOpen, setIsReplyOpen] = useState(false);
   const [isConversationOpen, setIsConversationOpen] = useState(false);
   const [isBrandProfileOpen, setIsBrandProfileOpen] = useState(false);
+  const [isContentListOpen, setIsContentListOpen] = useState(false);
   const todayCount = getTodayDealsCount(deals);
 
   const handleReply = (dealId: string) => {
@@ -120,6 +122,19 @@ export default function BrandDealsInbox() {
     setSelectedDeal(null);
   };
 
+  const handleViewContent = (dealId: string) => {
+    const deal = deals.find(d => d.id === dealId);
+    if (deal) {
+      setSelectedDeal(deal);
+      setIsContentListOpen(true);
+    }
+  };
+
+  const handleCloseContentList = () => {
+    setIsContentListOpen(false);
+    setSelectedDeal(null);
+  };
+
   // Sort deals: high priority first, then by received date (newest first)
   const sortedDeals = [...deals].sort((a, b) => {
     const priorityOrder = { high: 0, medium: 1, low: 2 };
@@ -191,6 +206,7 @@ export default function BrandDealsInbox() {
                 onReviewContract={handleReviewContract}
                 onSendPerformance={handleSendPerformance}
                 onViewBrandProfile={handleViewBrandProfile}
+                onViewContent={handleViewContent}
               />
             ))}
           </div>
@@ -299,6 +315,15 @@ export default function BrandDealsInbox() {
           profile={selectedDeal.brandProfile}
           isOpen={isBrandProfileOpen}
           onClose={handleCloseBrandProfile}
+        />
+      )}
+
+      {/* Content List Modal */}
+      {selectedDeal && (
+        <ContentListModal
+          brandName={selectedDeal.brandName}
+          isOpen={isContentListOpen}
+          onClose={handleCloseContentList}
         />
       )}
     </div>
