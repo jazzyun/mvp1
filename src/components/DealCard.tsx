@@ -89,8 +89,8 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
               className="text-lg font-semibold text-[#222222] hover:text-[#FF385C] transition-colors flex items-center gap-2"
             >
               {deal.brandKey ? t(`brands.${deal.brandKey}`) : deal.brandName}
-              <span className="w-5 h-5 flex items-center justify-center rounded-full bg-[#F7F7F7] hover:bg-[#FF385C]/10 transition-colors">
-                <svg className="w-3 h-3 text-[#717171]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <span className="w-7 h-7 flex items-center justify-center rounded-full bg-[#FFF0F3] border border-[#FF385C]/30 hover:bg-[#FF385C] hover:border-[#FF385C] group/info transition-all">
+                <svg className="w-4 h-4 text-[#FF385C] group-hover/info:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </span>
