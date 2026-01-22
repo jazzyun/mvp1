@@ -21,37 +21,28 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  // Welcome animation sequence
+  // Welcome animation sequence - handle each phase transition
   useEffect(() => {
-    if (showWelcome) {
-      // Intro phase - animated logo/rings
-      const introTimer = setTimeout(() => {
-        setWelcomePhase('enter')
-      }, 2000)
+    if (!showWelcome) return
 
-      // Enter phase - text fades in
-      const enterTimer = setTimeout(() => {
-        setWelcomePhase('stay')
-      }, 2100)
+    let timer: NodeJS.Timeout
 
-      // Stay phase - hold for a moment
-      const stayTimer = setTimeout(() => {
-        setWelcomePhase('exit')
-      }, 5100)
-
-      // Exit phase - fade to white and show content
-      const exitTimer = setTimeout(() => {
-        setShowWelcome(false)
-      }, 6100)
-
-      return () => {
-        clearTimeout(introTimer)
-        clearTimeout(enterTimer)
-        clearTimeout(stayTimer)
-        clearTimeout(exitTimer)
-      }
+    if (welcomePhase === 'intro') {
+      // Fallback timer if video doesn't trigger onEnded (8 seconds max)
+      timer = setTimeout(() => setWelcomePhase('enter'), 8000)
+    } else if (welcomePhase === 'enter') {
+      // Quick transition to stay phase
+      timer = setTimeout(() => setWelcomePhase('stay'), 100)
+    } else if (welcomePhase === 'stay') {
+      // Hold welcome text for 3 seconds
+      timer = setTimeout(() => setWelcomePhase('exit'), 3000)
+    } else if (welcomePhase === 'exit') {
+      // Fade out and show main content
+      timer = setTimeout(() => setShowWelcome(false), 1000)
     }
-  }, [showWelcome])
+
+    return () => clearTimeout(timer)
+  }, [showWelcome, welcomePhase])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -134,24 +125,18 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
         className={`min-h-screen flex flex-col items-center justify-center px-4 transition-all duration-1000 ease-out overflow-hidden
           ${welcomePhase === 'exit' ? 'bg-white' : 'bg-[#E11D48]'}`}
       >
-        {/* Animated Intro */}
+        {/* Video Intro */}
         {welcomePhase === 'intro' && (
-          <div className="relative flex items-center justify-center">
-            {/* Expanding rings */}
-            <div className="absolute w-20 h-20 rounded-full border-2 border-white/30 animate-ping" style={{ animationDuration: '1.5s' }} />
-            <div className="absolute w-32 h-32 rounded-full border border-white/20 animate-ping" style={{ animationDuration: '2s', animationDelay: '0.2s' }} />
-            <div className="absolute w-48 h-48 rounded-full border border-white/10 animate-ping" style={{ animationDuration: '2.5s', animationDelay: '0.4s' }} />
-
-            {/* Center icon - Heart/Home */}
-            <div className="relative z-10 w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center animate-pulse">
-              <svg
-                className="w-8 h-8 text-white"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
-            </div>
+          <div className="absolute inset-0 flex items-center justify-center bg-black">
+            <video
+              autoPlay
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+              onEnded={() => setWelcomePhase('enter')}
+            >
+              <source src="/main%20vid.mp4" type="video/mp4" />
+            </video>
           </div>
         )}
 
