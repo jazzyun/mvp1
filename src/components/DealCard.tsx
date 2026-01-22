@@ -142,76 +142,83 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
       )}
 
       {/* Action Buttons - Airbnb style */}
-      <div className="flex gap-2 flex-wrap">
-        <button
-          onClick={() => onReply(deal.id)}
-          className="flex-1 min-w-[80px] h-[42px] px-4 bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white rounded-lg font-semibold text-sm hover:from-[#D70466] hover:via-[#BD1E59] hover:to-[#BD1E59] transition-all flex items-center justify-center"
-        >
-          {t('reply')}
-        </button>
-        {deal.hasGuidelines && (
-          <div className="relative flex-1 min-w-[80px]" ref={guidelineMenuRef}>
+      <div className="space-y-2">
+        {/* First Row: Reply, Guideline, Contract */}
+        <div className="flex gap-2">
+          <button
+            onClick={() => onReply(deal.id)}
+            className="flex-1 h-[42px] px-4 bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white rounded-lg font-semibold text-sm hover:from-[#D70466] hover:via-[#BD1E59] hover:to-[#BD1E59] transition-all flex items-center justify-center"
+          >
+            {t('reply')}
+          </button>
+          {deal.hasGuidelines && (
+            <div className="relative flex-1" ref={guidelineMenuRef}>
+              <button
+                onClick={() => setShowGuidelineMenu(!showGuidelineMenu)}
+                className="w-full h-[42px] px-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all flex items-center justify-center gap-1"
+              >
+                <span>{t('guideline')}</span>
+                <svg className={`w-3 h-3 transition-transform ${showGuidelineMenu ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {showGuidelineMenu && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-[#DDDDDD] rounded-xl shadow-lg overflow-hidden z-20">
+                  <button
+                    onClick={() => {
+                      onCheckGuidelines(deal.id);
+                      setShowGuidelineMenu(false);
+                    }}
+                    className="w-full px-4 py-3 text-left text-sm text-[#222222] hover:bg-[#F7F7F7] transition-colors flex items-center gap-3"
+                  >
+                    <svg className="w-5 h-5 text-[#FF385C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {t('checkGuideline')}
+                  </button>
+                  <button
+                    onClick={() => {
+                      onShowGuidelines(deal.id);
+                      setShowGuidelineMenu(false);
+                    }}
+                    className="w-full px-4 py-3 text-left text-sm text-[#222222] hover:bg-[#F7F7F7] transition-colors flex items-center gap-3 border-t border-[#EBEBEB]"
+                  >
+                    <svg className="w-5 h-5 text-[#717171]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    {t('showGuideline')}
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+          {deal.hasContract && (
             <button
-              onClick={() => setShowGuidelineMenu(!showGuidelineMenu)}
-              className="w-full h-[42px] px-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all flex items-center justify-center gap-1"
+              onClick={() => onReviewContract(deal.id)}
+              className="flex-1 h-[42px] px-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all flex items-center justify-center"
             >
-              <span>{t('guideline')}</span>
-              <svg className={`w-3 h-3 transition-transform ${showGuidelineMenu ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
+              {t('reviewContract')}
             </button>
-            {showGuidelineMenu && (
-              <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-[#DDDDDD] rounded-xl shadow-lg overflow-hidden z-20">
-                <button
-                  onClick={() => {
-                    onCheckGuidelines(deal.id);
-                    setShowGuidelineMenu(false);
-                  }}
-                  className="w-full px-4 py-3 text-left text-sm text-[#222222] hover:bg-[#F7F7F7] transition-colors flex items-center gap-3"
-                >
-                  <svg className="w-5 h-5 text-[#FF385C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  {t('checkGuideline')}
-                </button>
-                <button
-                  onClick={() => {
-                    onShowGuidelines(deal.id);
-                    setShowGuidelineMenu(false);
-                  }}
-                  className="w-full px-4 py-3 text-left text-sm text-[#222222] hover:bg-[#F7F7F7] transition-colors flex items-center gap-3 border-t border-[#EBEBEB]"
-                >
-                  <svg className="w-5 h-5 text-[#717171]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  {t('showGuideline')}
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-        {deal.hasContract && (
+          )}
+        </div>
+
+        {/* Second Row: Content, Performance */}
+        <div className="flex gap-2">
           <button
-            onClick={() => onReviewContract(deal.id)}
-            className="flex-1 min-w-[80px] h-[42px] px-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-xs hover:bg-[#F7F7F7] transition-all flex items-center justify-center"
+            onClick={() => onViewContent(deal.id)}
+            className="flex-1 h-[42px] px-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all flex items-center justify-center"
           >
-            {t('reviewContract')}
+            {t('viewContent')}
           </button>
-        )}
-        {deal.requiresPerformance && (
-          <button
-            onClick={() => onSendPerformance(deal.id)}
-            className="flex-1 min-w-[70px] h-[42px] px-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-xs hover:bg-[#F7F7F7] transition-all flex items-center justify-center"
-          >
-            {t('sendPerformance')}
-          </button>
-        )}
-        <button
-          onClick={() => onViewContent(deal.id)}
-          className="flex-1 min-w-[70px] h-[42px] px-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-xs hover:bg-[#F7F7F7] transition-all flex items-center justify-center"
-        >
-          {t('viewContent')}
-        </button>
+          {deal.requiresPerformance && (
+            <button
+              onClick={() => onSendPerformance(deal.id)}
+              className="flex-1 h-[42px] px-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all flex items-center justify-center"
+            >
+              {t('sendPerformance')}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
