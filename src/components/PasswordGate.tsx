@@ -15,6 +15,10 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const verified = localStorage.getItem(STORAGE_KEY)
     setIsVerified(verified === 'true')
+    // Show welcome screen every time for verified users
+    if (verified === 'true') {
+      setShowWelcome(true)
+    }
   }, [])
 
   // Welcome animation sequence
