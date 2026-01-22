@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Conversation, ConversationMessage, DealChannel } from '@/types/deal';
 
 interface ConversationModalProps {
@@ -88,6 +89,18 @@ function MessageBubble({ message }: { message: ConversationMessage }) {
 }
 
 export default function ConversationModal({ brandName, conversation, isOpen, onClose }: ConversationModalProps) {
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   // Group messages by date

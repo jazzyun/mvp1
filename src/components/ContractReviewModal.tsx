@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { ContractDetails, RiskLevel } from '@/types/deal';
 
 interface ContractReviewModalProps {
@@ -33,6 +34,18 @@ function getRiskBadge(level: RiskLevel) {
 }
 
 export default function ContractReviewModal({ brandName, contract, isOpen, onClose }: ContractReviewModalProps) {
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const highRiskCount = contract.usageRights.filter(r => r.riskLevel === 'high').length +

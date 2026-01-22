@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Guideline } from '@/types/deal';
 
 interface VideoItem {
@@ -95,6 +95,18 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
   const [selectedVideo, setSelectedVideo] = useState<VideoItem | null>(null);
   const [isChecking, setIsChecking] = useState(false);
   const [results, setResults] = useState<CategoryResult[] | null>(null);
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 

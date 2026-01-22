@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { BrandProfile } from '@/types/deal';
 
 interface BrandProfileModalProps {
@@ -49,6 +50,18 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 export default function BrandProfileModal({ brandName, profile, isOpen, onClose }: BrandProfileModalProps) {
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   const paymentSpeed = getPaymentSpeedLabel(profile.creatorReviews.paymentSpeed);
