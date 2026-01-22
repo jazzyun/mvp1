@@ -160,7 +160,7 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
           >
             <div className="flex items-center justify-center gap-3 text-white text-base">
               <span className="w-10 h-[2px] bg-white/70"></span>
-              <span className="font-light tracking-wide" style={{ fontStyle: 'italic' }}>where it starts and end</span>
+              <span className="font-light tracking-wide" style={{ fontStyle: 'italic' }}>Where everything starts and end</span>
               <span className="w-10 h-[2px] bg-white/70"></span>
             </div>
           </div>
