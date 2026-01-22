@@ -96,15 +96,36 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
   const [isChecking, setIsChecking] = useState(false);
   const [results, setResults] = useState<CategoryResult[] | null>(null);
 
-  // Prevent body scroll when modal is open
+  // Prevent body scroll when modal is open (iOS Safari fix)
   useEffect(() => {
     if (isOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
       document.body.style.overflow = 'hidden';
     } else {
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
       document.body.style.overflow = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     }
     return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
       document.body.style.overflow = '';
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     };
   }, [isOpen]);
 
@@ -164,7 +185,7 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/40"
+        className="absolute inset-0 bg-black/40 touch-none"
         onClick={handleClose}
       />
 
@@ -201,7 +222,7 @@ export default function GuidelinesModal({ brandName, guidelines, isOpen, onClose
         </div>
 
         {/* Content */}
-        <div className="overflow-y-auto p-5" style={{ maxHeight: 'calc(90vh - 80px)' }}>
+        <div className="overflow-y-auto p-5 overscroll-contain" style={{ maxHeight: 'calc(90vh - 80px)' }}>
           {/* Video Selection */}
           {!selectedVideo && !isChecking && !results && (
             <div>
