@@ -7,49 +7,29 @@ const STORAGE_KEY = 'site_access_verified'
 
 export function PasswordGate({ children }: { children: React.ReactNode }) {
   const [isVerified, setIsVerified] = useState<boolean | null>(null)
-  const [showWelcome, setShowWelcome] = useState(false)
-  const [welcomePhase, setWelcomePhase] = useState<'intro' | 'enter' | 'stay' | 'exit'>('intro')
+  const [showIntro, setShowIntro] = useState(false)
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
 
   useEffect(() => {
     const verified = localStorage.getItem(STORAGE_KEY)
     setIsVerified(verified === 'true')
-    // Show welcome screen every time for verified users
+    // Show intro video every time for verified users
     if (verified === 'true') {
-      setShowWelcome(true)
+      setShowIntro(true)
     }
   }, [])
 
-  // Welcome animation sequence - handle each phase transition
-  useEffect(() => {
-    if (!showWelcome) return
-
-    let timer: NodeJS.Timeout
-
-    if (welcomePhase === 'intro') {
-      // Fallback timer if video doesn't trigger onEnded (8 seconds max)
-      timer = setTimeout(() => setWelcomePhase('enter'), 8000)
-    } else if (welcomePhase === 'enter') {
-      // Quick transition to stay phase
-      timer = setTimeout(() => setWelcomePhase('stay'), 100)
-    } else if (welcomePhase === 'stay') {
-      // Hold welcome text for 3 seconds
-      timer = setTimeout(() => setWelcomePhase('exit'), 3000)
-    } else if (welcomePhase === 'exit') {
-      // Fade out and show main content
-      timer = setTimeout(() => setShowWelcome(false), 1000)
-    }
-
-    return () => clearTimeout(timer)
-  }, [showWelcome, welcomePhase])
+  const handleVideoEnd = () => {
+    setShowIntro(false)
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (password === SITE_PASSWORD) {
       localStorage.setItem(STORAGE_KEY, 'true')
       setIsVerified(true)
-      setShowWelcome(true)
+      setShowIntro(true)
       setError(false)
     } else {
       setError(true)
@@ -118,75 +98,23 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
     )
   }
 
-  // Welcome splash screen
-  if (showWelcome) {
+  // Video intro
+  if (showIntro) {
     return (
-      <div
-        className={`min-h-screen flex flex-col items-center justify-center px-4 transition-all duration-1000 ease-out overflow-hidden
-          ${welcomePhase === 'exit' ? 'bg-white' : 'bg-[#E11D48]'}`}
-      >
-        {/* Video Intro */}
-        {welcomePhase === 'intro' && (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#E11D48]">
-            <video
-              autoPlay
-              muted
-              playsInline
-              className="w-full max-w-lg h-auto object-contain"
-              onEnded={() => setWelcomePhase('enter')}
-            >
-              <source src="/intro.mp4" type="video/mp4" />
-            </video>
-          </div>
-        )}
-
-        {/* Welcome Text */}
-        <div
-          className={`text-center transition-all duration-700 ease-out
-            ${welcomePhase === 'intro' ? 'opacity-0 scale-95' : ''}
-            ${welcomePhase === 'enter' ? 'opacity-0 translate-y-4' : ''}
-            ${welcomePhase === 'stay' ? 'opacity-100 translate-y-0' : ''}
-            ${welcomePhase === 'exit' ? 'opacity-0 -translate-y-4' : ''}`}
+      <div className="min-h-screen flex items-center justify-center bg-[#E11D48] overflow-hidden">
+        <video
+          autoPlay
+          muted
+          playsInline
+          className="w-full max-w-lg h-auto object-contain"
+          onEnded={handleVideoEnd}
         >
-          {welcomePhase !== 'intro' && (
-            <>
-              <h1
-                className="text-4xl sm:text-5xl md:text-6xl text-white font-light tracking-tight"
-                style={{
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif',
-                  fontStyle: 'italic',
-                }}
-              >
-                Welcome home,
-              </h1>
-              <h1
-                className="text-5xl sm:text-6xl md:text-7xl text-white font-medium tracking-tight mt-2"
-                style={{
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif',
-                  fontStyle: 'italic',
-                }}
-              >
-                Hanna!
-              </h1>
-
-              {/* Subtitle */}
-              <div
-                className={`mt-10 transition-all duration-500 delay-300
-                  ${welcomePhase === 'stay' ? 'opacity-100' : 'opacity-0'}`}
-              >
-                <div className="flex items-center justify-center gap-3 text-white text-base">
-                  <span className="w-10 h-[2px] bg-white/70"></span>
-                  <span className="font-light tracking-wide" style={{ fontStyle: 'italic' }}>Where everything starts and end</span>
-                  <span className="w-10 h-[2px] bg-white/70"></span>
-                </div>
-              </div>
-            </>
-          )}
-        </div>
+          <source src="/intro.mp4" type="video/mp4" />
+        </video>
       </div>
     )
   }
 
-  // Verified - show children
+  // Verified - show children (main app)
   return <>{children}</>
 }
