@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import MediaKitModal from '@/components/MediaKitModal';
 
 // Mock profile data
 const profileData = {
@@ -279,6 +280,7 @@ export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState<'overview' | 'points' | 'analytics' | 'rates' | 'settings'>('overview');
   const [settings, setSettings] = useState(profileData.settings);
   const [expandedCategory, setExpandedCategory] = useState<string | null>('Daily Activities');
+  const [isMediaKitOpen, setIsMediaKitOpen] = useState(false);
 
   const toggleSetting = (key: keyof typeof settings) => {
     setSettings(prev => ({ ...prev, [key]: !prev[key] }));
@@ -450,7 +452,10 @@ export default function ProfilePage() {
                 {t('overview.mediaKitDescription')}
               </p>
               <div className="flex gap-2">
-                <button className="flex-1 py-2.5 bg-white text-[#E61E4D] rounded-xl text-sm font-medium hover:bg-white/90 transition-colors">
+                <button
+                  onClick={() => setIsMediaKitOpen(true)}
+                  className="flex-1 py-2.5 bg-white text-[#E61E4D] rounded-xl text-sm font-medium hover:bg-white/90 transition-colors"
+                >
                   {t('overview.preview')}
                 </button>
                 <button className="flex-1 py-2.5 bg-white/20 text-white rounded-xl text-sm font-medium hover:bg-white/30 transition-colors">
@@ -1051,6 +1056,12 @@ export default function ProfilePage() {
           </div>
         </nav>
       </div>
+
+      {/* Media Kit Modal */}
+      <MediaKitModal
+        isOpen={isMediaKitOpen}
+        onClose={() => setIsMediaKitOpen(false)}
+      />
     </div>
   );
 }
