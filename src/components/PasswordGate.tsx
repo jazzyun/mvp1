@@ -32,12 +32,12 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
       // Stay phase - hold for a moment
       const stayTimer = setTimeout(() => {
         setWelcomePhase('exit')
-      }, 2000)
+      }, 3000)
 
       // Exit phase - fade to white and show content
       const exitTimer = setTimeout(() => {
         setShowWelcome(false)
-      }, 3000)
+      }, 4000)
 
       return () => {
         clearTimeout(enterTimer)
@@ -153,15 +153,15 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
             Hanna!
           </h1>
 
-          {/* Subtle indicator */}
+          {/* Subtitle */}
           <div
-            className={`mt-12 transition-all duration-500 delay-300
-              ${welcomePhase === 'stay' ? 'opacity-60' : 'opacity-0'}`}
+            className={`mt-10 transition-all duration-500 delay-300
+              ${welcomePhase === 'stay' ? 'opacity-100' : 'opacity-0'}`}
           >
-            <div className="flex items-center justify-center gap-2 text-white/70 text-sm">
-              <span className="w-8 h-[1px] bg-white/50"></span>
-              <span style={{ fontStyle: 'italic' }}>your journey begins</span>
-              <span className="w-8 h-[1px] bg-white/50"></span>
+            <div className="flex items-center justify-center gap-3 text-white text-base">
+              <span className="w-10 h-[2px] bg-white/70"></span>
+              <span className="font-light tracking-wide" style={{ fontStyle: 'italic' }}>where it starts and end</span>
+              <span className="w-10 h-[2px] bg-white/70"></span>
             </div>
           </div>
         </div>
