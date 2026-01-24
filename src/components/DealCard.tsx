@@ -145,17 +145,17 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
       {/* Action Buttons - Airbnb style */}
       <div className="space-y-2">
         {/* First Row: Reply, Guideline, Contract */}
-        <div className="flex gap-2">
+        <div className="grid grid-cols-3 gap-2">
           <button
             onClick={() => onReply(deal.id)}
-            className="flex-1 h-[42px] px-3 bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white rounded-lg font-semibold text-sm hover:from-[#D70466] hover:via-[#BD1E59] hover:to-[#BD1E59] transition-all flex items-center justify-center"
+            className="h-[42px] bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white rounded-lg font-semibold text-sm hover:from-[#D70466] hover:via-[#BD1E59] hover:to-[#BD1E59] transition-all flex items-center justify-center"
           >
             {t('reply')}
           </button>
-          <div className="relative flex-1" ref={guidelineMenuRef}>
+          <div className="relative" ref={guidelineMenuRef}>
             <button
               onClick={() => setShowGuidelineMenu(!showGuidelineMenu)}
-              className="w-full h-[42px] px-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all flex items-center justify-center gap-1"
+              className="w-full h-[42px] bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all flex items-center justify-center gap-1"
             >
               <span>{t('guideline')}</span>
               <svg className={`w-3 h-3 transition-transform ${showGuidelineMenu ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -193,29 +193,29 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
           </div>
           <button
             onClick={() => onReviewContract(deal.id)}
-            className="flex-1 h-[42px] px-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all flex items-center justify-center"
+            className="h-[42px] bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all flex items-center justify-center"
           >
             {t('reviewContract')}
           </button>
         </div>
 
         {/* Second Row: Content, Performance, Invoice */}
-        <div className="flex gap-2">
+        <div className="grid grid-cols-3 gap-2">
           <button
             onClick={() => onViewContent(deal.id)}
-            className="flex-1 h-[42px] px-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all flex items-center justify-center"
+            className="h-[42px] bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all flex items-center justify-center"
           >
             {t('viewContent')}
           </button>
           <button
             onClick={() => onSendPerformance(deal.id)}
-            className="flex-1 h-[42px] px-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all flex items-center justify-center"
+            className="h-[42px] bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all flex items-center justify-center"
           >
             {t('sendPerformance')}
           </button>
           <button
             onClick={() => onSendInvoice(deal.id)}
-            className="flex-1 h-[42px] px-3 bg-white border border-[#00A699] text-[#00A699] rounded-lg font-semibold text-sm hover:bg-[#00A699] hover:text-white transition-all flex items-center justify-center"
+            className="h-[42px] bg-white border border-[#00A699] text-[#00A699] rounded-lg font-semibold text-sm hover:bg-[#00A699] hover:text-white transition-all flex items-center justify-center"
           >
             {t('sendInvoice')}
           </button>
