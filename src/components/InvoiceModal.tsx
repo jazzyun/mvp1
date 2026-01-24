@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Deal } from '@/types/deal';
 
@@ -29,20 +29,20 @@ interface InvoiceHistoryItem {
   id: string;
   invoiceNumber: string;
   amount: number;
-  sentDate: Date;
-  dueDate: Date;
+  sentDate: string;
+  dueDate: string;
   status: 'paid' | 'pending' | 'overdue';
   brandName: string;
 }
 
-// Sample invoice history data
+// Sample invoice history data (static to avoid re-creation)
 const sampleInvoiceHistory: InvoiceHistoryItem[] = [
   {
     id: '1',
     invoiceNumber: 'INV-20260115-A3K9',
     amount: 2500,
-    sentDate: new Date('2026-01-15'),
-    dueDate: new Date('2026-02-15'),
+    sentDate: '2026-01-15',
+    dueDate: '2026-02-15',
     status: 'paid',
     brandName: 'Glossier'
   },
@@ -50,8 +50,8 @@ const sampleInvoiceHistory: InvoiceHistoryItem[] = [
     id: '2',
     invoiceNumber: 'INV-20260108-B7M2',
     amount: 1800,
-    sentDate: new Date('2026-01-08'),
-    dueDate: new Date('2026-02-08'),
+    sentDate: '2026-01-08',
+    dueDate: '2026-02-08',
     status: 'pending',
     brandName: 'Nike'
   },
@@ -59,8 +59,8 @@ const sampleInvoiceHistory: InvoiceHistoryItem[] = [
     id: '3',
     invoiceNumber: 'INV-20251220-C4P5',
     amount: 3200,
-    sentDate: new Date('2025-12-20'),
-    dueDate: new Date('2026-01-20'),
+    sentDate: '2025-12-20',
+    dueDate: '2026-01-20',
     status: 'overdue',
     brandName: 'Samsung'
   },
@@ -69,8 +69,6 @@ const sampleInvoiceHistory: InvoiceHistoryItem[] = [
 export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProps) {
   const t = useTranslations('deals');
   const [step, setStep] = useState<'edit' | 'preview' | 'sent'>('edit');
-  const [invoiceHistory] = useState<InvoiceHistoryItem[]>(sampleInvoiceHistory);
-  const contentRef = useRef<HTMLDivElement>(null);
   const [invoiceData, setInvoiceData] = useState<InvoiceData>({
     invoiceNumber: '',
     issueDate: '',
@@ -151,11 +149,11 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
   const renderEditStep = () => (
     <div className="space-y-5">
       {/* Invoice History Section */}
-      {invoiceHistory.length > 0 && (
+      {sampleInvoiceHistory.length > 0 && (
         <div>
           <p className="text-sm font-semibold text-[#222222] mb-3">Previous Invoices</p>
           <div className="space-y-2">
-            {invoiceHistory.slice(0, 3).map((invoice) => (
+            {sampleInvoiceHistory.map((invoice) => (
               <div
                 key={invoice.id}
                 className="flex items-center justify-between p-3 bg-[#F7F7F7] rounded-lg"
@@ -535,23 +533,17 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
   );
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-hidden"
-      onTouchMove={(e) => e.stopPropagation()}
-    >
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/50"
         onClick={onClose}
       />
 
       {/* Modal */}
       <div
         className="relative w-full max-w-md bg-white rounded-2xl max-h-[85vh] overflow-hidden flex flex-col shadow-xl"
-        onClick={(e) => e.stopPropagation()}
-        onTouchStart={(e) => e.stopPropagation()}
-        onTouchMove={(e) => e.stopPropagation()}
-        style={{ touchAction: 'pan-y', overscrollBehavior: 'contain' }}
+        style={{ touchAction: 'pan-y' }}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#EBEBEB] flex-shrink-0">
@@ -583,13 +575,8 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
 
         {/* Content */}
         <div
-          ref={contentRef}
-          className="flex-1 overflow-y-auto overflow-x-hidden overscroll-contain p-5"
-          style={{
-            WebkitOverflowScrolling: 'touch',
-            touchAction: 'pan-y',
-            overscrollBehaviorX: 'none'
-          }}
+          className="flex-1 overflow-y-auto overflow-x-hidden p-5"
+          style={{ touchAction: 'pan-y', overscrollBehavior: 'contain' }}
         >
           {step === 'edit' && renderEditStep()}
           {step === 'preview' && renderPreviewStep()}
