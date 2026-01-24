@@ -79,7 +79,8 @@
     "checkGuidelines": "Check Guidelines",
     "reviewContract": "Contract",
     "sendPerformance": "Performance",
-    "viewContent": "Content"
+    "viewContent": "Content",
+    "sendInvoice": "Invoice"
   },
   "community": {
     "title": "The Haus",

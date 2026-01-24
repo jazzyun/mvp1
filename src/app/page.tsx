@@ -12,6 +12,7 @@ import ReplyModal from '@/components/ReplyModal';
 import ConversationModal from '@/components/ConversationModal';
 import BrandProfileModal from '@/components/BrandProfileModal';
 import ContentListModal from '@/components/ContentListModal';
+import InvoiceModal from '@/components/InvoiceModal';
 import { mockDeals, getTodayDealsCount } from '@/data/mockDeals';
 import { Deal } from '@/types/deal';
 
@@ -29,6 +30,7 @@ export default function BrandDealsInbox() {
   const [isConversationOpen, setIsConversationOpen] = useState(false);
   const [isBrandProfileOpen, setIsBrandProfileOpen] = useState(false);
   const [isContentListOpen, setIsContentListOpen] = useState(false);
+  const [isInvoiceOpen, setIsInvoiceOpen] = useState(false);
   const todayCount = getTodayDealsCount(deals);
 
   const handleReply = (dealId: string) => {
@@ -135,6 +137,19 @@ export default function BrandDealsInbox() {
     setSelectedDeal(null);
   };
 
+  const handleSendInvoice = (dealId: string) => {
+    const deal = deals.find(d => d.id === dealId);
+    if (deal) {
+      setSelectedDeal(deal);
+      setIsInvoiceOpen(true);
+    }
+  };
+
+  const handleCloseInvoice = () => {
+    setIsInvoiceOpen(false);
+    setSelectedDeal(null);
+  };
+
   // Sort deals: high priority first, then by received date (newest first)
   const sortedDeals = [...deals].sort((a, b) => {
     const priorityOrder = { high: 0, medium: 1, low: 2 };
@@ -207,6 +222,7 @@ export default function BrandDealsInbox() {
                 onSendPerformance={handleSendPerformance}
                 onViewBrandProfile={handleViewBrandProfile}
                 onViewContent={handleViewContent}
+                onSendInvoice={handleSendInvoice}
               />
             ))}
           </div>
@@ -326,6 +342,13 @@ export default function BrandDealsInbox() {
           onClose={handleCloseContentList}
         />
       )}
+
+      {/* Invoice Modal */}
+      <InvoiceModal
+        deal={selectedDeal}
+        isOpen={isInvoiceOpen}
+        onClose={handleCloseInvoice}
+      />
     </div>
   );
 }

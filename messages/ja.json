@@ -79,7 +79,8 @@
     "checkGuidelines": "ガイドライン確認",
     "reviewContract": "契約書",
     "sendPerformance": "実績",
-    "viewContent": "コンテンツ"
+    "viewContent": "コンテンツ",
+    "sendInvoice": "請求書"
   },
   "community": {
     "title": "ザ・ハウス",

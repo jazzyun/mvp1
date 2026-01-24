@@ -79,7 +79,8 @@
     "checkGuidelines": "가이드라인 확인",
     "reviewContract": "계약서",
     "sendPerformance": "성과",
-    "viewContent": "콘텐츠"
+    "viewContent": "콘텐츠",
+    "sendInvoice": "인보이스"
   },
   "community": {
     "title": "더 하우스",
