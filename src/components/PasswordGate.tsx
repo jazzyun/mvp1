@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 const SITE_PASSWORD = '1111111'
 const STORAGE_KEY = 'site_access_verified'
@@ -10,6 +10,7 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
   const [showIntro, setShowIntro] = useState(false)
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     const verified = localStorage.getItem(STORAGE_KEY)
@@ -20,8 +21,23 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
+  // Try to play video when intro shows
+  useEffect(() => {
+    if (showIntro && videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Autoplay failed, user will need to tap
+      })
+    }
+  }, [showIntro])
+
   const handleVideoEnd = () => {
     setShowIntro(false)
+  }
+
+  const handleVideoClick = () => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {})
+    }
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -101,13 +117,19 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
   // Video intro
   if (showIntro) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#E11D48] overflow-hidden">
+      <div
+        className="min-h-screen flex items-center justify-center bg-[#E11D48] overflow-hidden cursor-pointer"
+        onClick={handleVideoClick}
+      >
         <video
+          ref={videoRef}
           autoPlay
           muted
           playsInline
+          webkit-playsinline="true"
           className="w-full max-w-lg h-auto object-contain"
           onEnded={handleVideoEnd}
+          controls={false}
         >
           <source src="/intro.mp4" type="video/mp4" />
         </video>
