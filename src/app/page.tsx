@@ -1,20 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import DealCard from '@/components/DealCard';
-import GuidelinesModal from '@/components/GuidelinesModal';
-import ShowGuidelinesModal from '@/components/ShowGuidelinesModal';
-import ContractReviewModal from '@/components/ContractReviewModal';
-import PerformanceModal from '@/components/PerformanceModal';
-import ReplyModal from '@/components/ReplyModal';
-import ConversationModal from '@/components/ConversationModal';
-import BrandProfileModal from '@/components/BrandProfileModal';
-import ContentListModal from '@/components/ContentListModal';
-import InvoiceModal from '@/components/InvoiceModal';
 import { mockDeals, getTodayDealsCount } from '@/data/mockDeals';
 import { Deal } from '@/types/deal';
+
+// Lazy load modals
+const GuidelinesModal = lazy(() => import('@/components/GuidelinesModal'));
+const ShowGuidelinesModal = lazy(() => import('@/components/ShowGuidelinesModal'));
+const ContractReviewModal = lazy(() => import('@/components/ContractReviewModal'));
+const PerformanceModal = lazy(() => import('@/components/PerformanceModal'));
+const ReplyModal = lazy(() => import('@/components/ReplyModal'));
+const ConversationModal = lazy(() => import('@/components/ConversationModal'));
+const BrandProfileModal = lazy(() => import('@/components/BrandProfileModal'));
+const ContentListModal = lazy(() => import('@/components/ContentListModal'));
+const InvoiceModal = lazy(() => import('@/components/InvoiceModal'));
 
 export default function BrandDealsInbox() {
   const t = useTranslations('home');
@@ -266,89 +268,85 @@ export default function BrandDealsInbox() {
         </nav>
       </div>
 
-      {/* Reply Modal */}
-      {selectedDeal && (
-        <ReplyModal
-          deal={selectedDeal}
-          isOpen={isReplyOpen}
-          onClose={handleCloseReply}
-        />
-      )}
+      {/* Modals - Only render when open */}
+      <Suspense fallback={null}>
+        {isReplyOpen && selectedDeal && (
+          <ReplyModal
+            deal={selectedDeal}
+            isOpen={isReplyOpen}
+            onClose={handleCloseReply}
+          />
+        )}
 
-      {/* Conversation Modal */}
-      {selectedDeal && selectedDeal.conversation && (
-        <ConversationModal
-          brandName={selectedDeal.brandName}
-          conversation={selectedDeal.conversation}
-          isOpen={isConversationOpen}
-          onClose={handleCloseConversation}
-        />
-      )}
+        {isConversationOpen && selectedDeal?.conversation && (
+          <ConversationModal
+            brandName={selectedDeal.brandName}
+            conversation={selectedDeal.conversation}
+            isOpen={isConversationOpen}
+            onClose={handleCloseConversation}
+          />
+        )}
 
-      {/* Guidelines Modal (Check with video) */}
-      {selectedDeal && (
-        <GuidelinesModal
-          brandName={selectedDeal.brandName}
-          guidelines={selectedDeal.guidelines}
-          isOpen={isGuidelinesOpen}
-          onClose={handleCloseGuidelines}
-        />
-      )}
+        {isGuidelinesOpen && selectedDeal && (
+          <GuidelinesModal
+            brandName={selectedDeal.brandName}
+            guidelines={selectedDeal.guidelines}
+            isOpen={isGuidelinesOpen}
+            onClose={handleCloseGuidelines}
+          />
+        )}
 
-      {/* Show Guidelines Modal (View only) */}
-      {selectedDeal && (
-        <ShowGuidelinesModal
-          brandName={selectedDeal.brandName}
-          guidelines={selectedDeal.guidelines}
-          isOpen={isShowGuidelinesOpen}
-          onClose={handleCloseShowGuidelines}
-        />
-      )}
+        {isShowGuidelinesOpen && selectedDeal && (
+          <ShowGuidelinesModal
+            brandName={selectedDeal.brandName}
+            guidelines={selectedDeal.guidelines}
+            isOpen={isShowGuidelinesOpen}
+            onClose={handleCloseShowGuidelines}
+          />
+        )}
 
-      {/* Contract Review Modal */}
-      {selectedDeal && selectedDeal.contract && (
-        <ContractReviewModal
-          brandName={selectedDeal.brandName}
-          contract={selectedDeal.contract}
-          isOpen={isContractOpen}
-          onClose={handleCloseContract}
-        />
-      )}
+        {isContractOpen && selectedDeal?.contract && (
+          <ContractReviewModal
+            brandName={selectedDeal.brandName}
+            contract={selectedDeal.contract}
+            isOpen={isContractOpen}
+            onClose={handleCloseContract}
+          />
+        )}
 
-      {/* Performance Modal */}
-      {selectedDeal && (
-        <PerformanceModal
-          brandName={selectedDeal.brandName}
-          isOpen={isPerformanceOpen}
-          onClose={handleClosePerformance}
-        />
-      )}
+        {isPerformanceOpen && selectedDeal && (
+          <PerformanceModal
+            brandName={selectedDeal.brandName}
+            isOpen={isPerformanceOpen}
+            onClose={handleClosePerformance}
+          />
+        )}
 
-      {/* Brand Profile Modal */}
-      {selectedDeal && selectedDeal.brandProfile && (
-        <BrandProfileModal
-          brandName={selectedDeal.brandName}
-          profile={selectedDeal.brandProfile}
-          isOpen={isBrandProfileOpen}
-          onClose={handleCloseBrandProfile}
-        />
-      )}
+        {isBrandProfileOpen && selectedDeal?.brandProfile && (
+          <BrandProfileModal
+            brandName={selectedDeal.brandName}
+            profile={selectedDeal.brandProfile}
+            isOpen={isBrandProfileOpen}
+            onClose={handleCloseBrandProfile}
+          />
+        )}
 
-      {/* Content List Modal */}
-      {selectedDeal && (
-        <ContentListModal
-          brandName={selectedDeal.brandName}
-          isOpen={isContentListOpen}
-          onClose={handleCloseContentList}
-        />
-      )}
+        {isContentListOpen && selectedDeal && (
+          <ContentListModal
+            brandName={selectedDeal.brandName}
+            isOpen={isContentListOpen}
+            onClose={handleCloseContentList}
+          />
+        )}
 
-      {/* Invoice Modal */}
-      <InvoiceModal
-        deal={selectedDeal}
-        isOpen={isInvoiceOpen}
-        onClose={handleCloseInvoice}
-      />
+        {isInvoiceOpen && selectedDeal && (
+          <InvoiceModal
+            deal={selectedDeal}
+            isOpen={isInvoiceOpen}
+            onClose={handleCloseInvoice}
+          />
+        )}
+      </Suspense>
     </div>
   );
 }
