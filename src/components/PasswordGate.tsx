@@ -118,7 +118,7 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
   if (showIntro) {
     return (
       <div
-        className="min-h-screen flex items-center justify-center bg-[#E11D48] overflow-hidden cursor-pointer"
+        className="fixed inset-0 bg-black cursor-pointer"
         onClick={handleVideoClick}
       >
         <video
@@ -127,7 +127,7 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
           muted
           playsInline
           webkit-playsinline="true"
-          className="w-full max-w-lg h-auto object-contain"
+          className="w-full h-full object-cover"
           onEnded={handleVideoEnd}
           controls={false}
         >
