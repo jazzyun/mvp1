@@ -203,22 +203,13 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
           )}
         </div>
 
-        {/* Second Row: Content, Invoice, Performance */}
+        {/* Second Row: Content, Performance, Invoice */}
         <div className="flex gap-2">
           <button
             onClick={() => onViewContent(deal.id)}
             className="flex-1 h-[42px] px-3 bg-white border border-[#222222] text-[#222222] rounded-lg font-semibold text-sm hover:bg-[#F7F7F7] transition-all flex items-center justify-center"
           >
             {t('viewContent')}
-          </button>
-          <button
-            onClick={() => onSendInvoice(deal.id)}
-            className="flex-1 h-[42px] px-3 bg-white border border-[#00A699] text-[#00A699] rounded-lg font-semibold text-sm hover:bg-[#00A699] hover:text-white transition-all flex items-center justify-center gap-1"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            {t('sendInvoice')}
           </button>
           {deal.requiresPerformance && (
             <button
@@ -228,6 +219,15 @@ export default function DealCard({ deal, onReply, onViewConversation, onCheckGui
               {t('sendPerformance')}
             </button>
           )}
+          <button
+            onClick={() => onSendInvoice(deal.id)}
+            className="flex-1 h-[42px] px-3 bg-white border border-[#00A699] text-[#00A699] rounded-lg font-semibold text-sm hover:bg-[#00A699] hover:text-white transition-all flex items-center justify-center gap-1"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            {t('sendInvoice')}
+          </button>
         </div>
       </div>
     </div>

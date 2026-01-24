@@ -89,16 +89,16 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
   };
 
   const renderEditStep = () => (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {/* Invoice Header Preview */}
       <div className="bg-gradient-to-r from-[#00A699] to-[#00B4A3] rounded-xl p-4 text-white">
-        <div className="flex items-center justify-between">
-          <div>
+        <div className="flex items-center justify-between gap-4">
+          <div className="min-w-0">
             <p className="text-sm opacity-80">Invoice</p>
-            <p className="text-xl font-bold">{invoiceData.invoiceNumber}</p>
+            <p className="text-lg font-bold truncate">{invoiceData.invoiceNumber}</p>
           </div>
-          <div className="text-right">
-            <p className="text-2xl font-bold">{formatCurrency(deal.offeredAmount)}</p>
+          <div className="text-right flex-shrink-0">
+            <p className="text-xl font-bold">{formatCurrency(deal.offeredAmount)}</p>
             <p className="text-sm opacity-80">Total Amount</p>
           </div>
         </div>
@@ -106,13 +106,13 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
 
       {/* Deal Info */}
       <div className="bg-[#F7F7F7] rounded-xl p-4">
-        <div className="flex items-center gap-3 mb-3">
+        <div className="flex items-center gap-3">
           {deal.brandProfile?.logo && (
-            <span className="text-2xl">{deal.brandProfile.logo}</span>
+            <span className="text-2xl flex-shrink-0">{deal.brandProfile.logo}</span>
           )}
-          <div>
-            <p className="font-semibold text-[#222222]">{deal.brandName}</p>
-            <p className="text-sm text-[#717171]">{deal.offeredDetails}</p>
+          <div className="min-w-0">
+            <p className="font-semibold text-[#222222] truncate">{deal.brandName}</p>
+            <p className="text-sm text-[#717171] truncate">{deal.offeredDetails}</p>
           </div>
         </div>
       </div>
@@ -267,80 +267,80 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
       {/* Invoice Document */}
       <div className="bg-white border border-[#DDDDDD] rounded-xl overflow-hidden shadow-sm">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#00A699] to-[#00B4A3] p-6 text-white">
-          <div className="flex justify-between items-start">
-            <div>
-              <h3 className="text-2xl font-bold">INVOICE</h3>
-              <p className="text-sm opacity-80 mt-1">{invoiceData.invoiceNumber}</p>
+        <div className="bg-gradient-to-r from-[#00A699] to-[#00B4A3] p-5 text-white">
+          <div className="flex justify-between items-start gap-4">
+            <div className="min-w-0">
+              <h3 className="text-xl font-bold">INVOICE</h3>
+              <p className="text-sm opacity-80 mt-1 truncate">{invoiceData.invoiceNumber}</p>
             </div>
-            <div className="text-right">
-              <p className="text-sm opacity-80">Amount Due</p>
-              <p className="text-3xl font-bold">{formatCurrency(deal.offeredAmount)}</p>
+            <div className="text-right flex-shrink-0">
+              <p className="text-xs opacity-80">Amount Due</p>
+              <p className="text-2xl font-bold">{formatCurrency(deal.offeredAmount)}</p>
             </div>
           </div>
         </div>
 
         {/* Body */}
-        <div className="p-6 space-y-6">
+        <div className="p-4 space-y-4">
           {/* From / To */}
-          <div className="grid grid-cols-2 gap-6">
-            <div>
-              <p className="text-xs font-semibold text-[#717171] uppercase tracking-wider mb-2">From</p>
-              <p className="font-semibold text-[#222222]">Hanna</p>
-              <p className="text-sm text-[#717171]">Content Creator</p>
-              <p className="text-sm text-[#717171]">hello@hanna.com</p>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="min-w-0">
+              <p className="text-xs font-semibold text-[#717171] uppercase tracking-wider mb-1">From</p>
+              <p className="font-semibold text-[#222222] text-sm">Hanna</p>
+              <p className="text-xs text-[#717171]">Content Creator</p>
+              <p className="text-xs text-[#717171] truncate">hello@hanna.com</p>
             </div>
-            <div>
-              <p className="text-xs font-semibold text-[#717171] uppercase tracking-wider mb-2">To</p>
-              <p className="font-semibold text-[#222222]">{deal.brandName}</p>
+            <div className="min-w-0">
+              <p className="text-xs font-semibold text-[#717171] uppercase tracking-wider mb-1">To</p>
+              <p className="font-semibold text-[#222222] text-sm truncate">{deal.brandName}</p>
               {deal.brandProfile?.industry && (
-                <p className="text-sm text-[#717171]">{deal.brandProfile.industry}</p>
+                <p className="text-xs text-[#717171] truncate">{deal.brandProfile.industry}</p>
               )}
             </div>
           </div>
 
           {/* Dates */}
-          <div className="grid grid-cols-2 gap-6 py-4 border-y border-[#EBEBEB]">
+          <div className="grid grid-cols-2 gap-4 py-3 border-y border-[#EBEBEB]">
             <div>
               <p className="text-xs font-semibold text-[#717171] uppercase tracking-wider mb-1">Issue Date</p>
-              <p className="text-[#222222]">{new Date(invoiceData.issueDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+              <p className="text-sm text-[#222222]">{new Date(invoiceData.issueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
             </div>
             <div>
               <p className="text-xs font-semibold text-[#717171] uppercase tracking-wider mb-1">Due Date</p>
-              <p className="text-[#222222]">{new Date(invoiceData.dueDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+              <p className="text-sm text-[#222222]">{new Date(invoiceData.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
             </div>
           </div>
 
           {/* Services */}
           <div>
-            <p className="text-xs font-semibold text-[#717171] uppercase tracking-wider mb-3">Services</p>
-            <div className="bg-[#F7F7F7] rounded-lg p-4">
-              <div className="flex justify-between items-center">
-                <div>
-                  <p className="font-medium text-[#222222]">{deal.offeredDetails}</p>
-                  <p className="text-sm text-[#717171]">Content creation & usage rights</p>
+            <p className="text-xs font-semibold text-[#717171] uppercase tracking-wider mb-2">Services</p>
+            <div className="bg-[#F7F7F7] rounded-lg p-3">
+              <div className="flex justify-between items-start gap-3">
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium text-[#222222] text-sm truncate">{deal.offeredDetails}</p>
+                  <p className="text-xs text-[#717171]">Content creation & usage rights</p>
                 </div>
-                <p className="font-semibold text-[#222222]">{formatCurrency(deal.offeredAmount)}</p>
+                <p className="font-semibold text-[#222222] text-sm flex-shrink-0">{formatCurrency(deal.offeredAmount)}</p>
               </div>
             </div>
           </div>
 
           {/* Payment Info */}
           <div>
-            <p className="text-xs font-semibold text-[#717171] uppercase tracking-wider mb-3">Payment Details</p>
-            <div className="bg-[#F7F7F7] rounded-lg p-4 space-y-2">
+            <p className="text-xs font-semibold text-[#717171] uppercase tracking-wider mb-2">Payment Details</p>
+            <div className="bg-[#F7F7F7] rounded-lg p-3 space-y-1">
               {invoiceData.paymentMethod === 'bank' && (
                 <>
-                  <p className="text-sm"><span className="text-[#717171]">Bank:</span> <span className="text-[#222222]">{invoiceData.bankName || 'Not specified'}</span></p>
-                  <p className="text-sm"><span className="text-[#717171]">Account:</span> <span className="text-[#222222]">{invoiceData.accountNumber || '••••••••'}</span></p>
-                  <p className="text-sm"><span className="text-[#717171]">Routing:</span> <span className="text-[#222222]">{invoiceData.routingNumber || '•••••••••'}</span></p>
+                  <p className="text-xs"><span className="text-[#717171]">Bank:</span> <span className="text-[#222222]">{invoiceData.bankName || 'Not specified'}</span></p>
+                  <p className="text-xs"><span className="text-[#717171]">Account:</span> <span className="text-[#222222]">{invoiceData.accountNumber || '••••••••'}</span></p>
+                  <p className="text-xs"><span className="text-[#717171]">Routing:</span> <span className="text-[#222222]">{invoiceData.routingNumber || '•••••••••'}</span></p>
                 </>
               )}
               {invoiceData.paymentMethod === 'paypal' && (
-                <p className="text-sm"><span className="text-[#717171]">PayPal:</span> <span className="text-[#222222]">{invoiceData.paypalEmail || 'Not specified'}</span></p>
+                <p className="text-xs"><span className="text-[#717171]">PayPal:</span> <span className="text-[#222222]">{invoiceData.paypalEmail || 'Not specified'}</span></p>
               )}
               {invoiceData.paymentMethod === 'wise' && (
-                <p className="text-sm"><span className="text-[#717171]">Wise:</span> <span className="text-[#222222]">{invoiceData.wiseEmail || 'Not specified'}</span></p>
+                <p className="text-xs"><span className="text-[#717171]">Wise:</span> <span className="text-[#222222]">{invoiceData.wiseEmail || 'Not specified'}</span></p>
               )}
             </div>
           </div>
@@ -348,15 +348,15 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
           {/* Notes */}
           {invoiceData.notes && (
             <div>
-              <p className="text-xs font-semibold text-[#717171] uppercase tracking-wider mb-2">Notes</p>
-              <p className="text-sm text-[#717171] italic">{invoiceData.notes}</p>
+              <p className="text-xs font-semibold text-[#717171] uppercase tracking-wider mb-1">Notes</p>
+              <p className="text-xs text-[#717171] italic">{invoiceData.notes}</p>
             </div>
           )}
 
           {/* Total */}
-          <div className="flex justify-between items-center pt-4 border-t border-[#EBEBEB]">
-            <p className="text-lg font-semibold text-[#222222]">Total</p>
-            <p className="text-2xl font-bold text-[#00A699]">{formatCurrency(deal.offeredAmount)}</p>
+          <div className="flex justify-between items-center pt-3 border-t border-[#EBEBEB]">
+            <p className="text-base font-semibold text-[#222222]">Total</p>
+            <p className="text-xl font-bold text-[#00A699]">{formatCurrency(deal.offeredAmount)}</p>
           </div>
         </div>
       </div>
@@ -383,34 +383,34 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
   );
 
   const renderSentStep = () => (
-    <div className="text-center py-8 space-y-6">
+    <div className="text-center py-6 space-y-5">
       {/* Success Animation */}
-      <div className="w-24 h-24 mx-auto bg-[#00A699]/10 rounded-full flex items-center justify-center">
-        <div className="w-16 h-16 bg-[#00A699] rounded-full flex items-center justify-center animate-pulse">
-          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="w-20 h-20 mx-auto bg-[#00A699]/10 rounded-full flex items-center justify-center">
+        <div className="w-14 h-14 bg-[#00A699] rounded-full flex items-center justify-center animate-pulse">
+          <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
           </svg>
         </div>
       </div>
 
       <div>
-        <h3 className="text-xl font-bold text-[#222222] mb-2">Invoice Sent!</h3>
-        <p className="text-[#717171]">Your invoice has been sent to {deal.brandName}</p>
+        <h3 className="text-lg font-bold text-[#222222] mb-1">Invoice Sent!</h3>
+        <p className="text-sm text-[#717171]">Your invoice has been sent to {deal.brandName}</p>
       </div>
 
       {/* Invoice Summary */}
       <div className="bg-[#F7F7F7] rounded-xl p-4 text-left">
-        <div className="flex justify-between items-center mb-3">
-          <span className="text-sm text-[#717171]">Invoice Number</span>
-          <span className="font-medium text-[#222222]">{invoiceData.invoiceNumber}</span>
+        <div className="flex justify-between items-center mb-2">
+          <span className="text-xs text-[#717171]">Invoice Number</span>
+          <span className="text-sm font-medium text-[#222222] truncate ml-2">{invoiceData.invoiceNumber}</span>
         </div>
-        <div className="flex justify-between items-center mb-3">
-          <span className="text-sm text-[#717171]">Amount</span>
-          <span className="font-bold text-[#00A699]">{formatCurrency(deal.offeredAmount)}</span>
+        <div className="flex justify-between items-center mb-2">
+          <span className="text-xs text-[#717171]">Amount</span>
+          <span className="text-sm font-bold text-[#00A699]">{formatCurrency(deal.offeredAmount)}</span>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-sm text-[#717171]">Due Date</span>
-          <span className="font-medium text-[#222222]">{new Date(invoiceData.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+          <span className="text-xs text-[#717171]">Due Date</span>
+          <span className="text-sm font-medium text-[#222222]">{new Date(invoiceData.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
         </div>
       </div>
 
@@ -420,16 +420,16 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
           onClick={() => {
             // Download PDF functionality could be added here
           }}
-          className="flex-1 py-3 bg-white border border-[#222222] text-[#222222] rounded-xl font-semibold hover:bg-[#F7F7F7] transition-colors flex items-center justify-center gap-2"
+          className="flex-1 py-3 bg-white border border-[#222222] text-[#222222] rounded-xl font-semibold text-sm hover:bg-[#F7F7F7] transition-colors flex items-center justify-center gap-2"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
           Download PDF
         </button>
         <button
           onClick={onClose}
-          className="flex-1 py-3 bg-[#00A699] text-white rounded-xl font-semibold hover:bg-[#008F84] transition-colors"
+          className="flex-1 py-3 bg-[#00A699] text-white rounded-xl font-semibold text-sm hover:bg-[#008F84] transition-colors"
         >
           Done
         </button>
@@ -446,27 +446,27 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
       />
 
       {/* Modal */}
-      <div className="relative w-full sm:max-w-lg bg-white sm:rounded-2xl rounded-t-2xl max-h-[90vh] overflow-hidden flex flex-col">
+      <div className="relative w-full max-w-md mx-4 sm:mx-auto bg-white rounded-2xl max-h-[90vh] overflow-hidden flex flex-col shadow-xl">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-[#EBEBEB] flex-shrink-0">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-[#EBEBEB] flex-shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-[#00A699]/10 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 bg-[#00A699]/10 rounded-full flex items-center justify-center flex-shrink-0">
               <svg className="w-5 h-5 text-[#00A699]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
-            <div>
+            <div className="min-w-0">
               <h2 className="text-lg font-bold text-[#222222]">
                 {step === 'edit' && 'Create Invoice'}
                 {step === 'preview' && 'Preview Invoice'}
                 {step === 'sent' && 'Invoice Sent'}
               </h2>
-              <p className="text-sm text-[#717171]">{deal.brandName}</p>
+              <p className="text-sm text-[#717171] truncate">{deal.brandName}</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#F7F7F7] transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#F7F7F7] transition-colors flex-shrink-0"
           >
             <svg className="w-5 h-5 text-[#717171]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -475,7 +475,7 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className="flex-1 overflow-y-auto p-5">
           {step === 'edit' && renderEditStep()}
           {step === 'preview' && renderPreviewStep()}
           {step === 'sent' && renderSentStep()}
