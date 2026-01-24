@@ -536,8 +536,8 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ touchAction: 'none' }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-hidden"
+      onTouchMove={(e) => e.stopPropagation()}
     >
       {/* Backdrop */}
       <div
@@ -549,6 +549,9 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
       <div
         className="relative w-full max-w-md bg-white rounded-2xl max-h-[85vh] overflow-hidden flex flex-col shadow-xl"
         onClick={(e) => e.stopPropagation()}
+        onTouchStart={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
+        style={{ touchAction: 'pan-y', overscrollBehavior: 'contain' }}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#EBEBEB] flex-shrink-0">
@@ -581,8 +584,12 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
         {/* Content */}
         <div
           ref={contentRef}
-          className="flex-1 overflow-y-auto overscroll-contain p-5"
-          style={{ WebkitOverflowScrolling: 'touch' }}
+          className="flex-1 overflow-y-auto overflow-x-hidden overscroll-contain p-5"
+          style={{
+            WebkitOverflowScrolling: 'touch',
+            touchAction: 'pan-y',
+            overscrollBehaviorX: 'none'
+          }}
         >
           {step === 'edit' && renderEditStep()}
           {step === 'preview' && renderPreviewStep()}
