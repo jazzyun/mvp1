@@ -93,8 +93,9 @@ export default function BenefitsSection() {
           {redeemableRewards.map((reward) => {
             const canAfford = userPoints >= reward.points;
             return (
-              <div
+              <Link
                 key={reward.id}
+                href={`/community/perks/${reward.id}`}
                 className={`flex-shrink-0 w-[calc(50%-6px)] snap-start bg-white rounded-2xl border border-[#DDDDDD] overflow-hidden ${
                   !canAfford ? 'opacity-60' : 'hover:shadow-lg hover:border-[#B0B0B0]'
                 } transition-all`}
@@ -109,22 +110,20 @@ export default function BenefitsSection() {
                     <span className={`text-xs font-semibold ${canAfford ? 'text-[#B45309]' : 'text-[#717171]'}`}>
                       {reward.points.toLocaleString()} {t('pts')}
                     </span>
-                    <button
-                      onClick={() => canAfford && !redeemedRewards.includes(reward.id) && handleRedeemReward(reward.id)}
-                      className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors ${
+                    <span
+                      className={`px-2.5 py-1 rounded-lg text-xs font-medium ${
                         redeemedRewards.includes(reward.id)
                           ? 'bg-[#F7F7F7] text-[#717171]'
                           : canAfford
-                          ? 'bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white hover:opacity-90'
-                          : 'bg-[#F7F7F7] text-[#717171] cursor-not-allowed'
+                          ? 'bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white'
+                          : 'bg-[#F7F7F7] text-[#717171]'
                       }`}
-                      disabled={!canAfford || redeemedRewards.includes(reward.id)}
                     >
                       {redeemedRewards.includes(reward.id) ? t('redeemed') : canAfford ? t('redeem') : t('locked')}
-                    </button>
+                    </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -135,7 +134,11 @@ export default function BenefitsSection() {
         <h3 className="text-sm font-semibold text-[#222222] mb-3">{t('freePerks')}</h3>
         <div className="space-y-3">
           {freePerks.map((perk) => (
-            <div key={perk.id} className="bg-white rounded-2xl border border-[#DDDDDD] p-4 hover:shadow-lg hover:border-[#B0B0B0] transition-all">
+            <Link
+              key={perk.id}
+              href={`/community/perks/${perk.id}`}
+              className="block bg-white rounded-2xl border border-[#DDDDDD] p-4 hover:shadow-lg hover:border-[#B0B0B0] transition-all"
+            >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-xl bg-[#F7F7F7] border border-[#EBEBEB] flex items-center justify-center flex-shrink-0">
                   {perk.logo ? (
@@ -153,19 +156,17 @@ export default function BenefitsSection() {
                   </div>
                   <p className="text-xs text-[#717171] mt-0.5">{t(`perks.${perk.id}.description`)}</p>
                 </div>
-                <button
-                  onClick={() => !claimedPerks.includes(perk.id) && handleClaimPerk(perk.id)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                <span
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium ${
                     claimedPerks.includes(perk.id)
                       ? 'bg-[#F7F7F7] text-[#717171]'
-                      : 'bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white hover:opacity-90'
+                      : 'bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white'
                   }`}
-                  disabled={claimedPerks.includes(perk.id)}
                 >
                   {claimedPerks.includes(perk.id) ? t('claimed') : t('claim')}
-                </button>
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

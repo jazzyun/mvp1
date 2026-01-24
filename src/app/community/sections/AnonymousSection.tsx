@@ -72,50 +72,50 @@ export default function AnonymousSection() {
   };
 
   return (
-    <div className="bg-[#F7F7F7] min-h-screen -mt-6 pt-6">
+    <div className="bg-[#0A0A0A] min-h-screen -mt-6 pt-6">
       <div className="px-4 sm:px-5 py-5 space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-[#222222] tracking-tight">{t('title')}</h2>
-            <p className="text-sm text-[#717171] mt-0.5">{t('subtitle')}</p>
+            <h2 className="text-2xl font-bold text-white tracking-tight">{t('title')}</h2>
+            <p className="text-sm text-[#A0A0A0] mt-0.5">{t('subtitle')}</p>
           </div>
           <button
             onClick={() => setShowCompose(true)}
-            className="bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity"
+            className="bg-white text-[#0A0A0A] px-4 py-2 rounded-full text-sm font-semibold hover:bg-[#E5E5E5] transition-colors"
           >
             {t('postButton')}
           </button>
         </div>
 
         {/* Privacy Badge */}
-        <div className="flex items-center gap-3 px-4 py-3 bg-white rounded-2xl border border-[#DDDDDD]">
-          <div className="w-10 h-10 rounded-xl bg-[#FFF0F3] flex items-center justify-center">
+        <div className="flex items-center gap-3 px-4 py-3 bg-[#1A1A1A] rounded-2xl border border-[#2A2A2A]">
+          <div className="w-10 h-10 rounded-xl bg-[#2A2A2A] flex items-center justify-center">
             <svg className="w-5 h-5 text-[#FF385C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
           </div>
           <div>
-            <p className="text-[#222222] text-sm font-medium">{t('identityProtected')}</p>
-            <p className="text-[#717171] text-xs">{t('identityProtectedDesc')}</p>
+            <p className="text-white text-sm font-medium">{t('identityProtected')}</p>
+            <p className="text-[#808080] text-xs">{t('identityProtectedDesc')}</p>
           </div>
         </div>
 
         {/* Posts */}
         <div className="space-y-4">
           {anonymousPosts.map((post) => (
-            <div key={post.id} className="bg-white rounded-2xl border border-[#DDDDDD] overflow-hidden hover:shadow-lg hover:border-[#B0B0B0] transition-all">
+            <div key={post.id} className="bg-[#1A1A1A] rounded-2xl border border-[#2A2A2A] overflow-hidden hover:border-[#3A3A3A] transition-all">
               {/* Header */}
               <div className="p-4 pb-0 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#F7F7F7] flex items-center justify-center border border-[#EBEBEB]">
-                    <svg className="w-5 h-5 text-[#717171]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-10 h-10 rounded-full bg-[#2A2A2A] flex items-center justify-center border border-[#3A3A3A]">
+                    <svg className="w-5 h-5 text-[#808080]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <div>
-                    <span className="text-[#222222] text-sm font-medium">{t('title')}</span>
-                    <span className="text-[#717171] text-xs ml-2">· {post.timeAgo}</span>
+                    <span className="text-white text-sm font-medium">{t('title')}</span>
+                    <span className="text-[#606060] text-xs ml-2">· {post.timeAgo}</span>
                   </div>
                 </div>
                 <span className={`px-2.5 py-1 ${post.categoryColor} text-[10px] font-bold rounded-full uppercase tracking-wider border`}>
@@ -125,18 +125,18 @@ export default function AnonymousSection() {
 
               {/* Content */}
               <div className="p-4">
-                <p className="text-[#484848] text-[15px] leading-relaxed">{t(`posts.${post.id}.content`)}</p>
+                <p className="text-[#E0E0E0] text-[15px] leading-relaxed">{t(`posts.${post.id}.content`)}</p>
               </div>
 
               {/* Actions */}
-              <div className="px-4 py-3 border-t border-[#EBEBEB] flex items-center justify-between">
+              <div className="px-4 py-3 border-t border-[#2A2A2A] flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => toggleLike(post.id)}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors ${
                       likedPosts.includes(post.id)
-                        ? 'bg-[#FFF0F3] text-[#FF385C]'
-                        : 'text-[#717171] hover:bg-[#F7F7F7]'
+                        ? 'bg-[#3A1A1E] text-[#FF385C]'
+                        : 'text-[#808080] hover:bg-[#2A2A2A]'
                     }`}
                   >
                     <svg className="w-4 h-4" fill={likedPosts.includes(post.id) ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
@@ -144,7 +144,7 @@ export default function AnonymousSection() {
                     </svg>
                     <span className="text-sm">{post.likes + (likedPosts.includes(post.id) ? 1 : 0)}</span>
                   </button>
-                  <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[#717171] hover:bg-[#F7F7F7] transition-colors">
+                  <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[#808080] hover:bg-[#2A2A2A] transition-colors">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                     </svg>
@@ -155,8 +155,8 @@ export default function AnonymousSection() {
                   onClick={() => toggleHelpful(post.id)}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                     helpfulPosts.includes(post.id)
-                      ? 'bg-[#E6F9E6] text-[#008A05]'
-                      : 'text-[#717171] hover:bg-[#F7F7F7]'
+                      ? 'bg-[#1A2A1A] text-[#4ADE80]'
+                      : 'text-[#808080] hover:bg-[#2A2A2A]'
                   }`}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -172,36 +172,36 @@ export default function AnonymousSection() {
 
       {/* Compose Modal */}
       {showCompose && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-end justify-center">
-          <div className="bg-white w-full max-w-lg rounded-t-3xl p-5 border-t border-[#DDDDDD]">
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-end justify-center">
+          <div className="bg-[#1A1A1A] w-full max-w-lg rounded-t-3xl p-5 border-t border-[#2A2A2A]">
             <div className="flex items-center justify-between mb-4">
               <button
                 onClick={() => setShowCompose(false)}
-                className="text-[#717171] font-medium text-sm"
+                className="text-[#808080] font-medium text-sm"
               >
                 {tCommon('cancel')}
               </button>
-              <span className="font-semibold text-[#222222]">{t('postAnonymously')}</span>
+              <span className="font-semibold text-white">{t('postAnonymously')}</span>
               <button
-                className="bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white px-4 py-1.5 rounded-full text-sm font-semibold disabled:opacity-50"
+                className="bg-white text-[#0A0A0A] px-4 py-1.5 rounded-full text-sm font-semibold disabled:opacity-50"
                 disabled={!newPost.trim()}
               >
                 {tCommon('post')}
               </button>
             </div>
 
-            <div className="flex items-center gap-2 px-3 py-2 bg-[#FFF0F3] rounded-xl mb-4 border border-[#FFCCD5]">
+            <div className="flex items-center gap-2 px-3 py-2 bg-[#2A2A2A] rounded-xl mb-4 border border-[#3A3A3A]">
               <svg className="w-4 h-4 text-[#FF385C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
-              <span className="text-[#C13515] text-xs">{t('identityHidden')}</span>
+              <span className="text-[#FF385C] text-xs">{t('identityHidden')}</span>
             </div>
 
             <textarea
               value={newPost}
               onChange={(e) => setNewPost(e.target.value)}
               placeholder={t('placeholder')}
-              className="w-full bg-[#F7F7F7] border border-[#DDDDDD] rounded-xl p-4 text-[#222222] placeholder-[#717171] resize-none focus:outline-none focus:border-[#FF385C] focus:ring-1 focus:ring-[#FF385C] min-h-[120px] text-[15px]"
+              className="w-full bg-[#2A2A2A] border border-[#3A3A3A] rounded-xl p-4 text-white placeholder-[#606060] resize-none focus:outline-none focus:border-[#FF385C] focus:ring-1 focus:ring-[#FF385C] min-h-[120px] text-[15px]"
               autoFocus
             />
           </div>

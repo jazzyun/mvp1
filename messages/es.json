@@ -94,9 +94,15 @@
     }
   },
   "feed": {
+    "title": "Feed de la Comunidad",
+    "subtitle": "Conecta con otros creadores",
     "composePlaceholder": "Comparte algo con la comunidad...",
     "newPost": "Nueva Publicación",
     "postPlaceholder": "Comparte tus logros, consejos o inicia una discusión...",
+    "replyPlaceholder": "Añade una respuesta...",
+    "sampleReply1": "¡Esto es muy útil, gracias por compartir!",
+    "sampleReply2": "¡Totalmente de acuerdo con este enfoque!",
+    "justNow": "Ahora mismo",
     "posts": {
       "1": {
         "content": "Acabo de cerrar un acuerdo de embajador de 6 meses con una marca de skincare. La mejor decisión fue pedir bonos de rendimiento ligados a las ventas. ¡Terminé ganando 40% más que la tarifa base!"

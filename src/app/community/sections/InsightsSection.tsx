@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 const signalsData = [
@@ -51,7 +52,6 @@ export default function InsightsSection() {
   const tCommon = useTranslations('common');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [savedPosts, setSavedPosts] = useState<string[]>([]);
-  const [expandedCard, setExpandedCard] = useState<string | null>(null);
 
   const categories = ['all', 'market', 'alert', 'guide', 'news', 'story'];
 
@@ -78,19 +78,19 @@ export default function InsightsSection() {
           <h2 className="text-2xl font-bold text-[#222222] tracking-tight">{t('title')}</h2>
           <p className="text-sm text-[#717171] mt-0.5">{t('subtitle')}</p>
         </div>
-        <button className="text-sm text-[#FF385C] font-medium hover:text-[#E31C5F]">
+        <Link href="/community/signals" className="text-sm text-[#FF385C] font-medium hover:text-[#E31C5F]">
           {tCommon('seeAll')}
-        </button>
+        </Link>
       </div>
 
       {/* Featured Cards - Horizontal Scroll */}
       {selectedCategory === 'all' && (
         <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 sm:-mx-5 sm:px-5 snap-x snap-mandatory scrollbar-hide">
           {hotSignals.map((signal) => (
-            <div
+            <Link
               key={signal.id}
-              onClick={() => setExpandedCard(expandedCard === signal.id ? null : signal.id)}
-              className="flex-shrink-0 w-72 bg-white rounded-2xl border border-[#DDDDDD] overflow-hidden cursor-pointer hover:shadow-lg hover:border-[#B0B0B0] transition-all snap-start"
+              href={`/community/signals/${signal.id}`}
+              className="flex-shrink-0 w-72 bg-white rounded-2xl border border-[#DDDDDD] overflow-hidden hover:shadow-lg hover:border-[#B0B0B0] transition-all snap-start"
             >
               {/* Image */}
               <div className="relative h-36 overflow-hidden">
@@ -127,7 +127,7 @@ export default function InsightsSection() {
                   </button>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
@@ -152,10 +152,10 @@ export default function InsightsSection() {
       {/* Signal List */}
       <div className="space-y-4">
         {(selectedCategory === 'all' ? signalsData.filter(s => !s.isHot) : filteredSignals).map((signal) => (
-          <div
+          <Link
             key={signal.id}
-            onClick={() => setExpandedCard(expandedCard === signal.id ? null : signal.id)}
-            className="bg-white rounded-2xl border border-[#DDDDDD] overflow-hidden cursor-pointer hover:shadow-lg hover:border-[#B0B0B0] transition-all"
+            href={`/community/signals/${signal.id}`}
+            className="block bg-white rounded-2xl border border-[#DDDDDD] overflow-hidden hover:shadow-lg hover:border-[#B0B0B0] transition-all"
           >
             <div className="flex">
               {/* Thumbnail */}
@@ -192,35 +192,7 @@ export default function InsightsSection() {
                 </div>
               </div>
             </div>
-
-            {/* Expanded Content */}
-            {expandedCard === signal.id && (
-              <div className="px-4 pb-4 border-t border-[#EBEBEB]">
-                <p className="text-[#484848] text-sm mt-3 mb-4">{t(`cards.${signal.id}.subheadline`)}</p>
-
-                <div className="space-y-2.5 mb-4">
-                  {(t.raw(`cards.${signal.id}.keyPoints`) as string[]).map((point: string, idx: number) => (
-                    <div key={idx} className="flex items-start gap-2.5">
-                      <div className="w-5 h-5 rounded-full bg-gradient-to-r from-[#E61E4D] to-[#D70466] flex items-center justify-center flex-shrink-0">
-                        <span className="text-white text-[10px] font-bold">{idx + 1}</span>
-                      </div>
-                      <span className="text-[#484848] text-sm">{point}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="bg-[#F7F7F7] rounded-xl p-4 border border-[#EBEBEB]">
-                  <p className="text-[10px] text-[#717171] uppercase tracking-wider font-semibold mb-1">{t('keyTakeaway')}</p>
-                  <p className="text-[#222222] text-sm font-medium">{t(`cards.${signal.id}.takeaway`)}</p>
-                </div>
-
-                <div className="flex items-center justify-between mt-4 pt-3 border-t border-[#EBEBEB]">
-                  <span className="text-xs text-[#717171]">{tCommon('by')} {t(`cards.${signal.id}.author`)}</span>
-                  <button className="text-xs text-[#FF385C] font-medium">{tCommon('share')} →</button>
-                </div>
-              </div>
-            )}
-          </div>
+          </Link>
         ))}
       </div>
     </div>

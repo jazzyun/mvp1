@@ -94,9 +94,15 @@
     }
   },
   "feed": {
+    "title": "Community Feed",
+    "subtitle": "Connect with fellow creators",
     "composePlaceholder": "Share something with the community...",
     "newPost": "New Post",
     "postPlaceholder": "Share your wins, tips, or start a discussion...",
+    "replyPlaceholder": "Add a reply...",
+    "sampleReply1": "This is so helpful, thanks for sharing!",
+    "sampleReply2": "Totally agree with this approach!",
+    "justNow": "Just now",
     "posts": {
       "1": {
         "content": "Just wrapped a 6-month ambassador deal with a skincare brand. Best decision I made was asking for performance bonuses tied to sales. Ended up making 40% more than the base rate!"

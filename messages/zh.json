@@ -94,9 +94,15 @@
     }
   },
   "feed": {
+    "title": "社区动态",
+    "subtitle": "与其他创作者联系",
     "composePlaceholder": "与社区分享一些内容...",
     "newPost": "新帖子",
     "postPlaceholder": "分享你的成就、技巧或开始一场讨论...",
+    "replyPlaceholder": "添加回复...",
+    "sampleReply1": "这太有帮助了，谢谢分享！",
+    "sampleReply2": "完全同意这个方法！",
+    "justNow": "刚刚",
     "posts": {
       "1": {
         "content": "刚完成与一个护肤品牌的6个月大使合同。最好的决定是要求与销售挂钩的绩效奖金。最终比基本费率多赚了40%！"

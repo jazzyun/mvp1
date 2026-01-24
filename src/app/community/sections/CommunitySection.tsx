@@ -10,8 +10,9 @@ const communityPosts = [
     handle: '@emmacreates',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&q=80',
     verified: true,
-    likes: 423,
-    comments: 67,
+    upvotes: 423,
+    downvotes: 12,
+    replies: 67,
     timeAgo: '1h',
   },
   {
@@ -20,8 +21,9 @@ const communityPosts = [
     handle: '@davidkim',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&q=80',
     verified: true,
-    likes: 891,
-    comments: 134,
+    upvotes: 891,
+    downvotes: 34,
+    replies: 134,
     timeAgo: '3h',
   },
   {
@@ -30,8 +32,9 @@ const communityPosts = [
     handle: '@lisapark',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&q=80',
     verified: false,
-    likes: 1567,
-    comments: 234,
+    upvotes: 1567,
+    downvotes: 45,
+    replies: 234,
     timeAgo: '5h',
   },
   {
@@ -40,8 +43,9 @@ const communityPosts = [
     handle: '@jameschen',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&q=80',
     verified: true,
-    likes: 678,
-    comments: 156,
+    upvotes: 678,
+    downvotes: 23,
+    replies: 156,
     timeAgo: '8h',
   },
 ];
@@ -50,19 +54,35 @@ export default function CommunitySection() {
   const t = useTranslations('feed');
   const tCommon = useTranslations('common');
   const [showCompose, setShowCompose] = useState(false);
+  const [showReplies, setShowReplies] = useState<string | null>(null);
   const [newPost, setNewPost] = useState('');
-  const [likedPosts, setLikedPosts] = useState<string[]>([]);
+  const [newReply, setNewReply] = useState('');
+  const [votes, setVotes] = useState<Record<string, 'up' | 'down' | null>>({});
 
-  const toggleLike = (postId: string) => {
-    setLikedPosts(prev =>
-      prev.includes(postId)
-        ? prev.filter(id => id !== postId)
-        : [...prev, postId]
-    );
+  const handleVote = (postId: string, type: 'up' | 'down') => {
+    setVotes(prev => ({
+      ...prev,
+      [postId]: prev[postId] === type ? null : type
+    }));
+  };
+
+  const getVoteCount = (post: typeof communityPosts[0]) => {
+    const vote = votes[post.id];
+    let upvotes = post.upvotes;
+    let downvotes = post.downvotes;
+    if (vote === 'up') upvotes += 1;
+    if (vote === 'down') downvotes += 1;
+    return upvotes - downvotes;
   };
 
   return (
     <div className="px-4 sm:px-5 py-5 space-y-4">
+      {/* Header */}
+      <div>
+        <h2 className="text-2xl font-bold text-[#222222] tracking-tight">{t('title')}</h2>
+        <p className="text-sm text-[#717171] mt-0.5">{t('subtitle')}</p>
+      </div>
+
       {/* Compose Box */}
       <div className="bg-white rounded-2xl border border-[#DDDDDD] p-4">
         <div className="flex items-start gap-3">
@@ -116,33 +136,118 @@ export default function CommunitySection() {
               <p className="text-[#484848] text-[15px] leading-relaxed">{t(`posts.${post.id}.content`)}</p>
             </div>
 
-            {/* Actions */}
-            <div className="px-4 py-3 border-t border-[#EBEBEB] flex items-center gap-1">
+            {/* Actions - Upvote/Downvote + Replies */}
+            <div className="px-4 py-3 border-t border-[#EBEBEB] flex items-center gap-2">
+              {/* Upvote/Downvote */}
+              <div className="flex items-center bg-[#F7F7F7] rounded-full">
+                <button
+                  onClick={() => handleVote(post.id, 'up')}
+                  className={`flex items-center gap-1 px-3 py-1.5 rounded-l-full transition-colors ${
+                    votes[post.id] === 'up'
+                      ? 'bg-[#E6F9E6] text-[#008A05]'
+                      : 'hover:bg-[#EBEBEB] text-[#717171]'
+                  }`}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                  </svg>
+                </button>
+                <span className={`text-sm font-semibold px-2 ${
+                  votes[post.id] === 'up' ? 'text-[#008A05]' : votes[post.id] === 'down' ? 'text-[#C13515]' : 'text-[#484848]'
+                }`}>
+                  {getVoteCount(post)}
+                </span>
+                <button
+                  onClick={() => handleVote(post.id, 'down')}
+                  className={`flex items-center gap-1 px-3 py-1.5 rounded-r-full transition-colors ${
+                    votes[post.id] === 'down'
+                      ? 'bg-[#FFF0F3] text-[#C13515]'
+                      : 'hover:bg-[#EBEBEB] text-[#717171]'
+                  }`}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Reply Button */}
               <button
-                onClick={() => toggleLike(post.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-colors ${
-                  likedPosts.includes(post.id)
+                onClick={() => setShowReplies(showReplies === post.id ? null : post.id)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
+                  showReplies === post.id
                     ? 'bg-[#FFF0F3] text-[#FF385C]'
-                    : 'hover:bg-[#F7F7F7] text-[#717171]'
+                    : 'bg-[#F7F7F7] hover:bg-[#EBEBEB] text-[#717171]'
                 }`}
               >
-                <svg className="w-5 h-5" fill={likedPosts.includes(post.id) ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-                <span className="text-sm font-medium">{post.likes + (likedPosts.includes(post.id) ? 1 : 0)}</span>
-              </button>
-              <button className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-[#F7F7F7] text-[#717171] transition-colors">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
-                <span className="text-sm font-medium">{post.comments}</span>
+                <span className="text-sm font-medium">{post.replies}</span>
               </button>
-              <button className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-[#F7F7F7] text-[#717171] transition-colors ml-auto">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+              {/* Bookmark */}
+              <button className="flex items-center gap-2 px-3 py-2 rounded-full bg-[#F7F7F7] hover:bg-[#EBEBEB] text-[#717171] transition-colors ml-auto">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                 </svg>
               </button>
             </div>
+
+            {/* Chat-style Replies Section */}
+            {showReplies === post.id && (
+              <div className="border-t border-[#EBEBEB] bg-[#FAFAFA]">
+                {/* Sample Replies */}
+                <div className="p-4 space-y-3 max-h-60 overflow-y-auto">
+                  <div className="flex gap-2">
+                    <div className="w-7 h-7 rounded-full bg-[#E0E0E0] flex-shrink-0 flex items-center justify-center text-xs font-medium text-[#717171]">A</div>
+                    <div className="flex-1">
+                      <div className="bg-white rounded-2xl rounded-tl-sm px-3 py-2 border border-[#EBEBEB]">
+                        <span className="text-xs font-medium text-[#484848]">Alex</span>
+                        <p className="text-sm text-[#484848]">{t('sampleReply1')}</p>
+                      </div>
+                      <span className="text-[10px] text-[#A0A0A0] ml-1 mt-0.5">{t('justNow')}</span>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <div className="w-7 h-7 rounded-full bg-[#FFE4E6] flex-shrink-0 flex items-center justify-center text-xs font-medium text-[#FF385C]">S</div>
+                    <div className="flex-1">
+                      <div className="bg-white rounded-2xl rounded-tl-sm px-3 py-2 border border-[#EBEBEB]">
+                        <span className="text-xs font-medium text-[#484848]">Sarah</span>
+                        <p className="text-sm text-[#484848]">{t('sampleReply2')}</p>
+                      </div>
+                      <span className="text-[10px] text-[#A0A0A0] ml-1 mt-0.5">2m</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Reply Input - Chat style */}
+                <div className="p-3 border-t border-[#EBEBEB] bg-white">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#FF385C] to-[#D70466] flex items-center justify-center text-white font-semibold text-xs flex-shrink-0">
+                      J
+                    </div>
+                    <div className="flex-1 flex items-center bg-[#F7F7F7] rounded-full border border-[#EBEBEB] pr-1">
+                      <input
+                        type="text"
+                        value={newReply}
+                        onChange={(e) => setNewReply(e.target.value)}
+                        placeholder={t('replyPlaceholder')}
+                        className="flex-1 bg-transparent px-4 py-2 text-sm text-[#222222] placeholder-[#A0A0A0] focus:outline-none"
+                      />
+                      <button
+                        className="w-8 h-8 rounded-full bg-gradient-to-r from-[#E61E4D] to-[#D70466] flex items-center justify-center text-white disabled:opacity-50"
+                        disabled={!newReply.trim()}
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>

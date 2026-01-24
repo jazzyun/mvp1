@@ -9,9 +9,8 @@ import InsightsSection from './sections/InsightsSection';
 import AnonymousSection from './sections/AnonymousSection';
 import CommunitySection from './sections/CommunitySection';
 import BenefitsSection from './sections/BenefitsSection';
-import MenuSection from './sections/MenuSection';
 
-type TabType = 'signals' | 'anonymous' | 'community' | 'benefits' | 'menu';
+type TabType = 'signals' | 'anonymous' | 'community' | 'benefits';
 
 export default function CommunityHub() {
   const t = useTranslations('community');
@@ -23,7 +22,6 @@ export default function CommunityHub() {
     { id: 'anonymous' as TabType, label: t('tabs.anonymous'), icon: '◐' },
     { id: 'community' as TabType, label: t('tabs.feed'), icon: '◈' },
     { id: 'benefits' as TabType, label: t('tabs.perks'), icon: '✧' },
-    { id: 'menu' as TabType, label: t('tabs.more'), icon: '≡' },
   ];
 
   const renderContent = () => {
@@ -36,8 +34,6 @@ export default function CommunityHub() {
         return <CommunitySection />;
       case 'benefits':
         return <BenefitsSection />;
-      case 'menu':
-        return <MenuSection />;
       default:
         return <InsightsSection />;
     }
