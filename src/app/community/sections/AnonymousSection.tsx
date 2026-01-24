@@ -56,6 +56,35 @@ const anonymousPosts = [
   },
 ];
 
+interface Reply {
+  id: string;
+  text: string;
+  time: string;
+}
+
+const initialAnonReplies: Record<string, Reply[]> = {
+  '1': [
+    { id: 'ar1', text: "I've heard similar stories. Make sure to get everything in writing!", time: '1h' },
+    { id: 'ar2', text: "That NDA sounds suspicious. I'd consult a lawyer first.", time: '30m' },
+  ],
+  '2': [
+    { id: 'ar3', text: "Sending you strength! I went through something similar.", time: '2h' },
+    { id: 'ar4', text: "Most brands are understanding. Be honest with them.", time: '1h' },
+  ],
+  '3': [
+    { id: 'ar5', text: "Take a break if you need to. Your mental health matters.", time: '4h' },
+    { id: 'ar6', text: "Same here. Started therapy and it helped a lot.", time: '3h' },
+    { id: 'ar7', text: "Maybe try batch creating content? It helped me.", time: '2h' },
+  ],
+  '4': [
+    { id: 'ar8', text: "30% is way too high. Standard is 15-20%.", time: '5h' },
+  ],
+  '5': [
+    { id: 'ar9', text: "Document everything. Small claims court is an option.", time: '10h' },
+    { id: 'ar10', text: "Name and shame after 90 days. Protect others.", time: '8h' },
+  ],
+};
+
 export default function AnonymousSection() {
   const t = useTranslations('anonymous');
   const tCommon = useTranslations('common');
@@ -66,6 +95,8 @@ export default function AnonymousSection() {
   const [newReply, setNewReply] = useState('');
   const [helpfulPosts, setHelpfulPosts] = useState<string[]>([]);
   const [votes, setVotes] = useState<Record<string, 'up' | 'down' | null>>({});
+  const [replies, setReplies] = useState<Record<string, Reply[]>>(initialAnonReplies);
+  const [replyCount, setReplyCount] = useState<Record<string, number>>({});
 
   const toggleHelpful = (postId: string) => {
     setHelpfulPosts(prev =>
@@ -87,6 +118,32 @@ export default function AnonymousSection() {
     if (vote === 'up') upvotes += 1;
     if (vote === 'down') downvotes += 1;
     return upvotes - downvotes;
+  };
+
+  const handleSendReply = (postId: string) => {
+    if (!newReply.trim()) return;
+
+    const newReplyObj: Reply = {
+      id: `ar${Date.now()}`,
+      text: newReply.trim(),
+      time: 'Just now',
+    };
+
+    setReplies(prev => ({
+      ...prev,
+      [postId]: [...(prev[postId] || []), newReplyObj],
+    }));
+
+    setReplyCount(prev => ({
+      ...prev,
+      [postId]: (prev[postId] || 0) + 1,
+    }));
+
+    setNewReply('');
+  };
+
+  const getReplyCount = (post: typeof anonymousPosts[0]) => {
+    return post.replies + (replyCount[post.id] || 0);
   };
 
   return (
@@ -193,7 +250,7 @@ export default function AnonymousSection() {
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
-                  <span className="text-sm font-medium">{post.replies}</span>
+                  <span className="text-sm font-medium">{getReplyCount(post)}</span>
                 </button>
 
                 {/* Helpful Button */}
@@ -215,28 +272,23 @@ export default function AnonymousSection() {
               {/* Chat-style Replies Section */}
               {showReplies === post.id && (
                 <div className="border-t border-[#2A2A2A] bg-[#0F0F0F]">
-                  {/* Sample Replies */}
+                  {/* Replies */}
                   <div className="p-4 space-y-3 max-h-60 overflow-y-auto">
-                    <div className="flex gap-2">
-                      <div className="w-7 h-7 rounded-full bg-[#3A3A3A] flex-shrink-0 flex items-center justify-center text-xs font-medium text-[#808080]">?</div>
-                      <div className="flex-1">
-                        <div className="bg-[#1A1A1A] rounded-2xl rounded-tl-sm px-3 py-2 border border-[#2A2A2A]">
-                          <span className="text-xs font-medium text-[#606060]">{t('title')}</span>
-                          <p className="text-sm text-[#E0E0E0]">{tFeed('sampleReply1')}</p>
+                    {(replies[post.id] || []).map((reply) => (
+                      <div key={reply.id} className="flex gap-2">
+                        <div className="w-7 h-7 rounded-full bg-[#3A3A3A] flex-shrink-0 flex items-center justify-center text-xs font-medium text-[#808080]">?</div>
+                        <div className="flex-1">
+                          <div className="bg-[#1A1A1A] rounded-2xl rounded-tl-sm px-3 py-2 border border-[#2A2A2A]">
+                            <span className="text-xs font-medium text-[#606060]">{t('title')}</span>
+                            <p className="text-sm text-[#E0E0E0]">{reply.text}</p>
+                          </div>
+                          <span className="text-[10px] text-[#606060] ml-1 mt-0.5">{reply.time}</span>
                         </div>
-                        <span className="text-[10px] text-[#606060] ml-1 mt-0.5">{tFeed('justNow')}</span>
                       </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <div className="w-7 h-7 rounded-full bg-[#3A3A3A] flex-shrink-0 flex items-center justify-center text-xs font-medium text-[#808080]">?</div>
-                      <div className="flex-1">
-                        <div className="bg-[#1A1A1A] rounded-2xl rounded-tl-sm px-3 py-2 border border-[#2A2A2A]">
-                          <span className="text-xs font-medium text-[#606060]">{t('title')}</span>
-                          <p className="text-sm text-[#E0E0E0]">{tFeed('sampleReply2')}</p>
-                        </div>
-                        <span className="text-[10px] text-[#606060] ml-1 mt-0.5">2m</span>
-                      </div>
-                    </div>
+                    ))}
+                    {(!replies[post.id] || replies[post.id].length === 0) && (
+                      <p className="text-center text-sm text-[#606060] py-4">No replies yet. Be the first to reply!</p>
+                    )}
                   </div>
 
                   {/* Reply Input - Chat style */}
@@ -250,10 +302,12 @@ export default function AnonymousSection() {
                           type="text"
                           value={newReply}
                           onChange={(e) => setNewReply(e.target.value)}
+                          onKeyDown={(e) => e.key === 'Enter' && handleSendReply(post.id)}
                           placeholder={tFeed('replyPlaceholder')}
                           className="flex-1 bg-transparent px-4 py-2 text-sm text-white placeholder-[#606060] focus:outline-none"
                         />
                         <button
+                          onClick={() => handleSendReply(post.id)}
                           className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#0A0A0A] disabled:opacity-50"
                           disabled={!newReply.trim()}
                         >

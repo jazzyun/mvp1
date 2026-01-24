@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
@@ -16,6 +16,19 @@ export default function CommunityHub() {
   const t = useTranslations('community');
   const tNav = useTranslations('navigation');
   const [activeTab, setActiveTab] = useState<TabType>('signals');
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
+        setProfileMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const tabs = [
     { id: 'signals' as TabType, label: t('tabs.signals'), icon: 'NEW' },
@@ -60,9 +73,41 @@ export default function CommunityHub() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </button>
-              <Link href="/community/profile" className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-[#FF385C] to-[#D70466] flex items-center justify-center text-white font-semibold text-xs sm:text-sm">
-                J
-              </Link>
+              <div className="relative" ref={profileMenuRef}>
+                <button
+                  onClick={() => setProfileMenuOpen(!profileMenuOpen)}
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-[#FF385C] to-[#D70466] flex items-center justify-center text-white font-semibold text-xs sm:text-sm"
+                >
+                  J
+                </button>
+                {profileMenuOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-[#EBEBEB] py-2 z-50">
+                    <Link
+                      href="/profile"
+                      onClick={() => setProfileMenuOpen(false)}
+                      className="flex items-center gap-3 px-4 py-2.5 text-sm text-[#222222] hover:bg-[#F7F7F7] transition-colors"
+                    >
+                      <svg className="w-5 h-5 text-[#717171]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                      Change Profile
+                    </Link>
+                    <button
+                      onClick={() => {
+                        setProfileMenuOpen(false);
+                        // Handle sign out logic here
+                        window.location.href = '/';
+                      }}
+                      className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-[#222222] hover:bg-[#F7F7F7] transition-colors"
+                    >
+                      <svg className="w-5 h-5 text-[#717171]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                      </svg>
+                      Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

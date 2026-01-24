@@ -50,6 +50,32 @@ const communityPosts = [
   },
 ];
 
+interface Reply {
+  id: string;
+  author: string;
+  initial: string;
+  color: string;
+  text: string;
+  time: string;
+}
+
+const initialReplies: Record<string, Reply[]> = {
+  '1': [
+    { id: 'r1', author: 'Alex', initial: 'A', color: 'bg-[#E0E0E0] text-[#717171]', text: 'This is so helpful, thanks for sharing!', time: '5m' },
+    { id: 'r2', author: 'Sarah', initial: 'S', color: 'bg-[#FFE4E6] text-[#FF385C]', text: 'Totally agree with this approach!', time: '2m' },
+  ],
+  '2': [
+    { id: 'r3', author: 'Mike', initial: 'M', color: 'bg-[#E6F4FF] text-[#0066CC]', text: 'I started doing this too and it works great!', time: '1h' },
+  ],
+  '3': [
+    { id: 'r4', author: 'Jenny', initial: 'J', color: 'bg-[#E6F9E6] text-[#008A05]', text: 'Congrats! This is amazing 🎉', time: '3h' },
+    { id: 'r5', author: 'Tom', initial: 'T', color: 'bg-[#F3E8FF] text-[#7C3AED]', text: 'Inspiring journey! Keep going!', time: '2h' },
+  ],
+  '4': [
+    { id: 'r6', author: 'Nina', initial: 'N', color: 'bg-[#FFF8E6] text-[#B45309]', text: 'Quality over quantity is key 💯', time: '6h' },
+  ],
+};
+
 export default function CommunitySection() {
   const t = useTranslations('feed');
   const tCommon = useTranslations('common');
@@ -58,6 +84,8 @@ export default function CommunitySection() {
   const [newPost, setNewPost] = useState('');
   const [newReply, setNewReply] = useState('');
   const [votes, setVotes] = useState<Record<string, 'up' | 'down' | null>>({});
+  const [replies, setReplies] = useState<Record<string, Reply[]>>(initialReplies);
+  const [replyCount, setReplyCount] = useState<Record<string, number>>({});
 
   const handleVote = (postId: string, type: 'up' | 'down') => {
     setVotes(prev => ({
@@ -73,6 +101,35 @@ export default function CommunitySection() {
     if (vote === 'up') upvotes += 1;
     if (vote === 'down') downvotes += 1;
     return upvotes - downvotes;
+  };
+
+  const handleSendReply = (postId: string) => {
+    if (!newReply.trim()) return;
+
+    const newReplyObj: Reply = {
+      id: `r${Date.now()}`,
+      author: 'You',
+      initial: 'J',
+      color: 'bg-gradient-to-br from-[#FF385C] to-[#D70466] text-white',
+      text: newReply.trim(),
+      time: 'Just now',
+    };
+
+    setReplies(prev => ({
+      ...prev,
+      [postId]: [...(prev[postId] || []), newReplyObj],
+    }));
+
+    setReplyCount(prev => ({
+      ...prev,
+      [postId]: (prev[postId] || 0) + 1,
+    }));
+
+    setNewReply('');
+  };
+
+  const getReplyCount = (post: typeof communityPosts[0]) => {
+    return post.replies + (replyCount[post.id] || 0);
   };
 
   return (
@@ -183,7 +240,7 @@ export default function CommunitySection() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
-                <span className="text-sm font-medium">{post.replies}</span>
+                <span className="text-sm font-medium">{getReplyCount(post)}</span>
               </button>
 
               {/* Bookmark */}
@@ -197,28 +254,25 @@ export default function CommunitySection() {
             {/* Chat-style Replies Section */}
             {showReplies === post.id && (
               <div className="border-t border-[#EBEBEB] bg-[#FAFAFA]">
-                {/* Sample Replies */}
+                {/* Replies */}
                 <div className="p-4 space-y-3 max-h-60 overflow-y-auto">
-                  <div className="flex gap-2">
-                    <div className="w-7 h-7 rounded-full bg-[#E0E0E0] flex-shrink-0 flex items-center justify-center text-xs font-medium text-[#717171]">A</div>
-                    <div className="flex-1">
-                      <div className="bg-white rounded-2xl rounded-tl-sm px-3 py-2 border border-[#EBEBEB]">
-                        <span className="text-xs font-medium text-[#484848]">Alex</span>
-                        <p className="text-sm text-[#484848]">{t('sampleReply1')}</p>
+                  {(replies[post.id] || []).map((reply) => (
+                    <div key={reply.id} className="flex gap-2">
+                      <div className={`w-7 h-7 rounded-full ${reply.color} flex-shrink-0 flex items-center justify-center text-xs font-medium`}>
+                        {reply.initial}
                       </div>
-                      <span className="text-[10px] text-[#A0A0A0] ml-1 mt-0.5">{t('justNow')}</span>
-                    </div>
-                  </div>
-                  <div className="flex gap-2">
-                    <div className="w-7 h-7 rounded-full bg-[#FFE4E6] flex-shrink-0 flex items-center justify-center text-xs font-medium text-[#FF385C]">S</div>
-                    <div className="flex-1">
-                      <div className="bg-white rounded-2xl rounded-tl-sm px-3 py-2 border border-[#EBEBEB]">
-                        <span className="text-xs font-medium text-[#484848]">Sarah</span>
-                        <p className="text-sm text-[#484848]">{t('sampleReply2')}</p>
+                      <div className="flex-1">
+                        <div className="bg-white rounded-2xl rounded-tl-sm px-3 py-2 border border-[#EBEBEB]">
+                          <span className="text-xs font-medium text-[#484848]">{reply.author}</span>
+                          <p className="text-sm text-[#484848]">{reply.text}</p>
+                        </div>
+                        <span className="text-[10px] text-[#A0A0A0] ml-1 mt-0.5">{reply.time}</span>
                       </div>
-                      <span className="text-[10px] text-[#A0A0A0] ml-1 mt-0.5">2m</span>
                     </div>
-                  </div>
+                  ))}
+                  {(!replies[post.id] || replies[post.id].length === 0) && (
+                    <p className="text-center text-sm text-[#A0A0A0] py-4">No replies yet. Be the first to reply!</p>
+                  )}
                 </div>
 
                 {/* Reply Input - Chat style */}
@@ -232,10 +286,12 @@ export default function CommunitySection() {
                         type="text"
                         value={newReply}
                         onChange={(e) => setNewReply(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handleSendReply(post.id)}
                         placeholder={t('replyPlaceholder')}
                         className="flex-1 bg-transparent px-4 py-2 text-sm text-[#222222] placeholder-[#A0A0A0] focus:outline-none"
                       />
                       <button
+                        onClick={() => handleSendReply(post.id)}
                         className="w-8 h-8 rounded-full bg-gradient-to-r from-[#E61E4D] to-[#D70466] flex items-center justify-center text-white disabled:opacity-50"
                         disabled={!newReply.trim()}
                       >
