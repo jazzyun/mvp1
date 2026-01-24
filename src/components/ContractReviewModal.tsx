@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ContractDetails, RiskLevel } from '@/types/deal';
 
 interface ContractReviewModalProps {
@@ -33,7 +33,55 @@ function getRiskBadge(level: RiskLevel) {
   }
 }
 
+// Sample negotiation points based on contract issues
+const sampleNegotiationPoints = [
+  {
+    issue: 'Payment Terms',
+    current: 'Net 60 payment',
+    suggested: 'Net 30 payment',
+    script: '"I appreciate the offer! However, Net 60 payment terms are longer than my standard. Could we adjust to Net 30? This is more aligned with industry standards and helps me manage my business operations smoothly."',
+    priority: 'high' as const,
+  },
+  {
+    issue: 'Usage Rights Duration',
+    current: 'Perpetual / Unlimited',
+    suggested: '12-24 months',
+    script: '"I noticed the contract includes perpetual usage rights. I typically license content for 12-24 months. For extended or perpetual rights, I would need to adjust the compensation to reflect the additional value. Would you be open to discussing a time-limited license, or we could explore a higher rate for perpetual rights?"',
+    priority: 'high' as const,
+  },
+  {
+    issue: 'Secondary Usage (Paid Ads)',
+    current: 'Included at no extra cost',
+    suggested: 'Additional 50-100% fee',
+    script: '"I see the contract includes rights to use the content in paid advertising. Given that ad usage significantly extends the reach and commercial value of the content, I typically charge an additional 50-100% for paid media rights. Could we discuss adding a paid media fee, or limiting the usage to organic posts only?"',
+    priority: 'medium' as const,
+  },
+  {
+    issue: 'Exclusivity Period',
+    current: '6 months',
+    suggested: '30-60 days',
+    script: '"The 6-month exclusivity period is quite long for this type of campaign. Would you consider reducing it to 30-60 days? This would allow me to continue working with other brands in complementary categories while still giving your campaign dedicated attention during the active period."',
+    priority: 'medium' as const,
+  },
+  {
+    issue: 'Revision Requests',
+    current: 'Unlimited revisions',
+    suggested: '2-3 rounds included',
+    script: '"I want to ensure you\'re completely happy with the content! To keep the project running smoothly, could we specify 2-3 rounds of revisions included? Additional revisions beyond that can be accommodated at an hourly rate. This helps set clear expectations for both of us."',
+    priority: 'low' as const,
+  },
+];
+
 export default function ContractReviewModal({ brandName, contract, isOpen, onClose }: ContractReviewModalProps) {
+  const [showNegotiationPoints, setShowNegotiationPoints] = useState(false);
+
+  // Reset state when modal closes
+  useEffect(() => {
+    if (!isOpen) {
+      setShowNegotiationPoints(false);
+    }
+  }, [isOpen]);
+
   // Prevent body scroll when modal is open (iOS Safari fix)
   useEffect(() => {
     if (isOpen) {
@@ -284,6 +332,82 @@ export default function ContractReviewModal({ brandName, contract, isOpen, onClo
             </div>
           </div>
 
+          {/* Negotiation Points Section */}
+          {showNegotiationPoints && (
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-[#222222] flex items-center gap-2">
+                  <svg className="w-4 h-4 text-[#FF385C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                  AI-Generated Negotiation Points
+                </h3>
+                <button
+                  onClick={() => setShowNegotiationPoints(false)}
+                  className="text-xs text-[#717171] hover:text-[#222222]"
+                >
+                  Hide
+                </button>
+              </div>
+
+              <div className="bg-[#E6F9E6] border border-[#B8E6B8] rounded-xl p-3">
+                <p className="text-xs text-[#008A05]">
+                  💡 These scripts are generated based on the contract terms. Customize them to match your communication style.
+                </p>
+              </div>
+
+              {sampleNegotiationPoints.map((point, index) => (
+                <div
+                  key={index}
+                  className={`rounded-xl p-4 border ${
+                    point.priority === 'high'
+                      ? 'bg-[#FFF0F3] border-[#FFCCD5]'
+                      : point.priority === 'medium'
+                      ? 'bg-[#FFF8E6] border-[#FFE4B3]'
+                      : 'bg-[#F7F7F7] border-[#DDDDDD]'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="text-sm font-semibold text-[#222222]">{point.issue}</h4>
+                    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                      point.priority === 'high'
+                        ? 'bg-[#C13515]/10 text-[#C13515]'
+                        : point.priority === 'medium'
+                        ? 'bg-[#B45309]/10 text-[#B45309]'
+                        : 'bg-[#717171]/10 text-[#717171]'
+                    }`}>
+                      {point.priority === 'high' ? 'High Priority' : point.priority === 'medium' ? 'Medium' : 'Optional'}
+                    </span>
+                  </div>
+
+                  <div className="flex gap-2 mb-3 text-xs">
+                    <div className="flex-1 p-2 bg-white/50 rounded-lg">
+                      <p className="text-[#717171] mb-0.5">Current</p>
+                      <p className="text-[#C13515] font-medium">{point.current}</p>
+                    </div>
+                    <div className="flex items-center text-[#717171]">→</div>
+                    <div className="flex-1 p-2 bg-white/50 rounded-lg">
+                      <p className="text-[#717171] mb-0.5">Suggested</p>
+                      <p className="text-[#008A05] font-medium">{point.suggested}</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-white rounded-lg p-3 border border-[#EBEBEB]">
+                    <p className="text-xs text-[#717171] mb-1">📝 Sample Script:</p>
+                    <p className="text-sm text-[#484848] italic leading-relaxed">{point.script}</p>
+                  </div>
+
+                  <button className="w-full mt-3 py-2 text-xs font-medium text-[#FF385C] bg-white border border-[#FFCCD5] rounded-lg hover:bg-[#FFF0F3] transition-colors flex items-center justify-center gap-1">
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    Copy Script
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
           {/* Action Buttons */}
           <div className="flex gap-3 pt-2">
             <button
@@ -293,10 +417,14 @@ export default function ContractReviewModal({ brandName, contract, isOpen, onClo
               Close
             </button>
             <button
-              onClick={onClose}
-              className="flex-1 py-3 bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white rounded-lg font-semibold hover:from-[#D70466] hover:via-[#BD1E59] hover:to-[#BD1E59] transition-all"
+              onClick={() => setShowNegotiationPoints(!showNegotiationPoints)}
+              className={`flex-1 py-3 rounded-lg font-semibold transition-all ${
+                showNegotiationPoints
+                  ? 'bg-[#222222] text-white hover:bg-[#484848]'
+                  : 'bg-gradient-to-r from-[#E61E4D] via-[#E31C5F] to-[#D70466] text-white hover:from-[#D70466] hover:via-[#BD1E59] hover:to-[#BD1E59]'
+              }`}
             >
-              Generate Negotiation Points
+              {showNegotiationPoints ? 'Hide Negotiation Points' : 'Generate Negotiation Points'}
             </button>
           </div>
         </div>
