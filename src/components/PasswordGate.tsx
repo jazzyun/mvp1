@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 
 const SITE_PASSWORD = '1111111'
 const STORAGE_KEY = 'site_access_verified'
+const INTRO_SHOWN_KEY = 'intro_shown_session'
 
 export function PasswordGate({ children }: { children: React.ReactNode }) {
   const [isVerified, setIsVerified] = useState<boolean | null>(null)
@@ -14,10 +15,12 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const verified = localStorage.getItem(STORAGE_KEY)
+    const introShown = sessionStorage.getItem(INTRO_SHOWN_KEY)
     setIsVerified(verified === 'true')
-    // Show intro video every time for verified users
-    if (verified === 'true') {
+    // Show intro video only once per session
+    if (verified === 'true' && !introShown) {
       setShowIntro(true)
+      sessionStorage.setItem(INTRO_SHOWN_KEY, 'true')
     }
   }, [])
 
@@ -44,6 +47,7 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
     e.preventDefault()
     if (password === SITE_PASSWORD) {
       localStorage.setItem(STORAGE_KEY, 'true')
+      sessionStorage.setItem(INTRO_SHOWN_KEY, 'true')
       setIsVerified(true)
       setShowIntro(true)
       setError(false)
@@ -127,12 +131,12 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
           muted
           playsInline
           webkit-playsinline="true"
+          preload="auto"
           className="w-full h-full object-cover"
           onEnded={handleVideoEnd}
           controls={false}
-        >
-          <source src="/intro.mp4" type="video/mp4" />
-        </video>
+          src="/intro.mp4"
+        />
       </div>
     )
   }
