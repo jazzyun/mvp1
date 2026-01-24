@@ -11,7 +11,26 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
   const [showIntro, setShowIntro] = useState(false)
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
+  const [videoReady, setVideoReady] = useState(false)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const preloadVideoRef = useRef<HTMLVideoElement | null>(null)
+
+  // Preload video in the background
+  useEffect(() => {
+    const video = document.createElement('video')
+    video.src = '/intro.mp4'
+    video.preload = 'auto'
+    video.muted = true
+    video.playsInline = true
+    video.oncanplaythrough = () => setVideoReady(true)
+    video.load()
+    preloadVideoRef.current = video
+
+    return () => {
+      video.src = ''
+      preloadVideoRef.current = null
+    }
+  }, [])
 
   useEffect(() => {
     const verified = localStorage.getItem(STORAGE_KEY)
@@ -134,6 +153,11 @@ export function PasswordGate({ children }: { children: React.ReactNode }) {
           preload="auto"
           className="w-full h-full object-cover"
           onEnded={handleVideoEnd}
+          onCanPlayThrough={() => {
+            if (videoRef.current) {
+              videoRef.current.play().catch(() => {})
+            }
+          }}
           controls={false}
           src="/intro.mp4"
         />
