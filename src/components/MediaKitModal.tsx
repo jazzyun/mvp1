@@ -1,6 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 interface MediaKitModalProps {
   isOpen: boolean;
@@ -8,6 +10,10 @@ interface MediaKitModalProps {
 }
 
 export default function MediaKitModal({ isOpen, onClose }: MediaKitModalProps) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
+  const [copied, setCopied] = useState(false);
+
   // Prevent body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -28,6 +34,68 @@ export default function MediaKitModal({ isOpen, onClose }: MediaKitModalProps) {
       };
     }
   }, [isOpen]);
+
+  const handleDownloadPDF = async () => {
+    if (!contentRef.current) return;
+
+    setIsGeneratingPDF(true);
+    try {
+      const content = contentRef.current;
+      const canvas = await html2canvas(content, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+      });
+
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4',
+      });
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+      const imgX = (pdfWidth - imgWidth * ratio) / 2;
+      const imgY = 0;
+
+      // Add multiple pages if content is tall
+      const pageHeight = pdfHeight * (imgWidth / pdfWidth);
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+      heightLeft -= pageHeight;
+
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', imgX, position * ratio, imgWidth * ratio, imgHeight * ratio);
+        heightLeft -= pageHeight;
+      }
+
+      pdf.save('Sarah_Chen_Media_Kit.pdf');
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
+      setIsGeneratingPDF(false);
+    }
+  };
+
+  const handleCopyLink = async () => {
+    const shareableLink = `${window.location.origin}/mediakit/sarahcreates`;
+    try {
+      await navigator.clipboard.writeText(shareableLink);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error('Failed to copy:', error);
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -60,7 +128,7 @@ export default function MediaKitModal({ isOpen, onClose }: MediaKitModalProps) {
         </div>
 
         {/* Media Kit Content */}
-        <div className="overflow-y-auto p-5 space-y-6" style={{ maxHeight: 'calc(95vh - 80px)' }}>
+        <div ref={contentRef} className="overflow-y-auto p-5 space-y-6" style={{ maxHeight: 'calc(95vh - 80px)' }}>
           {/* Hero Section */}
           <div className="bg-gradient-to-br from-[#E61E4D] via-[#E31C5F] to-[#D70466] rounded-2xl p-6 text-white text-center">
             <div className="w-24 h-24 mx-auto rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-5xl mb-4 border-4 border-white/30">
@@ -300,11 +368,28 @@ export default function MediaKitModal({ isOpen, onClose }: MediaKitModalProps) {
             </p>
             <p className="font-medium">sarah@sarahcreates.com</p>
             <div className="flex gap-3 mt-4">
-              <button className="flex-1 py-2.5 bg-white text-[#E61E4D] rounded-xl text-sm font-medium">
-                Download PDF
+              <button
+                onClick={handleDownloadPDF}
+                disabled={isGeneratingPDF}
+                className="flex-1 py-2.5 bg-white text-[#E61E4D] rounded-xl text-sm font-medium disabled:opacity-70 flex items-center justify-center gap-2"
+              >
+                {isGeneratingPDF ? (
+                  <>
+                    <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    Generating...
+                  </>
+                ) : (
+                  'Download PDF'
+                )}
               </button>
-              <button className="flex-1 py-2.5 bg-white/20 text-white rounded-xl text-sm font-medium">
-                Copy Link
+              <button
+                onClick={handleCopyLink}
+                className="flex-1 py-2.5 bg-white/20 text-white rounded-xl text-sm font-medium"
+              >
+                {copied ? '✓ Copied!' : 'Copy Link'}
               </button>
             </div>
           </div>
