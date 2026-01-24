@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { Deal } from '@/types/deal';
 
@@ -25,9 +25,52 @@ interface InvoiceData {
   notes: string;
 }
 
+interface InvoiceHistoryItem {
+  id: string;
+  invoiceNumber: string;
+  amount: number;
+  sentDate: Date;
+  dueDate: Date;
+  status: 'paid' | 'pending' | 'overdue';
+  brandName: string;
+}
+
+// Sample invoice history data
+const sampleInvoiceHistory: InvoiceHistoryItem[] = [
+  {
+    id: '1',
+    invoiceNumber: 'INV-20260115-A3K9',
+    amount: 2500,
+    sentDate: new Date('2026-01-15'),
+    dueDate: new Date('2026-02-15'),
+    status: 'paid',
+    brandName: 'Glossier'
+  },
+  {
+    id: '2',
+    invoiceNumber: 'INV-20260108-B7M2',
+    amount: 1800,
+    sentDate: new Date('2026-01-08'),
+    dueDate: new Date('2026-02-08'),
+    status: 'pending',
+    brandName: 'Nike'
+  },
+  {
+    id: '3',
+    invoiceNumber: 'INV-20251220-C4P5',
+    amount: 3200,
+    sentDate: new Date('2025-12-20'),
+    dueDate: new Date('2026-01-20'),
+    status: 'overdue',
+    brandName: 'Samsung'
+  },
+];
+
 export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProps) {
   const t = useTranslations('deals');
   const [step, setStep] = useState<'edit' | 'preview' | 'sent'>('edit');
+  const [invoiceHistory] = useState<InvoiceHistoryItem[]>(sampleInvoiceHistory);
+  const contentRef = useRef<HTMLDivElement>(null);
   const [invoiceData, setInvoiceData] = useState<InvoiceData>({
     invoiceNumber: '',
     issueDate: '',
@@ -62,19 +105,20 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
   // Lock body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
+      const scrollY = window.scrollY;
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
       document.body.style.width = '100%';
-    } else {
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
+
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+      };
     }
-    return () => {
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-    };
   }, [isOpen]);
 
   if (!isOpen || !deal) return null;
@@ -88,8 +132,55 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
     return `$${amount.toLocaleString()}`;
   };
 
+  const getStatusColor = (status: InvoiceHistoryItem['status']) => {
+    switch (status) {
+      case 'paid': return 'bg-green-100 text-green-700';
+      case 'pending': return 'bg-yellow-100 text-yellow-700';
+      case 'overdue': return 'bg-red-100 text-red-700';
+    }
+  };
+
+  const getStatusLabel = (status: InvoiceHistoryItem['status']) => {
+    switch (status) {
+      case 'paid': return 'Paid';
+      case 'pending': return 'Pending';
+      case 'overdue': return 'Overdue';
+    }
+  };
+
   const renderEditStep = () => (
     <div className="space-y-5">
+      {/* Invoice History Section */}
+      {invoiceHistory.length > 0 && (
+        <div>
+          <p className="text-sm font-semibold text-[#222222] mb-3">Previous Invoices</p>
+          <div className="space-y-2">
+            {invoiceHistory.slice(0, 3).map((invoice) => (
+              <div
+                key={invoice.id}
+                className="flex items-center justify-between p-3 bg-[#F7F7F7] rounded-lg"
+              >
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium text-[#222222] truncate">{invoice.brandName}</p>
+                  <p className="text-xs text-[#717171]">{invoice.invoiceNumber}</p>
+                </div>
+                <div className="flex items-center gap-3 flex-shrink-0">
+                  <span className="text-sm font-semibold text-[#222222]">${invoice.amount.toLocaleString()}</span>
+                  <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${getStatusColor(invoice.status)}`}>
+                    {getStatusLabel(invoice.status)}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Divider */}
+      <div className="border-t border-[#EBEBEB] pt-5">
+        <p className="text-sm font-semibold text-[#222222] mb-3">New Invoice</p>
+      </div>
+
       {/* Invoice Header Preview */}
       <div className="bg-gradient-to-r from-[#00A699] to-[#00B4A3] rounded-xl p-4 text-white">
         <div className="flex items-center justify-between gap-4">
@@ -117,15 +208,15 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
         </div>
       </div>
 
-      {/* Dates */}
-      <div className="grid grid-cols-2 gap-4">
+      {/* Dates - Fixed alignment */}
+      <div className="grid grid-cols-2 gap-3">
         <div>
           <label className="block text-sm font-medium text-[#222222] mb-2">Issue Date</label>
           <input
             type="date"
             value={invoiceData.issueDate}
             onChange={(e) => setInvoiceData({ ...invoiceData, issueDate: e.target.value })}
-            className="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none"
+            className="w-full h-12 px-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none text-sm bg-white"
           />
         </div>
         <div>
@@ -134,7 +225,7 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
             type="date"
             value={invoiceData.dueDate}
             onChange={(e) => setInvoiceData({ ...invoiceData, dueDate: e.target.value })}
-            className="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none"
+            className="w-full h-12 px-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none text-sm bg-white"
           />
         </div>
       </div>
@@ -146,6 +237,7 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
           {(['bank', 'paypal', 'wise'] as PaymentMethod[]).map((method) => (
             <button
               key={method}
+              type="button"
               onClick={() => setInvoiceData({ ...invoiceData, paymentMethod: method })}
               className={`p-3 rounded-xl border-2 transition-all flex flex-col items-center gap-1 ${
                 invoiceData.paymentMethod === method
@@ -176,7 +268,7 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
 
       {/* Payment Details based on method */}
       {invoiceData.paymentMethod === 'bank' && (
-        <div className="space-y-4 p-4 bg-[#F7F7F7] rounded-xl">
+        <div className="space-y-3 p-4 bg-[#F7F7F7] rounded-xl">
           <div>
             <label className="block text-sm font-medium text-[#222222] mb-2">Bank Name</label>
             <input
@@ -184,10 +276,10 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
               value={invoiceData.bankName}
               onChange={(e) => setInvoiceData({ ...invoiceData, bankName: e.target.value })}
               placeholder="e.g., Chase Bank"
-              className="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none bg-white"
+              className="w-full h-12 px-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none bg-white text-sm"
             />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-sm font-medium text-[#222222] mb-2">Account Number</label>
               <input
@@ -195,7 +287,7 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
                 value={invoiceData.accountNumber}
                 onChange={(e) => setInvoiceData({ ...invoiceData, accountNumber: e.target.value })}
                 placeholder="••••••1234"
-                className="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none bg-white"
+                className="w-full h-12 px-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none bg-white text-sm"
               />
             </div>
             <div>
@@ -205,7 +297,7 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
                 value={invoiceData.routingNumber}
                 onChange={(e) => setInvoiceData({ ...invoiceData, routingNumber: e.target.value })}
                 placeholder="021000021"
-                className="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none bg-white"
+                className="w-full h-12 px-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none bg-white text-sm"
               />
             </div>
           </div>
@@ -220,7 +312,7 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
             value={invoiceData.paypalEmail}
             onChange={(e) => setInvoiceData({ ...invoiceData, paypalEmail: e.target.value })}
             placeholder="your@email.com"
-            className="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none bg-white"
+            className="w-full h-12 px-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none bg-white text-sm"
           />
         </div>
       )}
@@ -233,7 +325,7 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
             value={invoiceData.wiseEmail}
             onChange={(e) => setInvoiceData({ ...invoiceData, wiseEmail: e.target.value })}
             placeholder="your@email.com"
-            className="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none bg-white"
+            className="w-full h-12 px-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none bg-white text-sm"
           />
         </div>
       )}
@@ -246,15 +338,16 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
           onChange={(e) => setInvoiceData({ ...invoiceData, notes: e.target.value })}
           placeholder="Thank you for the collaboration!"
           rows={3}
-          className="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none resize-none"
+          className="w-full px-3 py-3 border border-[#DDDDDD] rounded-lg focus:border-[#00A699] focus:ring-1 focus:ring-[#00A699] outline-none resize-none text-sm"
         />
       </div>
 
       {/* Actions */}
-      <div className="flex gap-3">
+      <div className="flex gap-3 pt-2">
         <button
+          type="button"
           onClick={() => setStep('preview')}
-          className="flex-1 py-3 bg-[#00A699] text-white rounded-xl font-semibold hover:bg-[#008F84] transition-colors"
+          className="flex-1 py-3 bg-[#00A699] text-white rounded-xl font-semibold hover:bg-[#008F84] transition-colors text-sm"
         >
           Preview Invoice
         </button>
@@ -364,16 +457,18 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
       {/* Actions */}
       <div className="flex gap-3">
         <button
+          type="button"
           onClick={() => setStep('edit')}
-          className="flex-1 py-3 bg-white border border-[#222222] text-[#222222] rounded-xl font-semibold hover:bg-[#F7F7F7] transition-colors"
+          className="flex-1 py-3 bg-white border border-[#222222] text-[#222222] rounded-xl font-semibold hover:bg-[#F7F7F7] transition-colors text-sm"
         >
           Edit
         </button>
         <button
+          type="button"
           onClick={handleSend}
-          className="flex-1 py-3 bg-[#00A699] text-white rounded-xl font-semibold hover:bg-[#008F84] transition-colors flex items-center justify-center gap-2"
+          className="flex-1 py-3 bg-[#00A699] text-white rounded-xl font-semibold hover:bg-[#008F84] transition-colors flex items-center justify-center gap-2 text-sm"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
           </svg>
           Send Invoice
@@ -417,6 +512,7 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
       {/* Actions */}
       <div className="flex gap-3">
         <button
+          type="button"
           onClick={() => {
             // Download PDF functionality could be added here
           }}
@@ -428,6 +524,7 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
           Download PDF
         </button>
         <button
+          type="button"
           onClick={onClose}
           className="flex-1 py-3 bg-[#00A699] text-white rounded-xl font-semibold text-sm hover:bg-[#008F84] transition-colors"
         >
@@ -438,7 +535,10 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ touchAction: 'none' }}
+    >
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -446,7 +546,10 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
       />
 
       {/* Modal */}
-      <div className="relative w-full max-w-md mx-4 sm:mx-auto bg-white rounded-2xl max-h-[90vh] overflow-hidden flex flex-col shadow-xl">
+      <div
+        className="relative w-full max-w-md bg-white rounded-2xl max-h-[85vh] overflow-hidden flex flex-col shadow-xl"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#EBEBEB] flex-shrink-0">
           <div className="flex items-center gap-3">
@@ -465,6 +568,7 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
             </div>
           </div>
           <button
+            type="button"
             onClick={onClose}
             className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#F7F7F7] transition-colors flex-shrink-0"
           >
@@ -475,7 +579,11 @@ export default function InvoiceModal({ isOpen, onClose, deal }: InvoiceModalProp
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-5">
+        <div
+          ref={contentRef}
+          className="flex-1 overflow-y-auto overscroll-contain p-5"
+          style={{ WebkitOverflowScrolling: 'touch' }}
+        >
           {step === 'edit' && renderEditStep()}
           {step === 'preview' && renderPreviewStep()}
           {step === 'sent' && renderSentStep()}
