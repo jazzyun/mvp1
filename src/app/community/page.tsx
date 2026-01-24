@@ -19,7 +19,7 @@ export default function CommunityHub() {
   const [activeTab, setActiveTab] = useState<TabType>('signals');
 
   const tabs = [
-    { id: 'signals' as TabType, label: t('tabs.signals'), icon: '✦' },
+    { id: 'signals' as TabType, label: t('tabs.signals'), icon: 'NEW' },
     { id: 'anonymous' as TabType, label: t('tabs.anonymous'), icon: '◐' },
     { id: 'community' as TabType, label: t('tabs.feed'), icon: '◈' },
     { id: 'benefits' as TabType, label: t('tabs.perks'), icon: '✧' },
@@ -84,7 +84,11 @@ export default function CommunityHub() {
                     : 'text-[#717171] hover:text-[#484848]'
                 }`}
               >
-                <span className={`text-sm sm:text-base ${activeTab === tab.id ? 'opacity-100' : 'opacity-60'}`}>{tab.icon}</span>
+                {tab.icon === 'NEW' ? (
+                  <span className={`text-[8px] sm:text-[9px] font-bold px-1 py-0.5 rounded bg-[#FF385C] text-white ${activeTab === tab.id ? 'opacity-100' : 'opacity-70'}`}>NEW</span>
+                ) : (
+                  <span className={`text-sm sm:text-base ${activeTab === tab.id ? 'opacity-100' : 'opacity-60'}`}>{tab.icon}</span>
+                )}
                 <span className="hidden sm:inline">{tab.label}</span>
               </button>
             ))}
