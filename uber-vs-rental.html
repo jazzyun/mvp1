@@ -77,17 +77,28 @@
   ul.factors{font-size:12px;color:var(--muted);margin:14px 0 0;padding-left:18px}
   ul.factors li{margin:5px 0}
   .note{font-size:11.5px;color:var(--muted2);margin-top:12px}
+  .opts{display:grid;gap:12px;margin-top:4px}
+  @media(min-width:720px){.opts{grid-template-columns:1fr 1fr 1fr}}
+  .opt{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .opt h3{margin:0 0 2px;font-size:14px}
+  .opt .tag{font-size:10.5px;color:var(--muted2);text-transform:uppercase;letter-spacing:.04em}
+  .opt .price{font-size:22px;font-weight:800;margin:8px 0 2px}
+  .opt .price small{font-size:12px;color:var(--muted);font-weight:600}
+  .opt ul{margin:8px 0 0;padding-left:16px;font-size:11.5px;color:var(--muted)}
+  .opt ul li{margin:3px 0}
+  .opt button{margin-top:10px;width:100%;background:rgba(255,140,66,.15);color:var(--rental);border:1px solid rgba(255,140,66,.4)}
+  .badge{display:inline-block;font-size:10px;padding:2px 7px;border-radius:999px;background:rgba(25,195,125,.18);color:var(--uber);margin-left:6px}
 </style>
 </head>
 <body>
 <header><div class="hwrap"><h1>🚗 Uber vs 렌터카 시뮬레이터</h1></div></header>
 <main>
-  <p class="sub">LA 출산 여정 (2026.6.6 도착 → 8.30 귀국) · 베이스: 라 카냐다 · 모든 숫자 수정 가능 · 자동 저장</p>
+  <p class="sub">LA 출산 여정 (2026.6.6 도착 → 8.30 귀국) · 베이스: 라 카냐다 · <b style="color:#fff">실제 LA 요율·거리 반영</b> · 모든 숫자 수정 가능 · 자동 저장</p>
 
   <!-- Trip schedule -->
   <section class="card">
-    <h2><span class="dot" style="background:var(--accent)"></span>이동 일정</h2>
-    <p class="hint">편도 거리는 베이스 기준 추정치 — 실제 값으로 바꾸세요.</p>
+    <h2><span class="dot" style="background:var(--accent)"></span>이동 일정 (실제 거리 기반)</h2>
+    <p class="hint">거리는 라 카냐다(91011) 기준 구글맵 도로거리. 차병원·여권국·LAX는 확인된 주소 기준, 유넬라·Janet Kim·Meta Labs는 권역 추정(주소 확인되면 바꾸세요).</p>
     <div class="scroll">
       <table id="trips">
         <thead><tr><th>목적지</th><th>횟수</th><th>편도(mi)</th><th style="text-align:center">왕복</th><th></th></tr></thead>
@@ -103,7 +114,7 @@
   <!-- Assumptions -->
   <div class="grid2">
     <section class="card">
-      <h2><span class="dot" style="background:var(--uber)"></span>Uber 가정</h2>
+      <h2><span class="dot" style="background:var(--uber)"></span>Uber 가정 <span class="badge">LA 실요율 2025</span></h2>
       <div class="f3">
         <div><label>기본요금 $</label><input type="number" id="uBase" step="0.5"></div>
         <div><label>마일당 $</label><input type="number" id="uMile" step="0.05"></div>
@@ -115,7 +126,7 @@
         <div><label>서지(혼잡) ×</label><input type="number" id="uSurge" step="0.1"></div>
         <div><label>공항 픽업피 $</label><input type="number" id="uAirport" step="1"></div>
       </div>
-      <p class="hint" style="margin-top:12px">요금 = (기본 + 마일×거리 + 분×시간)×서지, 최소요금 보장, +예약피 +팁. 왕복 ×2.</p>
+      <p class="hint" style="margin-top:12px">UberX LA 실측: 기본 $0 · 예약피 $2.84 · 분당 $0.28 · 마일당 $0.92 · 최소 $7.85. 요금 = (기본+마일×거리+분×시간)×서지, 최소요금 보장, +예약피 +팁. 왕복 ×2.</p>
     </section>
 
     <section class="card">
@@ -143,6 +154,13 @@
     </section>
   </div>
 
+  <!-- Rental options -->
+  <section class="card">
+    <h2><span class="dot" style="background:var(--rental)"></span>렌터카 옵션 3종 (85일 기준 · 기름값 포함 추정)</h2>
+    <p class="hint">아래 "이 옵션 적용"을 누르면 위 렌터카 가정에 자동 입력됩니다. 실제 견적으로 덮어쓰세요.</p>
+    <div class="opts" id="opts"></div>
+  </section>
+
   <!-- Results -->
   <section class="card">
     <h2>결과</h2>
@@ -165,7 +183,7 @@
       <span>손익분기 일 요율: <b id="sBreak">–</b></span>
     </div>
 
-    <details>
+    <details open>
       <summary>📋 항목별 상세 보기</summary>
       <div class="dwrap">
         <h3 style="font-size:12px;color:var(--uber);margin:12px 0 2px">Uber — 목적지별</h3>
@@ -187,27 +205,66 @@
 </main>
 
 <script>
+// ---- 실제 거리 기반 일정 (라 카냐다 91011 기준 도로거리) ----
 const DEFAULT_TRIPS = [
-  {name:"공항 픽업 (LAX→집) 6/6",      n:1, mi:32, rt:false},
-  {name:"유넬라 정기 산전검진 (주 1회)",  n:7, mi:13, rt:true},
-  {name:"차병원 분만 (입원/퇴원) 7/23", n:2, mi:13, rt:true},
-  {name:"장보기 (격주)",               n:6, mi:6,  rt:true},
-  {name:"LA Meta Labs",              n:1, mi:14, rt:true},
-  {name:"여권국 (윤여름 여권)",         n:1, mi:22, rt:true},
-  {name:"Birth Certificate 발급",     n:1, mi:18, rt:true},
-  {name:"Janet Kim 소아과 (산후 1회)", n:1, mi:13, rt:true},
-  {name:"캐주얼 LA 외출",              n:4, mi:15, rt:true},
-  {name:"공항 샌딩 (집→LAX) 8/30",    n:1, mi:32, rt:false},
+  {name:"공항 픽업 (LAX→집) 6/6",      n:1, mi:30, rt:false},  // 확인: 30mi
+  {name:"유넬라 정기 산전검진 (주 1회)",  n:7, mi:8,  rt:true},   // 추정(글렌데일 권역)
+  {name:"차병원 분만 (입원/퇴원) 7/23", n:2, mi:14, rt:true},   // CHA Hollywood Presby, 1300 N Vermont
+  {name:"장보기 (격주)",               n:6, mi:5,  rt:true},   // 인근 H마트/마켓
+  {name:"LA Meta Labs",              n:1, mi:14, rt:true},   // 추정(코리아타운 권역)
+  {name:"여권국 (윤여름 여권)",         n:1, mi:24, rt:true},   // LA Passport Agency, 11000 Wilshire
+  {name:"Birth Certificate 발급",     n:1, mi:14, rt:true},   // LA County Vital Records(다운타운)
+  {name:"Janet Kim 소아과 (산후 1회)", n:1, mi:14, rt:true},   // 추정(코리아타운 권역)
+  {name:"캐주얼 LA 외출",              n:4, mi:12, rt:true},
+  {name:"공항 샌딩 (집→LAX) 8/30",    n:1, mi:30, rt:false},
 ];
+// ---- 실제 LA UberX 요율 (2025) ----
 const DEFAULTS = {
-  uBase:3, uMile:1.6, uMin:0.35, uBook:3.5, uMinFare:9, uSpeed:24,
-  uTip:12, uSurge:1.15, uAirport:6,
-  rMode:"daily", rDays:85, rDaily:52, rMonthly:1250, rFlat:4200,
-  rIns:18, rFees:120, rPark:90, rGas:4.9, rMpg:28, rToll:0,
+  uBase:0, uMile:0.92, uMin:0.28, uBook:2.84, uMinFare:7.85, uSpeed:22,
+  uTip:15, uSurge:1.1, uAirport:3,
+  rMode:"daily", rDays:85, rDaily:22, rMonthly:650, rFlat:1840,
+  rIns:0, rFees:0, rPark:0, rGas:4.6, rMpg:30, rToll:0,
 };
+// ---- 렌터카 옵션 3종 ----
+const RENTAL_OPTIONS = [
+  {
+    title:"이코노미 세단", tag:"시내 영업소 · 월단위 · 가장 저렴",
+    headline:"$1,930", per:"≈ 85일 총액 (본인보험 가정)",
+    bullets:[
+      "월 $650 (시내 Enterprise/Budget) × 2.83개월 ≈ $1,840",
+      "기름 ~$90 (약 520mi ÷ 30mpg × $4.6)",
+      "보험: 여행자보험/신용카드 CDW로 커버 가정",
+      "LDW 추가 시 +약 $1,275 (≈ $15/일)",
+    ],
+    apply:{rMode:"flat", rFlat:1840, rIns:0, rFees:0, rPark:0, rGas:4.6, rMpg:30},
+  },
+  {
+    title:"Turo 준중형/SUV", tag:"보험 포함 플랜 · 배달 가능",
+    headline:"$3,900", per:"≈ 85일 총액 (보험 포함)",
+    bullets:[
+      "월 할인가 ~$45/일 (보험 포함 옵션) × 85일 ≈ $3,825",
+      "기름 ~$90",
+      "집 앞 배달 가능 · 공항 픽업 불필요",
+      "차종 선택 폭 넓음 (신생아용 넉넉한 트렁크)",
+    ],
+    apply:{rMode:"daily", rDaily:45, rIns:0, rFees:0, rPark:0, rGas:4.6, rMpg:28},
+  },
+  {
+    title:"대형 SUV / 미니밴", tag:"공항 픽업 · 가족·짐 많을 때",
+    headline:"$4,300", per:"≈ 85일 총액 (LDW 포함)",
+    bullets:[
+      "LAX 픽업 대형 SUV ~$1,400/월(공항세 포함) × 2.83 ≈ $3,960",
+      "LDW ~$3/일 차액 미반영 시 차량요금에 포함 가정",
+      "기름 ~$110 (연비 24mpg)",
+      "공항 도착 즉시 차 확보 · 우버비 0",
+    ],
+    apply:{rMode:"flat", rFlat:4180, rIns:0, rFees:0, rPark:0, rGas:4.6, rMpg:24},
+  },
+];
+
 const $ = id => document.getElementById(id);
 const money = v => "$" + Math.round(v).toLocaleString();
-const STORE = "uber_rental_sim_v1";
+const STORE = "uber_rental_sim_v2";  // v2: 실제 요율 반영
 let trips = [];
 
 function load(){
@@ -219,6 +276,16 @@ function load(){
 function save(){
   const f={}; for(const k in DEFAULTS) f[k]=$(k).value;
   localStorage.setItem(STORE, JSON.stringify({trips, fields:f}));
+}
+function renderOpts(){
+  $("opts").innerHTML = RENTAL_OPTIONS.map((o,i)=>`
+    <div class="opt">
+      <div class="tag">${o.tag}</div>
+      <h3>${o.title}</h3>
+      <div class="price">${o.headline} <small>${o.per}</small></div>
+      <ul>${o.bullets.map(b=>`<li>${b}</li>`).join("")}</ul>
+      <button data-opt="${i}">이 옵션 적용</button>
+    </div>`).join("");
 }
 function renderTrips(){
   const tb=$("tbody"); tb.innerHTML="";
@@ -309,10 +376,22 @@ $("tbody").addEventListener("click",e=>{
     trips.splice(+e.target.dataset.del,1); renderTrips(); compute();
   }
 });
+$("opts").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-opt]"); if(!b) return;
+  const o=RENTAL_OPTIONS[+b.dataset.opt].apply;
+  $("rMode").value=o.rMode;
+  if(o.rDaily!==undefined) $("rDaily").value=o.rDaily;
+  if(o.rFlat!==undefined) $("rFlat").value=o.rFlat;
+  if(o.rMonthly!==undefined) $("rMonthly").value=o.rMonthly;
+  $("rIns").value=o.rIns; $("rFees").value=o.rFees; $("rPark").value=o.rPark;
+  $("rGas").value=o.rGas; $("rMpg").value=o.rMpg;
+  compute();
+  document.querySelector(".verdict").scrollIntoView({behavior:"smooth",block:"center"});
+});
 $("add").addEventListener("click",()=>{ trips.push({name:"새 목적지",n:1,mi:10,rt:true}); renderTrips(); compute(); });
 $("reset").addEventListener("click",()=>{ if(confirm("기본 일정으로 되돌릴까요?")){ trips=DEFAULT_TRIPS.map(t=>({...t})); renderTrips(); compute(); }});
 
-load(); renderTrips(); compute();
+load(); renderOpts(); renderTrips(); compute();
 </script>
 </body>
 </html>
