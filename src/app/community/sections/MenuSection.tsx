@@ -8,6 +8,7 @@ const menuItems = [
     items: [
       { name: 'Haus AI', desc: 'Your negotiation assistant', icon: '🤖', href: '/community/ai', badge: 'New' },
       { name: 'Brand Deals', desc: 'Curated opportunities', icon: '💼', href: '/community/deals', badge: '5' },
+      { name: 'Uber vs Rental', desc: 'LA trip cost simulator', icon: '🚗', href: '/calculator', badge: 'New' },
     ],
   },
   {
